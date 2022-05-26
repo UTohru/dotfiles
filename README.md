@@ -1,26 +1,42 @@
-# MyConfig
 
-## link
+# setup
+## sym link
 ```bash
 $ cd dotfiles  && ./script/setup.sh
 ```
+## font install
+```
+$ ./script/font_install.sh
+```
 
-## vim
-- plugin
-	- `dein_install.sh`でdeinをインストール
-	- vim で `:call dein#install()`を実行
-- lsp
-	- coc.nvim(\<v8.2) → nodejs, yarn
-	- ddc.vim(\>=v8.2) → deno
-
-## wezterm
-- デフォルトの端末に設定(Ubuntu)
+## vim plugin install
+1. dein(plugin manager)
 	```
-	$ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator `which wezterm` 30
-	$ sudo update-alternatives --config x-terminal-emulator
+	dein_install.sh
+	```
+1. deno install
+	```
+	`$ curl -fsSL https://deno.land/install.sh | sh`
+	```
+	(v8.2↓ -> nodejs, yarn)
+1. plugin install
+	```
+	# in vim
+	:call dein#install() 
 	```
 
-## DE
+## term
+1. terminal install
+1. ``ln -s `which <term-name>` ~/.local/bin/x-terminal-emulator``
+	- case of Ubuntu
+		```
+		$ sudo update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator `which <term-name>` 30
+		$ sudo update-alternatives --config x-terminal-emulator
+		```
+
+___
+
+## DE memo
 - i3 (i3wm or i3-gap)
 - compton (picom)
 - ~~imagemagick~~ → maim
