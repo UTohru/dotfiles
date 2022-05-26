@@ -1,0 +1,125 @@
+snippet section "set section" b
+\\section{${1:title}}
+$2
+endsnippet
+
+snippet subsection "set subsection" b
+\\subsection{${1:title}}
+$2
+endsnippet
+
+snippet begin "set begin" b
+\\begin{$1}
+	$2
+\\end{$1}
+endsnippet
+
+snippet figure "set fugure" b
+\\begin{figure}[${1:tb}]
+	\\centering
+	\\includegraphics[width=${2:\\columnwidth}]{${3:path}}
+	\\caption{$4}
+	\\label{fig:$5}
+\\end{figure}
+endsnippet
+
+snippet table "set table" b
+\\begin{table}[${1:t}]
+	\\centering
+	\\caption{$2}
+	\\begin{tabular}{$3}\\hline
+		$5
+	\\end{tabular}
+	\\label{tab:$4}
+\\end{table}
+endsnippet
+
+snippet bibliography "set bibliography" b
+\\bibliographystyle{junsrt}
+\\bibliography{bibliography.bib}
+endsnippet
+
+# snippet subfigure "set subfigures" b
+# \\begin{figure*}[${1:tb}]
+# 	\\centering
+# 	\\subfigure[\\label{fig:$2}figname]{
+# 		\\includegraphics[${3:width=cm}]{$4}
+# 	}
+# 	\\caption{$4}
+# 	\\label{fig:$5}
+# \\end{figure*}
+# endsnippet
+
+snippet subcaption "set subcaption" b
+\\begin{figure}[tb]
+	\\centering
+	\\subcaptionbox{${2:caption_name}}{
+		\\includegraphics[width=${4:\\columnwidth}]{${5:img/path}}
+	}
+	\\caption{${6:caption_name}}
+	\\label{fig:$7}
+\\end{figure}
+endsnippet
+
+snippet subfigure_table "set subfigure using table" b
+\\begin{table*}[${1:t}]
+	\\centering
+	\\caption{$2}
+	\\subfigure[\\label{tab:$3}tabname]{
+		\\begin{tabular}{$4}\\hline
+			$5
+		\\end{tabular}
+	}
+	\\label{tab:$5}
+\\end{table*}
+endsnippet
+
+snippet enumerate "set enumerate" b
+\\begin{enumerate}
+	\\item $1
+\\end{enumerate}
+endsnippet
+
+snippet itemize "set itemize" b
+\\begin{itemize}
+	\\item $1
+\\end{itemize}
+endsnippet
+
+snippet description "set description" b
+\\begin{description}
+	\\item[$1] $2
+\\end{description}
+endsnippet
+
+snippet equation "set equation" b
+\\begin{equation}
+	\\label{$1}
+	$2
+\\end{equation}
+endsnippet
+
+snippet eqnarray "set eqnarray" b
+\\begin{eqnarray}
+	\\label{$1}
+	$2 &= \\nonumber
+\\end{eqnarray}
+endsnippet
+
+snippet aligned "set aligned" b
+\\begin{aligned}
+	$1
+\\end{aligned}
+endsnippet
+
+snippet algorithm "set algorithm" b
+\\begin{algorithm}
+	\\caption{$1}
+	\\label{alg:$2}
+	\\begin{algorithmic}[1]
+		\\Require{${3:Input}}
+		\\Ensure{${4:Output}}
+		$5
+	\\end{algorithmic}
+\\end{algorithm}
+endsnippet

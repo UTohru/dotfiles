@@ -1,0 +1,92 @@
+
+[[plugins]]
+repo = 'Shougo/dein.vim'
+hook_add = '''
+hi DiffChange ctermbg=33
+'''
+
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+if = 'v:version >= 802'
+
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+let s:lspfunc = v:version >= 802 ? "LLLspStatus" : "coc#status"
+""\	'enable': {'statusline':1, 'tabline':0},
+let g:lightline = {
+\	'enable': {'statusline':1, 'tabline':0},
+\	'active': {
+\		'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'],['lsp']],
+\		'right': [ ['fileformat', 'fileencoding', 'filetype'] ]
+\	},
+\	'separator': {'left': "\ue0b0", 'right':"\ue0b6"},
+\	'subseparator': {'left': "|", 'right':"\ue0b7"},
+\	'component_function': {
+\		'lsp': s:lspfunc,
+\		'fileformat' : 'LLFileFormat',
+\		'filetype' : 'LLFiletype'
+\	}
+\}
+""let g:lightline.tab = {
+""\	'active': ['tabnum' , 'filename', 'modified'],
+""\	'inactive': ['tabnum' , 'filename', 'modified']
+""\}
+""let g:lightline.tab_component_function ={
+""\	'filename': 'LLFileName',
+""\	'tabnum': 'lightline#tab#tabnum',
+""\	'modified': 'lightline#tab#modified',
+""\}
+""
+""function! LLFileName(n) abort
+""	let buflist = tabpagebuflist(a:n)
+""	let winnr = tabpagewinnr(a:n)
+""	let _ = pathshorten(expand('#'.buflist[winnr-1].':f'))
+""	return _ !=# '' ? _ : '[No Name]'
+""endfunction
+
+function! LLLspStatus() abort
+	let l:counts = lsp#get_buffer_diagnostics_counts()
+	let l:all_counts = l:counts.error + l:counts.warning
+	return l:all_counts==0 ? "\uf00c" : printf("\uf467 %d  \uf071 %d", l:counts.error, l:counts.warning)
+endfunction
+
+function! LLFiletype() abort
+	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . nerdfont#find() . ' ' : 'no ft') : ''
+endfunction
+
+function! LLFileFormat() abort
+	return winwidth(0) > 70 ? (&fileformat . ' ' . nerdfont#fileformat#find()) : ''
+endfunction
+'''
+
+[[plugins]]
+repo = 'tyru/caw.vim'
+hook_add = '''
+" numToStr/Comment.nvim , preservim/nerdcommenter"
+" _ == /
+nmap <C-_> <Plug>(caw:hatpos:toggle)
+vmap <C-_> <Plug>(caw:hatpos:toggle)
+'''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
+hook_add = '''
+" TODO   plugin load with Space+g"
+nmap <Space>g [Git]
+nnoremap [Git]a :<C-u>Gwrite<CR>
+nnoremap [Git]c :<C-u>Git commit -m ""<Left>
+nnoremap [Git]b :<C-u>Git blame<CR>
+nnoremap [Git]l :<C-u>Git log<CR>
+"nnoremap [Git]s :<C-u>Git<CR>
+nnoremap [Git]p :<C-u>Git push<CR>
+nnoremap [Git]d :<C-u>Gdiff<CR>
+nnoremap [Git]r :<C-u>Gread<CR>
+nnoremap [Git]g :<C-u>Ggrep<Space>
+'''
+
+

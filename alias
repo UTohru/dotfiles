@@ -1,0 +1,78 @@
+
+alias ls='ls --color=auto'
+alias la='ls -A'
+alias ll='ls -alhF'
+alias l='ls -CF'
+
+# less option
+export LESS='-R -S -g -x4'
+
+
+# global  pushd/popd
+dir_stack="${HOME}/.dir_stack"
+if [ ! -e $dir_stack ]; then
+	touch $dir_stack
+fi
+function gpushd(){
+	echo $(pwd) >> $dir_stack
+	cd $1
+}
+function gpopd(){
+	if [ ! -s $dir_stack ];  then
+		 return
+	fi
+	newdir=$(sed -n '$p' $dir_stack)
+	sed -i -e '$d' $dir_stack
+	if [ ! -d $newdir ]; then
+		return
+	fi
+	cd $newdir
+}
+
+
+which vim > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	alias vimplane='vim -u NONE -N'
+	
+	export EDITOR=vim
+fi
+
+#which open > /dev/null 2>&1
+#if [ $? -ne 0 ]; then
+#	alias open='xdg-open'
+#fi
+
+alias ipa="ip -br -c a"
+alias ipr="ip -br -c route"
+
+alias setenv='source ./.env/bin/activate'
+
+# 数字を入力して桁数を指定
+alias gen_pass='openssl rand -base64'
+
+which python > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	alias urlencode='python -c "import sys; import urllib.parse; print(urllib.parse.quote(sys.argv[1]));"'
+	alias urldecode='python -c "import sys; import urllib.parse; print(urllib.parse.unquote(sys.argv[1]));"'
+	#alias pip_allupdate='pip list -o | awk "NR>=3 {print $1}" | xargs pip install -U'
+
+	which jq > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		pysearch () {
+			if [ $# -eq 1 ]; then
+				curl -Ls https://pypi.org/pypi/"{$1}"/json | jq '.info.home_page'
+			else
+				return 1
+			fi
+		}
+	fi
+fi
+
+which trash-put > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	alias rm='echo "rm is dangerous!  use trash-put comand."'
+fi
+
+
+scriptdir=$(cd $(dirname $(readlink -f $0)); pwd)/script/util
+export PATH="$scriptdir:$PATH"

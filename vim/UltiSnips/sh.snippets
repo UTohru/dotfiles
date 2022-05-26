@@ -1,0 +1,20 @@
+
+snippet isInteractive "if source" b
+if echo "$-" | grep -q "i"; then
+	$1
+else;
+	echo "use 「source」or「.」 command"
+fi
+endsnippet
+
+snippet cdir "script path" b
+cdir="$(cd "$(dirname "$(readlink -e "\$0" || echo "\$0")")"; pwd -P)"
+$1
+endsnippet
+
+snippet commandFound "command found" b
+which $1 > /dev/null 2>&1
+if [ \$? -eq 0 ]; then
+	$2
+fi
+endsnippet

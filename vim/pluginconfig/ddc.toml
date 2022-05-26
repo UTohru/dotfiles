@@ -1,0 +1,159 @@
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go']
+
+# [python] globalのpipの補完をする場合，pylsp[all]をインストールして，Sリンクで偽装すればok
+hook_add = '''
+""\				'configurationSources': ['flake8'],
+""\					'rope': {'extensionModules': ["numpy", "pandas", "matplotlib", "sklearn", "os.path", "os", "sys"]},
+let g:lsp_settings = {
+\	'pylsp-all':{
+\		'disabled': 0,
+\		'workspace_config': {
+\			'pylsp': {
+\				'plugins': {
+\					'pycodestyle': {'enabled': v:false},
+\					'pydocstyle': {'enabled': v:false},
+\					'pylint': {'enabled': v:false},
+\					'mypy': {'enabled': v:false},
+\					'mccabe': {'enabled': v:false},
+\					'pyflakes': {'enabled': v:false},
+\					'flake8': {'enabled': v:false, 'ignore': ['E203', 'E231', 'E265', 'E266', 'E302', 'E501', 'W191', 'W293']},
+\					'yapf': {'enabled': v:false},
+\				},
+\			}
+\		}
+\	},
+\}
+'''
+
+[[plugins]]
+repo = 'prabirshrestha/vim-lsp'
+on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go']
+hook_add = '''
+
+let g:lsp_format_sync_timeout = 1000
+let g:lsp_competion_resolve_timeout = 50
+
+" [debug]
+"let g:lsp_log_file = expand('~/vim-lsp.log')
+
+let g:asyncomplete_auto_popup = 1
+""let g:lsp_diagnostics_enabled = 0
+let g:lsp_diagnostics_signs_error = {'text': "\uf467"}
+"let g:lsp_diagnostics_signs_warning = {'text': "\uf071"}
+let g:lsp_diagnostics_signs_warning = {'text': "!"}
+let g:lsp_diagnostics_float_cursor = 1
+let g:lsp_diagnostics_highlights_enabled = 0
+let g:lsp_preview_float = 1
+
+function! s:on_lsp_buffer_enabled() abort
+	setlocal signcolumn=yes
+	nmap <buffer> <Space>c [lsp]
+	nmap <buffer> K <Plug>(lsp-hover)
+	nnoremap <buffer> [lsp]d <Plug>(lsp-definition)
+	nnoremap <buffer> [lsp]r <Plug>(lsp-references)
+endfunction
+
+augroup myvimrc
+	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+'''
+
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['denops.vim', 'pum.vim']
+on_event = ['InsertEnter', 'CursorHold']
+
+hook_source = '''
+call ddc#custom#patch_global('sources', ['ultisnips', 'file', 'around'])
+
+call ddc#custom#patch_global('sourceOptions', {
+\	'_': {
+\		'ignorecase': v:true,
+\		'matchers': ['matcher_head'],
+\		'sorters' : ['sorter_rank'],
+\	},
+\	'around': {
+\		'mark': 'A',
+\		'maxCandidates': 5,
+\	},
+\	'vim-lsp': {
+\		'mark': 'LSP',
+\		'isVolatile': v:true,
+\		'minAutoCompleteLength': 1,
+\		'forceCompletionPattern': '\.\w*|:\w*|->\w*',
+\		'matchers': [],
+\		'maxCandidates': 10,
+\	},
+\	'file': {
+\		'mark': 'F',
+\		'isVolatile': v:true,
+\		'minAutoCompleteLength': 3,
+\		'forceCompletionPattern': '\S/\S*',
+\	},
+\	'ultisnips': {
+\		'mark': 'S',
+\		'isVolatile': v:true,
+\		'minAutoCompleteLength': 1,
+\	}
+\})
+
+call ddc#custom#patch_filetype(
+\	['python', 'rust', 'typescript'], 
+\	'sources', ['ultisnips', 'file', 'vim-lsp', 'around']
+\)
+call ddc#custom#patch_global('completionMenu', 'pum.vim')
+call ddc#custom#patch_global('backspaceCompletion', v:true)
+call ddc#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/pum.vim'
+hook_add = '''
+inoremap <expr> <Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(+1)<CR>" : "\<Tab>"
+inoremap <expr> <S-Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(-1)<CR>" : "\<S-Tab>"
+
+inoremap <expr> <CR> pum#visible() ? 
+\	!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
+\	"<CMD>call pum#map#confirm()<CR>" : 
+\	"\<CR>"
+
+hi Pmenu ctermfg=250 ctermbg=238
+"hi Pmenu ctermfg=165 ctermbg=none
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-around'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-matcher_head'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc-sorter_rank'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-file'
+on_source = 'ddc.vim'
+
+[[plugins]]
+repo = 'shun/ddc-vim-lsp'
+on_source = ['ddc.vim', 'vim-lsp']
+
+[[plugins]]
+repo = 'SirVer/ultisnips'
+on_event = 'InsertEnter'
+hook_add = '''
+let g:UltiSnipsExpandTrigger="<C-j>"
+
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+'''
+[[plugins]]
+repo = 'matsui54/ddc-ultisnips'
+on_source = 'ddc.vim'
+

@@ -1,0 +1,81 @@
+
+[[plugins]] 
+repo = 'neoclide/coc.nvim'
+if = '''executable('node') && executable('yarn')'''
+merged = 0
+rev = 'master'
+build = 'yarn install --frozen-lockfile'
+# :call coc#util#install()
+on_event = 'OptionSet'
+
+hook_add = '''
+let g:coc_global_extensions = [
+\	'coc-pyright',
+\	'coc-snippets',
+\	'coc-rls'
+\]
+
+hi Pmenu ctermfg=250 ctermbg=235
+
+augroup cocrc
+	autocmd!
+	autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+	autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+nmap <Space>c [coc]
+nmap <silent> [coc][ <Plug>(coc-diagnostic-prev)
+nmap <silent> [coc]] <Plug>(coc-diagnostic-next)
+
+nmap <silent> [coc]d <Plug>(coc-definition)
+nmap <silent> [coc]y <Plug>(coc-type-definition)
+nmap <silent> [coc]i <Plug>(coc-implementation)
+nmap <silent> [coc]r <Plug>(coc-references)
+
+nnoremap <silent> K :<C-u> <SID>show_documentation()<CR>
+
+"function s:check_back_space() abort
+"	let col = col('.') - 1
+"	return !col || getline('.')[col - 1] =~# '\s'
+"endfunction
+"
+"inoremap <silent><expr> <TAB>
+"	\ pumvisible() ? "\<C-n>" :
+"	\ <SID>check_back_space() ? "\<TAB>" :
+"	\ coc#refresh()
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+let g:coc_snippet_next = '<C-j>'
+let g:coc_snippet_prev = '<C-k>'
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+inoremap <silent><expr> <c-space> coc#refresh()
+
+
+function! s:show_documentation()
+	if (index(['vim','help'], &filetype) >= 0)
+		execute 'h '.expand('<cword>')
+	else
+		call CocAction('doHover')
+	endif
+endfunction
+'''
+
+hook_post_source = '''
+
+call coc#config('snippets', {
+\	'extends': {
+\		"cpp" : ["c"],
+\		"plaintex": ["tex"],
+\	},
+\})
+
+"call coc#config('snippets', {
+"\	'userSnippetsDirectory': '~/.vim/snippets/',
+"\	'snipmate.enable': 'false',
+"})
+
+""\	'textmateSnippetsRoots': ['~/.vim/rc/snippets/vscode']
+'''

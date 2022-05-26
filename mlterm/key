@@ -1,0 +1,5 @@
+
+
+Control+1=OPEN_PTY
+Control+2=NEXT_PTY
+Control+3=PREV_PTY

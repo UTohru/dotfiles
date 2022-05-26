@@ -1,0 +1,92 @@
+
+
+
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_add = '''
+"nnoremap <Space>fw :<C-u>Fern .<CR>:set nonumber<CR>
+"nnoremap <Space>f :<C-u>Fern . -drawer<CR>:set nonumber<CR>
+nnoremap <Space>f :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
+'''
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+on_source = ['fern.vim']
+hook_add = '''
+let g:fern#renderer = 'nerdfont'
+hi Directory ctermfg=39
+'''
+
+[[plugins]]
+repo = 'machakann/vim-sandwich'
+on_event = 'CursorMoved'
+hook_post_source = '''
+let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
+let g:sandwich#recipes += [
+			\ {'buns': ['「', '」'], 'match_syntax': 1},
+			\ {'buns': ['『', '』'], 'match_syntax': 1},
+			\ {'buns': ['（', '）'], 'match_syntax': 1},
+			\]
+'''
+
+[[plugins]]
+repo = 't9md/vim-quickhl'
+on_event = 'VimEnter'
+hook_add = '''
+nmap <Space>M ^v$<Plug>(quickhl-manual-this)<ESC>
+
+nmap <Space>mm <Plug>(quickhl-manual-this)
+nmap <Space>mM <Plug>(quickhl-manual-reset)
+
+nmap <Space>mn <Plug>(quickhl-manual-go-to-next)<SID><Space>m
+nmap <Space>mp <Plug>(quickhl-manual-go-to-prev)<SID><Space>m
+nnoremap <silent><script> <SID><Space>mn :<C-u>QuickhlManualGoToNext<CR><SID><Space>m
+nnoremap <silent><script> <SID><Space>mp :<C-u>QuickhlManualGoToPrev<CR><SID><Space>m
+nmap <SID><Space>m <Nop>
+
+'''
+
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+on_ft = ['python', 'tex']
+hook_add = '''
+nnoremap <silent> <F5> :<C-u>w<CR>:QuickRun<CR>
+let g:quickrun_config = {
+\	'_': {
+\		'runner': 'terminal',
+\		'runner/terminal/opener': '10new',
+\		'runner/terminal/append': '1'
+\	},
+\	'tex': {
+\		'command': 'latexmk'
+\	},
+\	'python': {
+\		'command': 'python',
+\	}
+\}
+'''
+
+[[plugins]]
+repo = 'previm/previm'
+on_ft = ['markdown']
+hook_add='''
+if(g:wsl)
+	let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+	let g:previm_wsl_mode = 1
+else
+	let g:previm_open_cmd = '/usr/bin/firefox'
+endif
+'''
+
+[[plugins]]
+repo = 'mattn/emmet-vim'
+on_ft = ['html']
+hook_add='''
+let g:user_emmet_leader_key='<C-e>'
+'''
+
+
+[[plugins]]
+repo = 'vim-jp/vimdoc-ja'
+hook_add = 'set helplang=ja,en'

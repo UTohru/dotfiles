@@ -1,0 +1,41 @@
+
+snippet import "import" b
+import ${1:module}
+endsnippet
+
+snippet from "from_import" b
+from ${1:package} import ${2:module}
+endsnippet
+
+snippet class "class format"
+class ${1:Name}(${2:object}):
+	def __init__(self):
+		$3
+endsnippet
+
+snippet def "function format"
+def ${1:Name}(${2:arg:})${3: -> None}:
+	${4:pass}
+endsnippet
+
+snippet #! "make script file" b
+#!/usr/bin/env python
+endsnippet
+
+snippet ifmain "if name == main" b
+if __name__ == '__main__':
+	$1
+endsnippet
+
+snippet debug "pdb debug" b
+import pdb; pdb.set_trace()
+endsnippet
+
+snippet try "try except finally" b
+try:
+	$1
+except:
+	${2:pass}
+finally:
+	${3:pass}
+endsnippet

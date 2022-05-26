@@ -1,0 +1,52 @@
+ENCODING=UTF-8
+
+# 端末サイズ
+#geometry=88x27
+
+# font
+fontsize = 16
+# Unicodeの記号の文字幅
+col_size_of_width_a = 1
+
+#not_use_unicode_font = false
+# only_use_unicode_font = false
+
+#compose_dec_special_font = false
+use_point_size = true
+#use_variable_column_width = false
+#use_multi_column_char = true
+use_anti_alias = true
+
+#use_combing = true
+#use_dynamic_comb = true
+
+depth = 32
+fg_color = #f6f3e8
+bg_color = rgba:26/26/26/128
+
+# 背景
+alpha = 120
+birightness = 50
+contrast = 60
+gamma = 50
+#use_transbg=true
+#wall_picture = ~/.config/i3/wallpaper/62578571_p0.jpg
+
+# scroll bar
+#use_scrollbar=false
+sb_fg_color = #fdeabb
+sb_bg_color = #b5b9b9
+scrollbar_mode = autohide #right
+# scrollbar_view_name : (simple,sample,sample2,sample3,next,motif,athena,mozmodern)
+scrollbar_view_name = athena #sample2
+
+#termtype = mlterm
+termtype = xterm-256color
+box_drawing_font = decsp
+logsize=1024
+use_clipboard=true
+
+#letter_space = 1
+#line_space = 3
+#unicode_full_width_areas = U+2600-27FF,U+1F000-1FFFF
+#borderless = true
