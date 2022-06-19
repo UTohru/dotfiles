@@ -10,7 +10,14 @@ if [ -n "$DESKTOP_SESSION" ]; then
 	# gnome-keyring
 	which gnome-keyring-daemon > /dev/null 2>&1
 	if [ $? -eq 0 ]; then
-			eval $(gnome-keyring-daemon --start) #--components=ssh,secrets)
+		# eval $(gnome-keyring-daemon --start) #--components=ssh,secrets)
 		export SSH_AUTH_SOCK
 	fi
 fi
+
+
+which firefox > /dev/null 2>&1
+	if [ $? -eq 0 ]; then
+		export BROWSER=`which firefox`
+	fi
+

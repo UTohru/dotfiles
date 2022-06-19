@@ -17,6 +17,7 @@ ln -sf ${cdir}/mlterm ~/.mlterm
 
 ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
 ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
+ln -sf ${cdir}/.xprofile ~/.xprofile
 
 if [ -d ~/.config/i3 ]; then
 	rm -rf ~/.config/i3
@@ -27,11 +28,17 @@ if [ ! -d ~/.config/i3/wallpaper ]; then
 fi
 ln -sf ${cdir}/compton.conf ~/.config/compton.conf
 
+if [ -d ~/.config/conky ]; then
+	rm -rf ~/.config/conky
+fi
+ln -sf ${cdir}/conky ~/.config/conky
+
 ln -sf ${cdir}/.zshenv ~/.zshenv
 if [ -d ~/.config/zsh ]; then
 	rm -rf ~/.config/zsh
 fi
 ln -sf ${cdir}/zsh ~/.config/zsh
+
 
 
 if [ -d ~/.config/wezterm ]; then
@@ -54,7 +61,7 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 			echo "alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'";
 			echo "alias explorer='explorer.exe .'";
 			echo "alias cmd='cmd.exe'";
-		} tee -a ~/.bashrc >> ~/.config/zsh/localconf/rc.zsh
+		} | tee -a ~/.bashrc >> ~/.config/zsh/localconf/rc.zsh
 
 		touch ~/.inputrc
 		{
