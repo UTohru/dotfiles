@@ -79,6 +79,8 @@ inoremap <C-h> <Left>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
+vnoremap J <NOP>
+
 onoremap a" 2i"
 onoremap a' 2i'
 onoremap a` 2i`

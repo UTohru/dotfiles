@@ -29,6 +29,14 @@ function gpopd(){
 	cd $newdir
 }
 
+function setenv(){
+	if [ -d ".venv" ]; then
+		source ./.venv/bin/activate
+	else
+		source ./.env/bin/activate
+	fi
+}
+
 
 which vim > /dev/null 2>&1
 if [ $? -eq 0 ]; then
@@ -45,10 +53,6 @@ fi
 alias ipa="ip -br -c a"
 alias ipr="ip -br -c route"
 
-alias setenv='source ./.env/bin/activate'
-
-# 数字を入力して桁数を指定
-alias gen_pass='openssl rand -base64'
 
 which python > /dev/null 2>&1
 if [ $? -eq 0 ]; then

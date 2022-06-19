@@ -26,6 +26,8 @@ return {
 	window_background_opacity = 0.5,
 	hide_tab_bar_if_only_one_tab = true,
 	
+	-- disable_default_key_bindings = True,
+	-- debug_key_events = true,
 	keys = {
 		{key='t', mods=MODKEY, action=wezterm.action{SpawnTab="DefaultDomain"}},
 		{key='h', mods=MODKEY, action=wezterm.action{ ActivateTabRelative = -1}},
@@ -33,20 +35,34 @@ return {
 		{key='h', mods=MODKEY.."|CTRL", action=wezterm.action{ MoveTabRelative = -1}},
 		{key='l', mods=MODKEY.."|CTRL", action=wezterm.action{ MoveTabRelative =  1}},
 		{key='v', mods="CTRL|SHIFT", action=wezterm.action{ PasteFrom =  "Clipboard"}},
+		{key='c', mods="CTRL|SHIFT", action=wezterm.action{ CopyTo =  "ClipboardAndPrimarySelection"}},
+		{key='_', mods="CTRL", action="DisableDefaultAssignment"},
+		{key='-', mods="CTRL", action="DisableDefaultAssignment"},
+		-- {key='/', mods="CTRL", action="Nop"},
 	},
 
 	-- disable_default_mouse_bindings = true,
-	-- mouse_bindings = {
-	-- 	{
-	-- 		event={Down={streak=1, button="Middle"}},
-	-- 		modes="NONE",
-	-- 		action="PrimarySelection",
-	-- 	},
-	-- 	{
-	-- 		event={Down={streak=1, button="Right"}},
-	-- 		modes="NONE",
-	-- 		action="Paste",
-	-- 	},
-	-- }
+	mouse_bindings = {
+		{
+			event={ Up = { streak=1, button="Middle" } },
+			mods = "NONE",
+			action = wezterm.action({ CompleteSelection = "PrimarySelection" }),
+		},
+		{
+			event={ Up = { streak=1, button="Right" }},
+			mods = "NONE",
+			action = wezterm.action({ CompleteSelection = "Clipboard" }),
+		},
+		{
+			event={ Up = { streak=1, button="Left" }},
+			mods = "NONE",
+			action = wezterm.action{CompleteSelection="PrimarySelection"},
+		},
+		{
+			event={ Up = { streak=1, button="Left" }},
+			mods = "CTRL",
+			action = "OpenLinkAtMouseCursor",
+		},
+	}
 }
 
