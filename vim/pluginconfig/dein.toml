@@ -89,4 +89,16 @@ nnoremap [Git]r :<C-u>Gread<CR>
 nnoremap [Git]g :<C-u>Ggrep<Space>
 '''
 
+[[plugins]]
+repo = 'junegunn/fzf'
+build = './install --all'
+merged = 0
 
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+"let g:fzf_layout = {'down': '50%'}"
+nnoremap <C-p> :<C-u>Files<CR>
+nnoremap <Space>fl :<C-u>Lines<CR>
+'''

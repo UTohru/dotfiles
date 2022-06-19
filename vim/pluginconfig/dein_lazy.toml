@@ -6,7 +6,7 @@ repo = 'lambdalisue/fern.vim'
 hook_add = '''
 "nnoremap <Space>fw :<C-u>Fern .<CR>:set nonumber<CR>
 "nnoremap <Space>f :<C-u>Fern . -drawer<CR>:set nonumber<CR>
-nnoremap <Space>f :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
+nnoremap <Space>ff :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
 '''
 
 [[plugins]]
