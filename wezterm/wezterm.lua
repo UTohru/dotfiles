@@ -10,24 +10,39 @@ end
 
 return {
 	default_prog = shell,
-	exit_behavior = "Close",
+	-- exit_behavior = "Close",
 	font = wezterm.font("Cica"),
 	use_ime = true,
-	-- treat_east_asian_ambiguous_width_as_wide = true,
-	-- unicode_version = 14,
+	ime_preedit_rendering = "Builtin",
+	-- disable_default_key_bindings = True,
+	debug_key_events = true,
+
+
 	font_size = 14,
+	-- unicode_version = 14,
+	-- treat_east_asian_ambiguous_width_as_wide = true,
+	-- allow_square_glyphs_to_overflow_width = "Always",
+	-- allow_square_glyphs_to_overflow_width = "WhenFollowedBySpace",
+	adjust_window_size_when_changing_font_size = false,
+	--
+	
+	
+	animation_fps = 1,
+	cursor_blink_ease_in = 'Constant',
+	cursor_blink_ease_out = 'Constant',
+	cursor_blink_rate = 800,
+
+	use_fancy_tab_bar = false,
+
+
 	colors ={
 		foreground = "#f6f3e8",
 		background = "rgba(0,0,0,128)"
 	},
-	-- allow_square_glyphs_to_overflow_width = "Always",
-	-- allow_square_glyphs_to_overflow_width = "Never",
 
 	window_background_opacity = 0.5,
 	hide_tab_bar_if_only_one_tab = true,
 	
-	-- disable_default_key_bindings = True,
-	-- debug_key_events = true,
 	keys = {
 		{key='t', mods=MODKEY, action=wezterm.action{SpawnTab="DefaultDomain"}},
 		{key='h', mods=MODKEY, action=wezterm.action{ ActivateTabRelative = -1}},

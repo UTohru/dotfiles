@@ -21,13 +21,14 @@ let s:lspfunc = v:version >= 802 ? "LLLspStatus" : "coc#status"
 let g:lightline = {
 \	'enable': {'statusline':1, 'tabline':0},
 \	'active': {
-\		'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'],['lsp']],
+\		'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'],['branch'],['lsp']],
 \		'right': [ ['fileformat', 'fileencoding', 'filetype'] ]
 \	},
 \	'separator': {'left': "\ue0b0", 'right':"\ue0b6"},
 \	'subseparator': {'left': "|", 'right':"\ue0b7"},
 \	'component_function': {
 \		'lsp': s:lspfunc,
+\		'branch': 'FugitiveHead',
 \		'fileformat' : 'LLFileFormat',
 \		'filetype' : 'LLFiletype'
 \	}
@@ -74,9 +75,16 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
+repo = 'bkad/CamelCaseMotion'
+hook_add = '''
+noremap <silent> W <Plug>CamelCaseMotion_w
+noremap <silent> B <Plug>CamelCaseMotion_b
+noremap <silent> E <Plug>CamelCaseMotion_e
+'''
+
+[[plugins]]
 repo = 'tpope/vim-fugitive'
 hook_add = '''
-" TODO   plugin load with Space+g"
 nmap <Space>g [Git]
 nnoremap [Git]a :<C-u>Gwrite<CR>
 nnoremap [Git]c :<C-u>Git commit -m ""<Left>
@@ -88,6 +96,9 @@ nnoremap [Git]d :<C-u>Gdiff<CR>
 nnoremap [Git]r :<C-u>Gread<CR>
 nnoremap [Git]g :<C-u>Ggrep<Space>
 '''
+
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'

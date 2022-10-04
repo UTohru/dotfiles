@@ -67,6 +67,15 @@ let g:quickrun_config = {
 \}
 '''
 
+
+[[plugins]]
+repo = 'preservim/vim-markdown'
+on_ft = ['markdown']
+hook_add='''
+let g:vim_markdown_folding_disabled = 1
+'''
+
+
 [[plugins]]
 repo = 'previm/previm'
 on_ft = ['markdown']
@@ -75,7 +84,7 @@ if(g:wsl)
 	let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 	let g:previm_wsl_mode = 1
 else
-	let g:previm_open_cmd = '/usr/bin/firefox'
+	let g:previm_open_cmd = 'firefox'
 endif
 '''
 

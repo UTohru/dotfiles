@@ -1,8 +1,9 @@
 #!/bin/bash
 
-prohibit_files=(
-	^zsh/localconf/.*
-)
+prohibit_files=()
+prohibit_files+=(^zsh/localconf/.*)
+prohibit_files+=(^i3/enable/local.conf)
+
 
 isContains () {
 	local e

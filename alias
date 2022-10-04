@@ -11,7 +11,7 @@ export LESS='-R -S -g -x4'
 # global  pushd/popd
 dir_stack="${HOME}/.dir_stack"
 if [ ! -e $dir_stack ]; then
-	touch $dir_stack
+	touch $dir_stack && chmod 600 $dir_stack
 fi
 function gpushd(){
 	echo $(pwd) >> $dir_stack

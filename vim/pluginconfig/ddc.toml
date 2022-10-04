@@ -82,10 +82,10 @@ call ddc#custom#patch_global('sourceOptions', {
 \	'vim-lsp': {
 \		'mark': 'LSP',
 \		'isVolatile': v:true,
-\		'minAutoCompleteLength': 1,
+\		'minAutoCompleteLength': 2,
 \		'forceCompletionPattern': '\.\w*|:\w*|->\w*',
-\		'matchers': [],
-\		'maxCandidates': 10,
+\		'matchers': ['matcher_head'],
+\		'maxCandidates': 5,
 \	},
 \	'file': {
 \		'mark': 'F',
@@ -97,12 +97,22 @@ call ddc#custom#patch_global('sourceOptions', {
 \		'mark': 'S',
 \		'isVolatile': v:true,
 \		'minAutoCompleteLength': 1,
+\	},
+\	'tabnine': {
+\		'mark': 'TN',
+\		'isVolatile': v:true,
+\	}
+\})
+
+call ddc#custom#patch_global('sourceParams', {
+\	'tabnine': {
+\		'maxNumResults': 3
 \	}
 \})
 
 call ddc#custom#patch_filetype(
-\	['python', 'rust', 'typescript'], 
-\	'sources', ['ultisnips', 'file', 'vim-lsp', 'around']
+\	['python', 'rust', 'typescript', 'go', 'c', 'cpp'], 
+\	'sources', ['ultisnips', 'file', 'tabnine', 'vim-lsp', 'around']
 \)
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('backspaceCompletion', v:true)
@@ -143,6 +153,12 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'shun/ddc-vim-lsp'
 on_source = ['ddc.vim', 'vim-lsp']
+
+
+[[plugins]]
+repo = 'LumaKernel/ddc-tabnine'
+on_source = 'ddc.vim'
+
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
