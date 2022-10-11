@@ -15,7 +15,7 @@ return {
 	use_ime = true,
 	ime_preedit_rendering = "Builtin",
 	-- disable_default_key_bindings = True,
-	debug_key_events = true,
+	-- debug_key_events = true,
 
 
 	font_size = 14,
