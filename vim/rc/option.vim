@@ -27,7 +27,11 @@ set number
 ""set ambiwidth=double
 
 set list
-set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~ "非表示文字の可視化"
+if v:version >= 802
+	set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~ "非表示文字の可視化"
+else
+	set listchars=tab:»-,nbsp:%,trail:~ "非表示文字の可視化"
+endif
 "set listchars=tab:--\|,nbsp:%,trail:~ "非表示文字の可視化"
 
 set tags=./tags;$HOME
