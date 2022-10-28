@@ -109,7 +109,10 @@ merged = 0
 repo = 'junegunn/fzf.vim'
 depends = 'fzf'
 hook_add = '''
-"let g:fzf_layout = {'down': '50%'}"
-nnoremap <C-p> :<C-u>Files<CR>
-nnoremap <Space>fl :<C-u>Lines<CR>
+let g:fzf_layout = {'window': {'width': 0.8, 'height': 0.6, 'yoffset': 0.8, 'xoffset': 1.0}}
+let g:fzf_preview_window = ['right,60%']
+nmap <Space>f [fzf]
+nnoremap [fzf]f :<C-u>Files<CR>
+nnoremap [fzf]g :<C-u>GFiles<CR>
+nnoremap [fzf]l :<C-u>Lines<CR>
 '''
