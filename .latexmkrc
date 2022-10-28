@@ -12,6 +12,9 @@ $pdf_mode	= 3; # .dvi -> .pdf
 # ordpdf not rm
 #$pvc_view_file_via_temporary = 0;
 
+# -pv option
+$preview_mode = 1;
+
 # wsl
 if(-e '/proc/sys/fs/binfmt_misc/WSLInterop'){
 	$pdf_previewer = "/mnt/c/Users/" . $ENV{WIN_USER} . "/AppData/Local/SumatraPDF/SumatraPDF.exe"; 
