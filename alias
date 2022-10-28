@@ -72,17 +72,6 @@ if [ $? -eq 0 ]; then
 	fi
 fi
 
-which curl > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-	function CurlSendJson(){
-		if [ $# >= 2 ]; then
-			echo argError: $*
-			exit 1
-		fi
-
-		curl -f -d @$1 -H "Content-Type: application/json" $2 ${@:3}
-	}
-fi
 
 # openssl rand -hex 8
 alias rndpass='openssl rand -base64 16 | fold -w 10 | head -n 1'
