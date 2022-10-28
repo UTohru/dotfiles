@@ -77,9 +77,9 @@ vmap <C-_> <Plug>(caw:hatpos:toggle)
 [[plugins]]
 repo = 'bkad/CamelCaseMotion'
 hook_add = '''
-noremap <silent> W <Plug>CamelCaseMotion_w
-noremap <silent> B <Plug>CamelCaseMotion_b
-noremap <silent> E <Plug>CamelCaseMotion_e
+map <silent> W <Plug>CamelCaseMotion_w
+map <silent> B <Plug>CamelCaseMotion_b
+map <silent> E <Plug>CamelCaseMotion_e
 '''
 
 [[plugins]]

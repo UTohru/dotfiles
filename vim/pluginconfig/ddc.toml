@@ -114,10 +114,13 @@ call ddc#custom#patch_filetype(
 \	['python', 'rust', 'typescript', 'go', 'c', 'cpp'], 
 \	'sources', ['ultisnips', 'file', 'tabnine', 'vim-lsp', 'around']
 \)
+
+call ddc#custom#patch_global('ui', 'pum')
 call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('backspaceCompletion', v:true)
 call ddc#enable()
 '''
+
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
@@ -173,3 +176,6 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 repo = 'matsui54/ddc-ultisnips'
 on_source = 'ddc.vim'
 
+[[plugins]]
+repo = 'Shougo/ddc-ui-pum'
+on_source = ['ddc.vim', 'pum.vim']

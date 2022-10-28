@@ -94,6 +94,7 @@ if [ $? -eq 0 ]; then
 	alias rt='trash-put'
 fi
 
+alias bc='bc -l'
 
 scriptdir=$(cd $(dirname $(readlink -f $0)); pwd)/script/util
 export PATH="$scriptdir:$PATH"
