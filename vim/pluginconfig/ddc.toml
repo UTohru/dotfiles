@@ -27,6 +27,7 @@ let g:lsp_settings = {
 \}
 '''
 
+
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go']
@@ -64,15 +65,16 @@ augroup END
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
-on_event = ['InsertEnter', 'CursorHold']
+on_event = ['VimEnter']
 
 hook_source = '''
-call ddc#custom#patch_global('sources', ['ultisnips', 'file', 'around'])
 
+call ddc#custom#patch_global('sources', ['ultisnips', 'file', 'around'])
 call ddc#custom#patch_global('sourceOptions', {
 \	'_': {
 \		'ignorecase': v:true,
 \		'matchers': ['matcher_head'],
+\		'minAutoCompleteLength': 2,
 \		'sorters' : ['sorter_rank'],
 \	},
 \	'around': {
@@ -82,7 +84,6 @@ call ddc#custom#patch_global('sourceOptions', {
 \	'vim-lsp': {
 \		'mark': 'LSP',
 \		'isVolatile': v:true,
-\		'minAutoCompleteLength': 2,
 \		'forceCompletionPattern': '\.\w*|:\w*|->\w*',
 \		'matchers': ['matcher_head'],
 \		'maxCandidates': 5,
@@ -98,21 +99,12 @@ call ddc#custom#patch_global('sourceOptions', {
 \		'isVolatile': v:true,
 \		'minAutoCompleteLength': 1,
 \	},
-\	'tabnine': {
-\		'mark': 'TN',
-\		'isVolatile': v:true,
-\	}
 \})
 
-call ddc#custom#patch_global('sourceParams', {
-\	'tabnine': {
-\		'maxNumResults': 3
-\	}
-\})
 
 call ddc#custom#patch_filetype(
 \	['python', 'rust', 'typescript', 'go', 'c', 'cpp'], 
-\	'sources', ['ultisnips', 'file', 'tabnine', 'vim-lsp', 'around']
+\	'sources', ['ultisnips', 'file', 'vim-lsp', 'around']
 \)
 
 call ddc#custom#patch_global('ui', 'pum')
@@ -124,14 +116,15 @@ call ddc#enable()
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-hook_add = '''
+depends = ['ultisnips', 'lexima.vim']
+hook_post_source = '''
 inoremap <expr> <Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(+1)<CR>" : "\<Tab>"
 inoremap <expr> <S-Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(-1)<CR>" : "\<S-Tab>"
 
 inoremap <expr> <CR> pum#visible() ? 
-\	!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
-\	"<CMD>call pum#map#confirm()<CR>" : 
-\	"\<CR>"
+\!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
+\"<CMD>call pum#map#confirm()<CR>" : 
+\lexima#expand('<LT>CR>', 'i')
 
 hi Pmenu ctermfg=250 ctermbg=238
 "hi Pmenu ctermfg=165 ctermbg=none
@@ -158,14 +151,21 @@ repo = 'shun/ddc-vim-lsp'
 on_source = ['ddc.vim', 'vim-lsp']
 
 
-[[plugins]]
-repo = 'LumaKernel/ddc-tabnine'
-on_source = 'ddc.vim'
+# [[plugins]]
+# repo = 'LumaKernel/ddc-tabnine'
+# on_source = 'ddc.vim'
+#hook_add='''
+# call ddc#custom#patch_global('sourceParams', {
+# \	'tabnine': {
+# \		'maxNumResults': 3
+# \	}
+# \})
+#'''
 
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
-on_event = 'InsertEnter'
+on_event = 'VimEnter'
 hook_add = '''
 let g:UltiSnipsExpandTrigger="<C-j>"
 
@@ -179,3 +179,4 @@ on_source = 'ddc.vim'
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'
 on_source = ['ddc.vim', 'pum.vim']
+

@@ -19,7 +19,7 @@ hi Directory ctermfg=39
 
 [[plugins]]
 repo = 'machakann/vim-sandwich'
-on_event = 'CursorMoved'
+on_event = ['CursorMoved', 'CursorHold']
 hook_post_source = '''
 let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
 let g:sandwich#recipes += [
@@ -31,7 +31,7 @@ let g:sandwich#recipes += [
 
 [[plugins]]
 repo = 't9md/vim-quickhl'
-on_event = 'VimEnter'
+on_event = ['CursorMoved', 'CursorHold']
 hook_add = '''
 nmap <Space>M ^v$<Plug>(quickhl-manual-this)<ESC>
 
@@ -175,7 +175,19 @@ hook_add='''
 let g:user_emmet_leader_key='<C-e>'
 '''
 
-
+[[plugins]]
+repo = 'cohama/lexima.vim'
+on_event = ['InsertEnter']
+hook_add='''
+let g:lexima_enable_basic_rules = 1
+let g:lexima_enable_newline_rules = 1
+let g:lexima_enable_endwise_rules = 0
+'''
+hook_post_source='''
+call lexima#add_rule({'char': '$', 'input_after': '$', 'filetype': 'plaintex'})
+call lexima#add_rule({'char': '$', 'at': '\%#\$', 'leave': 1, 'filetype': 'plaintex'})
+call lexima#add_rule({'char': '<BS>', 'at': '\$\%#\$', 'delete': 1, 'filetype': 'plaintex'})
+'''
 
 [[plugins]]
 repo = 'vim-jp/vimdoc-ja'

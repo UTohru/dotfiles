@@ -27,7 +27,22 @@ endsnippet
 #</script>
 #endsnippet
 
-snippet uml
+snippet class
+\`\`\`plantuml
+@startuml
+hide class circle
+skinparam {
+	classAttributeIconSize 0
+	monochrome true
+}
+skinparam shadowing false
+
+$1
+@enduml
+\`\`\`
+endsnippet
+
+snippet sequence
 \`\`\`plantuml
 @startuml
 /' define participants '/

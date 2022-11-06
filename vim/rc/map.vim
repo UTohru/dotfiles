@@ -59,19 +59,6 @@ nnoremap <Leader>o <C-o>
 
 
 "code"
-inoremap {} {}
-inoremap {<CR> {<CR>}<ESC>O
-inoremap { {}<Left>
-inoremap [] []
-inoremap [<CR> [<CR>]<ESC>O
-inoremap [ []<Left>
-inoremap () ()
-inoremap ( ()<Left>
-inoremap " ""<Left>
-inoremap "" ""
-inoremap ' ''<Left>
-inoremap '' ''
-inoremap ''' '''
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 
