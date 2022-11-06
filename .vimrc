@@ -72,7 +72,7 @@ augroup myvimrc
 	" ファイルタイプの付与
 	"autocmd BufRead,BufNewFile *.toml setfiletype vim
 	autocmd BufRead,BufNewFile */pluginconfig/*.toml call dein#toml#syntax()
-	let g:tex_flavor = 'plain'
+	let g:tex_flavor = 'latex'
 
 	" color
 	autocmd VimEnter * colorscheme mycolor

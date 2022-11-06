@@ -17,7 +17,8 @@ $preview_mode = 1;
 
 # wsl
 if(-e '/proc/sys/fs/binfmt_misc/WSLInterop'){
-	$pdf_previewer = "/mnt/c/Users/" . $ENV{WIN_USER} . "/AppData/Local/SumatraPDF/SumatraPDF.exe"; 
+	#$filepath=`wslpath -w %S`;
+	$pdf_previewer = "/mnt/c/Users/" . $ENV{WIN_USER} . "/AppData/Local/SumatraPDF/SumatraPDF.exe -reuse-instance %S"; 
 }else{
 	$pdf_previewer = "/usr/bin/evince";
 }
