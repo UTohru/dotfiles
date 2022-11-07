@@ -38,6 +38,8 @@ function setenv(){
 }
 
 
+
+
 which vim > /dev/null 2>&1
 if [ $? -eq 0 ]; then
 	alias vimplane='vim -u NONE -N'
@@ -81,6 +83,23 @@ which trash-put > /dev/null 2>&1
 if [ $? -eq 0 ]; then
 	alias rm='echo "rm is dangerous!  use trash-put comand."'
 	alias rt='trash-put'
+fi
+
+which fzf > /dev/null 2>&1
+if [ $? -eq 0 ]; then
+	function ccd() {
+		git rev-parse &>/dev/null
+		if [ $? -ne 0 ]; then
+			dir=`find . -type d | fzf --preview 'ls -a {}' --border`
+			[[ ${#dir} != 0 ]] || return 0
+			builtin cd "$dir" &> /dev/null
+			return 0
+		fi
+		groot=`git rev-parse --show-superproject-working-tree --show-toplevel | head -1`
+		dir=`git ls-files ${groot} | sed -e '/^[^\/]*$/d' -e 's/\/[^\/]*$//g' | sort | uniq | fzf --preview 'ls -a {}' --border`
+		[[ ${#dir} != 0 ]] || return 0
+		builtin cd "$dir" &> /dev/null
+	}
 fi
 
 alias bc='bc -l'
