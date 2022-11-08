@@ -1,5 +1,4 @@
 
-#################################  COMPLEMENT  #################################
 autoload -Uz compinit && compinit
 zstyle ':completion:*' verbose yes
 

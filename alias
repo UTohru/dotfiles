@@ -15,7 +15,7 @@ if [ ! -e $dir_stack ]; then
 fi
 function gpushd(){
 	echo $(pwd) >> $dir_stack
-	cd $1
+	builtin cd $1
 }
 function gpopd(){
 	if [ ! -s $dir_stack ];  then
@@ -26,7 +26,8 @@ function gpopd(){
 	if [ ! -d $newdir ]; then
 		return
 	fi
-	cd $newdir
+	builtin cd $newdir
+	unset -v newdir
 }
 
 function setenv(){
@@ -93,12 +94,15 @@ if [ $? -eq 0 ]; then
 			dir=`find . -type d | fzf --preview 'ls -a {}' --border`
 			[[ ${#dir} != 0 ]] || return 0
 			builtin cd "$dir" &> /dev/null
+			unset -v dir 
 			return 0
 		fi
 		groot=`git rev-parse --show-superproject-working-tree --show-toplevel | head -1`
 		dir=`git ls-files ${groot} | sed -e '/^[^\/]*$/d' -e 's/\/[^\/]*$//g' | sort | uniq | fzf --preview 'ls -a {}' --border`
 		[[ ${#dir} != 0 ]] || return 0
 		builtin cd "$dir" &> /dev/null
+		unset -v dir 
+		unset -v groot
 	}
 fi
 
