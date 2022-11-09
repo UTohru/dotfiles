@@ -1,9 +1,4 @@
 
-alias ls='ls --color=auto'
-alias la='ls -A'
-alias ll='ls -alhF'
-alias l='ls -CF'
-
 # less option
 export LESS='-R -S -g -x4'
 
