@@ -1,4 +1,4 @@
-alias ls="exa --icons"
+alias ls="exa "
 alias l="exa"
-alias ll="exa -l --icons -snew"
+alias ll="exa -l --icons -snew -T -L1"
 alias la="exa -a --icons"

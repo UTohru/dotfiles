@@ -40,6 +40,8 @@ return {
 		background = "rgba(0,0,0,128)"
 	},
 
+	color_scheme = 'Dracula',
+
 	window_background_opacity = 0.5,
 	hide_tab_bar_if_only_one_tab = true,
 	
