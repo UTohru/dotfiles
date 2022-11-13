@@ -28,6 +28,7 @@ return {
 	
 	
 	animation_fps = 1,
+
 	cursor_blink_ease_in = 'Constant',
 	cursor_blink_ease_out = 'Constant',
 	cursor_blink_rate = 800,
@@ -36,11 +37,18 @@ return {
 
 
 	colors ={
+		cursor_bg='gray',
+		cursor_fg='silver',
 		foreground = "#f6f3e8",
 		background = "rgba(0,0,0,128)"
 	},
 
-	color_scheme = 'Dracula',
+	-- color_scheme = 'Dracula',
+	-- color_scheme = "Neon (terminal.sexy)",
+	-- color_scheme = "iceberg-dark",
+	color_scheme = "Pro Light",
+	
+
 
 	window_background_opacity = 0.5,
 	hide_tab_bar_if_only_one_tab = true,

@@ -36,8 +36,7 @@ function setenv(){
 
 
 
-which vim > /dev/null 2>&1
-if [ $? -eq 0 ]; then
+if command -V vim > /dev/null 2>&1; then
 	alias vimplane='vim -u NONE -N'
 	
 	export EDITOR=vim
@@ -52,8 +51,7 @@ alias ipa="ip -br -c a"
 alias ipr="ip -br -c route"
 
 
-which python > /dev/null 2>&1
-if [ $? -eq 0 ]; then
+if command -V python > /dev/null 2>&1; then
 	alias urlencode='python -c "import sys; import urllib.parse; print(urllib.parse.quote(sys.argv[1]));"'
 	alias urldecode='python -c "import sys; import urllib.parse; print(urllib.parse.unquote(sys.argv[1]));"'
 	#alias pip_allupdate='pip list -o | awk "NR>=3 {print $1}" | xargs pip install -U'
@@ -75,29 +73,61 @@ fi
 alias rndpass='openssl rand -base64 16 | fold -w 10 | head -n 1'
 
 
-which trash-put > /dev/null 2>&1
-if [ $? -eq 0 ]; then
+if command -V trash-put > /dev/null 2>&1; then
 	alias rm='echo "rm is dangerous!  use trash-put comand."'
 	alias rt='trash-put'
 fi
 
-which fzf > /dev/null 2>&1
-if [ $? -eq 0 ]; then
+if command -V exa > /dev/null 2>&1; then
+	alias ls="exa "
+	alias la="exa -a --icons"
+	alias ll="exa -l --icons -snew -T -L1"
+	alias l="exa"
+else
+	alias ls='ls --color=auto'
+	alias la='ls -A'
+	alias ll='ls -alhF'
+	alias l='ls -CF'
+fi
+
+
+if command -V fzf > /dev/null 2>&1; then
 	function ccd() {
-		git rev-parse &>/dev/null
-		if [ $? -ne 0 ]; then
-			dir=`find . -type d | fzf --preview 'ls -a {}' --border`
-			[[ ${#dir} != 0 ]] || return 0
-			builtin cd "$dir" &> /dev/null
-			unset -v dir 
-			return 0
+		if command -V fd > /dev/null 2>&1; then
+			findcmd="fd . -t d"
+		else
+			findcmd="find . -type d"
 		fi
-		groot=`git rev-parse --show-superproject-working-tree --show-toplevel | head -1`
-		dir=`git ls-files ${groot} | sed -e '/^[^\/]*$/d' -e 's/\/[^\/]*$//g' | sort | uniq | fzf --preview 'ls -a {}' --border`
-		[[ ${#dir} != 0 ]] || return 0
+
+		git rev-parse &>/dev/null
+		if [ $? -eq 0 ]; then
+			cdir=`pwd`
+			builtin cd `git rev-parse --show-superproject-working-tree --show-toplevel | head -1` &> /dev/null
+			# dir=`git ls-files ${groot} | sed -e '/^[^\/]*$/d' -e 's/\/[^\/]*$//g' | sort | uniq | fzf --preview 'ls -a {}' --border`
+		fi
+
+		if [ $# = 0 ]; then
+			dir=$(eval "$findcmd" | fzf --preview 'ls -a {}' --border)
+		else
+			if [ -d $1 ]; then
+				dir=$1
+			else
+				dir=$(eval "$findcmd" | fzf --query "$1" --preview 'ls -a {}' --border)
+			fi
+		fi
+				
+		if [ ${#dir} -eq 0 ]; then
+			if [ -v cdir ]; then
+				dir="$cdir"
+				unset -v cdir
+			else
+				dir=`pwd`
+			fi
+		fi
+		# [[ ${#dir} != 0 ]] || return 0
 		builtin cd "$dir" &> /dev/null
-		unset -v dir 
-		unset -v groot
+		unset -v dir
+		unset -v findcmd
 	}
 fi
 
