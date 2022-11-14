@@ -1,9 +1,14 @@
 #!/bin/bash
 
-SRC_DIR="/usr/src"
+#SRC_DIR="/usr/src"
+SRC_DIR="$HOME/src/"
 #PYTHON_DIR="$HOME/.pyenv/shims/python"
 
+if [ ! -d ${SRC_DIR}/vim ]; then
+	mkdir -p $SRC_DIR
+fi
 cd ${SRC_DIR}
+
 
 if [ ! -d ${SRC_DIR}/vim ]; then
 	git clone https://github.com/vim/vim
@@ -17,6 +22,9 @@ CONFIG+=("enable-multibyte")
 CONFIG+=("enable-terminal")
 CONFIG+=("enable-fontset")
 CONFIG+=("enable-python3interp")
+
+
+CONFIG+=("prefix=$HOME/.local/")
 
 
 #./configure \

@@ -20,6 +20,13 @@ if [ -z "${SSH_AUTH_SOCK}" ]; then
 			export SSH_AUTH_SOCK
 		fi
 	fi
+
+	if [ -d "$HOME/.local/bin" ] ; then
+		PATH="$HOME/.local/bin:$PATH"
+	fi
+	if [ -d "$HOME/bin" ] ; then
+		PATH="$HOME/bin:$PATH"
+	fi
 fi
 
 which firefox > /dev/null 2>&1

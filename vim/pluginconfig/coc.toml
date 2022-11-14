@@ -3,10 +3,10 @@
 repo = 'neoclide/coc.nvim'
 if = '''executable('node') && executable('yarn')'''
 merged = 0
-rev = 'master'
-build = 'yarn install --frozen-lockfile'
+rev = 'release'
+# build = 'yarn install --frozen-lockfile'
 # :call coc#util#install()
-on_event = 'OptionSet'
+on_event = 'VimEnter'
 
 hook_add = '''
 let g:coc_global_extensions = [
@@ -43,13 +43,12 @@ nnoremap <silent> K :<C-u> <SID>show_documentation()<CR>
 "	\ pumvisible() ? "\<C-n>" :
 "	\ <SID>check_back_space() ? "\<TAB>" :
 "	\ coc#refresh()
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr><TAB> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 
 let g:coc_snippet_next = '<C-j>'
 let g:coc_snippet_prev = '<C-k>'
 
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -64,6 +63,8 @@ endfunction
 '''
 
 hook_post_source = '''
+inoremap <silent><expr> <cr> coc#pum#visible() ? 
+\coc#pum#comfirm() : "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 call coc#config('snippets', {
 \	'extends': {
