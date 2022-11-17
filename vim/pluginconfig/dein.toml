@@ -115,4 +115,5 @@ nmap <Space>f [fzf]
 nnoremap [fzf]f :<C-u>Files<CR>
 nnoremap [fzf]g :<C-u>GFiles<CR>
 nnoremap [fzf]l :<C-u>Lines<CR>
+nnoremap [fzf]r :<C-u>Rg<CR>
 '''
