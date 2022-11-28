@@ -52,8 +52,8 @@ function! s:on_lsp_buffer_enabled() abort
 	setlocal signcolumn=yes
 	nmap <buffer> <Space>c [lsp]
 	nmap <buffer> K <Plug>(lsp-hover)
-	nnoremap <buffer> [lsp]d <Plug>(lsp-definition)
-	nnoremap <buffer> [lsp]r <Plug>(lsp-references)
+	nmap <buffer> [lsp]d <Plug>(lsp-definition)
+	nmap <buffer> [lsp]r <Plug>(lsp-references)
 endfunction
 
 augroup myvimrc
