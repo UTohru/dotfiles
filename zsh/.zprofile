@@ -20,7 +20,7 @@ if [ -z "${SSH_AUTH_SOCK}" ]; then
 		export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
 	else
 		# gnome-keyring
-		if command -V gnome-keyring-daemon > dev/null 2>&1; then
+		if command -V gnome-keyring-daemon > /dev/null 2>&1; then
 			eval $(gnome-keyring-daemon --start) #--components=ssh,secrets)
 			export SSH_AUTH_SOCK
 		fi
