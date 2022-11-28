@@ -9,15 +9,6 @@ else
 endif
 
 
-" coc fault"
-set hidden
-set nobackup
-set nowritebackup
-set updatetime=2000
-set shortmess+=c
-"set signcolumn=yes
-
-
 set laststatus=2
 set tabstop=4
 set shiftwidth=4

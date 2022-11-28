@@ -33,10 +33,10 @@ if [ $? -eq 0 ]; then
 	i3-msg "exec --no-startup-id pasystray"
 fi
 
-which conky > /dev/null 2>&1
-if [ $? -eq 0 ]; then
-	i3-msg "exec --no-startup-id conky"
-fi
+# which conky > /dev/null 2>&1
+# if [ $? -eq 0 ]; then
+# 	i3-msg "exec --no-startup-id conky"
+# fi
 
 # bluetooth
 which blueman-applet > /dev/null 2>&1
