@@ -1,5 +1,7 @@
 let mapleader="\<Space>"
 
+inoremap <Esc> <Esc>:set iminsert=0<CR>
+
 " tmux
 noremap <C-b> <NOP>
 
@@ -26,6 +28,9 @@ set termwinkey=<C-g>
 nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
 tnoremap <ESC> <C-\><C-n>
 
+nnoremap > >>
+nnoremap < <<
+
 
 nnoremap <C-i> <C-l>
 "nnoremap <C-l> i<Space><ESC>
@@ -34,8 +39,11 @@ nnoremap <silent> ZZ :<C-u>bd<CR>
 
 " redo
 nnoremap U <C-r>
-" toggle number
+
+" toggle option
 nnoremap <silent> <C-n> :<C-u>set number!<CR>
+nnoremap <silent> <C-s> :<C-u>set wrap!<CR>
+
 " paste full filepath"
 nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
 " basic replace
