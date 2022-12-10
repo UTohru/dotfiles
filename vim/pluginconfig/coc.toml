@@ -9,6 +9,14 @@ rev = 'release'
 on_event = 'VimEnter'
 
 hook_add = '''
+set hidden
+set nobackup
+set nowritebackup
+set updatetime=2000
+set shortmess+=c
+
+"set signcolumn=yes
+
 let g:coc_global_extensions = [
 \	'coc-pyright',
 \	'coc-snippets',
