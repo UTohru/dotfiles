@@ -82,6 +82,16 @@ hook_add='''
 let g:vim_markdown_folding_disabled = 1
 '''
 
+[[plugins]]
+repo = 'heavenshell/vim-pydocstring'
+build='make install'
+on_ft = ['python']
+hook_add = '''
+let g:pydocstring_formatter = 'google'
+nnoremap <silent> <Space>cp :<C-u>Pydocstring<CR>
+'''
+
+
 
 [[plugins]]
 repo = 'previm/previm'
