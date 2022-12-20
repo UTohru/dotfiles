@@ -43,7 +43,6 @@ nmap <Space>mp <Plug>(quickhl-manual-go-to-prev)<SID><Space>m
 nnoremap <silent><script> <SID><Space>mn :<C-u>QuickhlManualGoToNext<CR><SID><Space>m
 nnoremap <silent><script> <SID><Space>mp :<C-u>QuickhlManualGoToPrev<CR><SID><Space>m
 nmap <SID><Space>m <Nop>
-
 '''
 
 
@@ -72,15 +71,23 @@ let g:quickrun_config = {
 repo = 'matze/vim-tex-fold'
 on_ft = ['tex']
 hook_add = '''
+" zm command"
 "let g:tex_fold_sec_char = '>'
 '''
 
 [[plugins]]
-repo = 'preservim/vim-markdown'
+repo = 'mattn/vim-sonictemplate'
+on_event = ['CursorHold', 'CursorMoved']
+hook_add='''
+'''
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 hook_add='''
-let g:vim_markdown_folding_disabled = 1
+vnoremap T :<C-u>'<,'>MAKETABLE! \t
 '''
+
 
 [[plugins]]
 repo = 'heavenshell/vim-pydocstring'
@@ -90,7 +97,6 @@ hook_add = '''
 let g:pydocstring_formatter = 'google'
 nnoremap <silent> <Space>cp :<C-u>Pydocstring<CR>
 '''
-
 
 
 [[plugins]]
