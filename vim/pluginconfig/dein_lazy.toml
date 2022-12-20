@@ -85,7 +85,8 @@ hook_add='''
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 hook_add='''
-vnoremap T :<C-u>'<,'>MAKETABLE! \t
+vnoremap <silent> t :<C-u>'<,'>MakeTable! \t<CR>
+vnoremap <silent> T :<C-u>UnmakeTable \t<CR>
 '''
 
 
