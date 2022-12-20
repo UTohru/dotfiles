@@ -93,43 +93,9 @@ fi
 
 
 if command -V fzf > /dev/null 2>&1; then
-	function ccd() {
-		if command -V fd > /dev/null 2>&1; then
-			findcmd="fd . -t d"
-		else
-			findcmd="find . -type d"
-		fi
-
-		git rev-parse &>/dev/null
-		if [ $? -eq 0 ]; then
-			cdir=`pwd`
-			builtin cd `git rev-parse --show-superproject-working-tree --show-toplevel | head -1` &> /dev/null
-			# dir=`git ls-files ${groot} | sed -e '/^[^\/]*$/d' -e 's/\/[^\/]*$//g' | sort | uniq | fzf --preview 'ls -a {}' --border`
-		fi
-
-		if [ $# = 0 ]; then
-			dir=$(eval "$findcmd" | fzf --preview 'ls -a {}' --border)
-		else
-			if [ -d $1 ]; then
-				dir=$1
-			else
-				dir=$(eval "$findcmd" | fzf --query "$1" --preview 'ls -a {}' --border)
-			fi
-		fi
-				
-		if [ ${#dir} -eq 0 ]; then
-			if [ -v cdir ]; then
-				dir="$cdir"
-				unset -v cdir
-			else
-				dir=`pwd`
-			fi
-		fi
-		# [[ ${#dir} != 0 ]] || return 0
-		builtin cd "$dir" &> /dev/null
-		unset -v dir
-		unset -v findcmd
-	}
+	if command -V fd > /dev/null 2>&1; then
+		export FZF_DEFAULT_COMMAND='fd --type f'
+	fi
 fi
 
 alias bc='bc -l'

@@ -111,6 +111,11 @@ depends = 'fzf'
 hook_add = '''
 let g:fzf_layout = {'window': {'width': 0.8, 'height': 0.6, 'yoffset': 0.8, 'xoffset': 1.0}}
 let g:fzf_preview_window = ['right,60%']
+let g:fzf_action = {
+	\ 'enter': 'tab split',
+	\ 'ctrl-s': 'split',
+	\ 'ctrl-v': 'vsplit'
+\}
 nmap <Space>f [fzf]
 nnoremap [fzf]f :<C-u>Files<CR>
 nnoremap [fzf]g :<C-u>GFiles<CR>
