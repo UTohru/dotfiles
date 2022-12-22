@@ -6,15 +6,17 @@
 
 let g:colors_name = 'mycolor'
 
-highlight PreProc ctermfg=226
-hi Statement ctermfg=220
+highlight PreProc ctermfg=214
+hi Statement ctermfg=226
+
 hi Identifier ctermfg=212
-hi Constant ctermfg=208
-hi Special ctermfg=133
-hi Comment ctermfg=75
+hi Constant ctermfg=222
+
 hi Type ctermfg=77
 hi SpecialKey ctermfg=68
-hi Title ctermfg=133
+hi Comment ctermfg=81
+hi Special ctermfg=154
+hi Title ctermfg=82
 " hi LineNr ctermfg=241 ctermbg=234
 " hi SignColumn ctermfg=20 ctermbg=235
 
