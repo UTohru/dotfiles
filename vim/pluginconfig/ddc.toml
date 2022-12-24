@@ -55,6 +55,8 @@ function! s:on_lsp_buffer_enabled() abort
 	nmap <buffer> K <Plug>(lsp-hover)
 	nmap <buffer> [lsp]d <Plug>(lsp-definition)
 	nmap <buffer> [lsp]r <Plug>(lsp-references)
+	nnoremap <buffer> [lsp]f :<C-u>LspDocumentFormat<CR>
+	vnoremap <buffer> <C-f> :<C-u>LspDocumentRangeFormat<CR>
 endfunction
 
 augroup myvimrc
