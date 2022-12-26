@@ -14,15 +14,14 @@ $ ./script/font_install.sh
 ```
 
 ## vim plugin install
-1. dein install
-	```
-	dein_install.sh
-	```
+<!-- 1. dein install  -->
+<!-- 	```             -->
+<!-- 	dein_install.sh -->
+<!-- 	```             -->
 1. deno install
 	```
 	$ curl -fsSL https://deno.land/x/install/install.sh | sh
 	```
-	(if vim version is under 8.2 use nodejs,yarn instead)
 1. plugin install
 	```
 	:call dein#install() 
