@@ -1,0 +1,181 @@
+
+set backspace=indent,eol,start
+
+if exists('+belloff')
+	set belloff=all
+else 
+	set visualbell
+	set t_vb=
+endif
+
+set laststatus=2
+set tabstop=4
+set shiftwidth=4
+set whichwrap=b,s,h,l,<,>,[,],~ "行を跨ぐ移動
+set nowrap "折り返しなし"
+set number
+
+set list
+set listchars=tab:»-,nbsp:%,trail:~ "非表示文字の可視化"
+set tags=./tags;$HOME
+
+function! s:tabpage_label(n) abort
+	let title = gettabvar(a:n, 'title')
+	if title !=# ''
+		" using t:title
+		return title
+	endif
+
+	let buffnr = tabpagebuflist(a:n)
+	" highlight (current tab)
+	let hi = a:n is tabpagenr() ? '%#TabLineSel#' : '%#TabLine#'
+
+	" buf num
+	let no = len(buffnr)
+	if no is 1
+		let no = ''
+	endif
+
+	" modified symbol
+	let mod = len(filter(copy(buffnr), 'getbufvar(v:val, "&modified")')) ? '+' :''
+	let sp = (no . mod) ==# '' ? '' : ' '
+
+	" current buf
+	let curbufnr = buffnr[tabpagewinnr(a:n) - 1]
+	let fname = pathshorten(bufname(curbufnr))
+
+	let label = ' ' . no . mod . sp . fname . ' '
+	return '%' . a:n . 'T' . hi . label . '%T%#TabLineFill#'
+endfunction
+
+function! MakeTabLine() abort
+	let titles = map(range(1, tabpagenr('$')), 's:tabpage_label(v:val)')
+	let sep = '|'
+	let tabpages = join(titles, sep) . sep . '%#TabLineFill#%T'
+	let info = ''
+	return tabpages . '%=' . info
+endfunction
+
+" default
+set showtabline=2
+set tabline=%!MakeTabLine()
+
+
+let mapleader="\<Space>"
+
+inoremap <Esc> <Esc>:set iminsert=0<CR>
+
+" tmux
+noremap <C-b> <NOP>
+
+" move pagewise
+nnoremap <Leader>j <C-f>
+nnoremap <Leader>k <C-b>
+
+" ^  $
+noremap <Leader>h ^
+noremap <Leader>l $
+onoremap h ^
+onoremap l $
+
+" tab , window
+nnoremap - :<C-u>split<Space>
+nnoremap <Bar> :<C-u>vsplit<Space>
+nnoremap <Leader>t :<C-u>tabnew<Space>
+nnoremap t gt
+nnoremap T gT
+
+nmap <Leader>w <C-w>
+
+set termwinkey=<C-g>
+nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
+tnoremap <ESC> <C-\><C-n>
+
+nnoremap > >>
+nnoremap < <<
+
+
+nnoremap <C-i> <C-l>
+"nnoremap <C-l> i<Space><ESC>
+
+nnoremap <silent> ZZ :<C-u>bd<CR>
+
+" redo
+nnoremap U <C-r>
+
+" toggle option
+nnoremap <silent> <C-n> :<C-u>set number!<CR>
+nnoremap <silent> <C-s> :<C-u>set wrap!<CR>
+
+" paste full filepath"
+nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
+" basic replace
+nnoremap <C-f> :<C-u>%s<Space>/
+
+
+
+" inc dec (-: conflict)
+"nnoremap + <C-a>
+"nnoremap - <C-x>
+
+" leave insert
+inoremap jk <ESC>
+inoremap kj <ESC>
+
+
+" tags / jump"
+nnoremap <C-]> g<C-]>
+inoremap <C-]> <ESC>g<C-]>
+nnoremap <Leader>o <C-o>
+
+
+"code"
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
+
+inoremap {} {}
+inoremap {<CR> {<CR>}<ESC>O
+inoremap { {}<Left>
+inoremap [] []
+inoremap [<CR> [<CR>]<ESC>O
+inoremap [ []<Left>
+inoremap () ()
+inoremap ( ()<Left>
+inoremap " ""<Left>
+inoremap "" ""
+inoremap ' ''<Left>
+inoremap '' ''
+inoremap ''' '''
+
+" command"
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+
+vnoremap J <NOP>
+
+
+" === "
+" color
+" === "
+highlight PreProc ctermfg=214
+hi Statement ctermfg=226
+
+hi Identifier ctermfg=212
+hi Constant ctermfg=222
+
+hi Type ctermfg=77
+hi SpecialKey ctermfg=68
+hi Comment ctermfg=81
+hi Special ctermfg=154
+hi Title ctermfg=82
+
+" transparent"
+hi Normal ctermbg=none
+hi NonText ctermbg=none
+hi Folded ctermbg=none
+hi EndOfBuffer ctermbg=none
+hi LineNr ctermfg=241 ctermbg=none
+hi SignColumn ctermfg=20 ctermbg=none
+hi TabLine cterm=bold ctermfg=238 ctermbg=none
+hi TabLineFill cterm=bold ctermfg=250 ctermbg=none
+hi TabLineSel ctermfg=252 ctermbg=none

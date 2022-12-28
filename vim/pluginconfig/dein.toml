@@ -7,7 +7,6 @@ hi DiffChange ctermbg=33
 
 [[plugins]]
 repo = 'vim-denops/denops.vim'
-if = 'v:version >= 802'
 
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
@@ -16,7 +15,9 @@ repo = 'lambdalisue/nerdfont.vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 hook_add = '''
-let s:lspfunc = v:version >= 802 ? "LLLspStatus" : "coc#status"
+let s:lspfunc = "LLLspStatus" 
+"let s:lspfunc = "coc#status"
+
 ""\	'enable': {'statusline':1, 'tabline':0},
 let g:lightline = {
 \	'enable': {'statusline':1, 'tabline':0},
@@ -70,8 +71,8 @@ repo = 'tyru/caw.vim'
 hook_add = '''
 " numToStr/Comment.nvim , preservim/nerdcommenter"
 " _ == /
-nmap <C-_> <Plug>(caw:hatpos:toggle)
-vmap <C-_> <Plug>(caw:hatpos:toggle)
+nmap <C-\> <Plug>(caw:hatpos:toggle)
+vmap <C-\> <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]

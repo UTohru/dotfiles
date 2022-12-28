@@ -13,7 +13,7 @@ $1
 endsnippet
 
 snippet commandFound "command found" b
-if command -V $1 > /dev/null 2>&1; then
+if builtin command -V $1 > /dev/null 2>&1; then
 	$2
 fi
 endsnippet

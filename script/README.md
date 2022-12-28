@@ -4,20 +4,21 @@
 
 
 
-## create symlink
+## main setup
 ```bash
 $ ./script/setup.sh
 ```
-## font install
+## font local-install
 ```
 $ ./script/font_install.sh
 ```
 
+<!-- 
 ## vim plugin install
-<!-- 1. dein install  -->
-<!-- 	```             -->
-<!-- 	dein_install.sh -->
-<!-- 	```             -->
+1. dein install
+	```
+	dein_install.sh
+	```
 1. deno install
 	```
 	$ curl -fsSL https://deno.land/x/install/install.sh | sh
@@ -26,6 +27,7 @@ $ ./script/font_install.sh
 	```
 	:call dein#install() 
 	```
+-->
 
 
 ## i3 config

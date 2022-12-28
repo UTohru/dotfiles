@@ -11,6 +11,7 @@ chmod u+x $1
 
 {
 	echo "#!/usr/bin/env bash";
+	echo "set -eo pipefail"
 	echo ""
 	echo "# if [ \$# != 1 ]; then"
 	echo "# 	echo Error: \$*"

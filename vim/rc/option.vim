@@ -18,12 +18,8 @@ set number
 ""set ambiwidth=double
 
 set list
-if v:version >= 802
-	set shortmess-=S
-	set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~ "非表示文字の可視化"
-else
-	set listchars=tab:»-,nbsp:%,trail:~ "非表示文字の可視化"
-endif
+set shortmess-=S
+set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~ "非表示文字の可視化"
 "set listchars=tab:--\|,nbsp:%,trail:~ "非表示文字の可視化"
 
 set tags=./tags;$HOME

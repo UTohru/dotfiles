@@ -1,14 +1,35 @@
 #!/bin/sh
+set -eo pipefail
+
+#
+# Mainly create symbolic link
+#
 
 cdir=$(cd $(dirname $0);cd ..;pwd)
 
+# restrict  git add localconf
 ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
 
-if [ -d ~/.vim ]; then
-	rm -rf ~/.vim
+# vim
+vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
+vim_version_check=$(echo "scale=2;$vim_version >= 8.2" | bc)
+if [ $vim_version_check -eq 1 ]; then
+	# deno install
+	if ! builtin command -V deno > /dev/null 2>&1; then
+		curl -fsSL https://deno.land/x/install/install.sh | sh
+	fi
+
+	if [ -d ~/.vim ]; then
+		rm -rf ~/.vim
+	fi
+	ln -sf ${cdir}/vim ~/.vim
+	ln -sf ${cdir}/.vimrc ~/.vimrc
+else
+	echo "[warning] vim version is too low"
+	echo "Configure <mini-vimrc> without plugins\n"
+	ln -sf ${cdir}/others/mini-vimrc ~/.vimrc
 fi
-ln -sf ${cdir}/vim ~/.vim
-ln -sf ${cdir}/.vimrc ~/.vimrc
+
 
 if [ -d ~/.mlterm ]; then
 	rm -rf ~/.mlterm
@@ -28,10 +49,6 @@ if [ ! -d ~/.config/i3/wallpaper ]; then
 fi
 ln -sf ${cdir}/compton.conf ~/.config/compton.conf
 
-if [ -d ~/.config/conky ]; then
-	rm -rf ~/.config/conky
-fi
-ln -sf ${cdir}/conky ~/.config/conky
 
 ln -sf ${cdir}/.zshenv ~/.zshenv
 if [ -d ~/.config/zsh ]; then
