@@ -1,5 +1,8 @@
 
 #################################  PROMPT  #################################
+#
+
+
 # git
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 setopt prompt_subst
@@ -66,9 +69,12 @@ else
 fi
 
 # 左プロンプト
-# ambigious 2colmns
-#PROMPT='%{%F{green}%}%2{'$'\UF2be''%}%n %{%F{$HOST_COLOR}%}%2{'$'\UF108''%}%m%{%F{white}%}[%.$(rprompt-git-current-branch)]$(__show_status)%# '
 # ２文字幅を1文字として使う場合
-PROMPT='%{%F{green}%}%1{'$'\UF2be''%} %n %{%F{$HOST_COLOR}%}%1{'$'\UF108''%} %m%{%F{white}%}[%.$(rprompt-git-current-branch)]$(__show_status)%# '
+# PROMPT='%{%F{green}%}%1{'$'\UF2be''%} %n %{%F{$HOST_COLOR}%}%1{'$'\UF108''%} %m%{%F{white}%}[%.$(rprompt-git-current-branch)]$(__show_status)%# '
+
+# no icons
+PROMPT='%{%F{green}%}%n %{%F{$HOST_COLOR}%}%m%{%F{white}%}[%.$(rprompt-git-current-branch)]$(__show_status): '
+
+
 
 

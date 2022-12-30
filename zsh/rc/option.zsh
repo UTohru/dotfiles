@@ -1,37 +1,38 @@
 
 #################################  OPTION  #################################
 unsetopt promptcr
-setopt extended_history
-setopt append_history
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
 
+
+# === history ===
+setopt extended_history			# 開始・経過時刻を追加
+setopt append_history			# 毎回履歴を作らない
+setopt hist_ignore_all_dups
+# setopt hist_ignore_dups
+# setopt hist_ignore_space
 unsetopt hist_verify
 setopt hist_save_no_dups
 setopt hist_no_store
 setopt hist_expand
-
 setopt share_history
 
+# === complete ===
 setopt list_packed
 setopt auto_param_slash
 setopt mark_dirs
-
 unsetopt menu_complete
 setopt auto_list
 setopt auto_menu
 setopt auto_param_keys
+setopt complete_in_word
+setopt equals
+setopt glob
+setopt extended_glob
+setopt nonomatch
 
 
 setopt auto_cd
 setopt no_beep
 #setopt bsd_echo
-setopt complete_in_word
-setopt equals
-setopt nonomatch
-setopt glob
-setopt extended_glob
 unsetopt flow_control
 setopt no_flow_control
 setopt hash_cmds

@@ -2,7 +2,7 @@ augroup myvimrc
 	autocmd!
 augroup END
 
-" wslのチェック "
+" check wsl "
 let g:wsl = filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 
 " =====================================

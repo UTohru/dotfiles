@@ -63,32 +63,3 @@ if [ -d ~/.config/wezterm ]; then
 fi
 ln -sf ${cdir}/wezterm ~/.config/wezterm
 
-
-# ===
-# WSL
-# ===
-if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-	if [ ! -e ~/.inputrc ]; then
-		{
-			echo "# ===";
-			echo "# wsl conf";
-			echo "# ===";
-			echo "#export WIN_USER=\$(printenv | grep -m1 /mnt/c/Users | sed -r 's/.*\/c\/Users\/([^\/]+).*/\\\1/')"
-			echo "export BROWSER='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe\ \$(wslpath -w \${1})'";
-			echo "alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'";
-			echo "alias explorer='explorer.exe .'";
-			echo "alias cmd='cmd.exe'";
-		} | tee -a ~/.bashrc >> ~/.config/zsh/localconf/rc.zsh
-
-		touch ~/.inputrc
-		{
-			echo "set bell-style none"
-		} >> ~/.inputrc
-
-		#touch /etc/wsl.conf
-		#{
-		#	echo "[interop]"
-		#	echo "appendWindowsPath=false"
-		#} >> /etc/wsl.conf
-	fi
-fi

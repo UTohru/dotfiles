@@ -27,11 +27,8 @@ function gpopd(){
 
 
 
-
-
 if command -V vim > /dev/null 2>&1; then
 	alias vimplane='vim -u NONE -N'
-	
 	export EDITOR=vim
 fi
 
@@ -43,6 +40,7 @@ fi
 alias ipa="ip -br -c a"
 alias ipr="ip -br -c route"
 
+alias bc='bc -l'
 
 if command -V python > /dev/null 2>&1; then
 	alias urlencode='python -c "import sys; import urllib.parse; print(urllib.parse.quote(sys.argv[1]));"'
@@ -98,7 +96,15 @@ if command -V fzf > /dev/null 2>&1; then
 	fi
 fi
 
-alias bc='bc -l'
+
+# === wsl ===
+if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+	#export WIN_USER=\$(printenv | grep -m1 /mnt/c/Users | sed -r 's/.*\/c\/Users\/([^\/]+).*/\\\1/')
+	alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+	alias explorer='explorer.exe .'";
+	alias cmd='cmd.exe'";
+fi
+
 
 scriptdir=$(cd $(dirname $(readlink -f $0)); pwd)/script/util
 export PATH="$scriptdir:$PATH"
