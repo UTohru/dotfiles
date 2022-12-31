@@ -26,19 +26,29 @@ wezterm.on('update-right-status', function(window, pane)
 		table.insert(elements, {Text = icons["left"] .. " " .. text .. " "})
 	end
 
-	-- corresponds remote username/hostname/branch
-	--     Prompt could be omitted
 	local cwd = pane:get_current_working_dir()
-	local username = ""
+	-- push( ' ' .. wezterm.hostname(), 'magenta')
+	local username = os.getenv("USER")
 	local hostname = ""
-	if cwd then
-		username = os.getenv("USER")
-		hostname = wezterm.hostname()
-	end
-
 	local hostcolor = 'cyan'
-	if pane:get_domain_name() ~= "local" then
-		hostcolor = 'magenta'
+	if cwd then
+		cwd = cwd:sub(8)
+		local slash = cwd:find '/'
+		hostname = cwd:sub(1, slash -1)
+		local dot = hostname:find '[.]'
+		if dot then
+			hostname = hostname:sub(1, dot -1)
+		end
+
+		if hostname ~= string.lower(wezterm.hostname()) then
+			username = ""
+			hostcolor = 'magenta'
+		end
+		cwd = cwd:sub(slash)
+		if string.len(cwd) > 28 then
+			cwd = '..' .. cwd:sub(-28)
+		end
+		push( cwd, 'lightsteelblue')
 	end
 	push(icons["user"] .. ' ' .. username, 'lightgreen')
 	push(icons["host"] .. ' ' .. hostname, hostcolor)
