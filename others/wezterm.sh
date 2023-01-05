@@ -399,7 +399,11 @@ __wezterm_osc7() {
     # If the command failed (perhaps the installed wezterm
     # is too old?) then fall back to the simple version below.
   fi
-  printf "\033]7;file://%s%s\033\\" "${HOSTNAME}" "${PWD}"
+  local host=$HOSTNAME
+  if [ -n "${ZSH_VERSION}" ]; then
+    host=$HOST
+  fi
+  printf "\033]7;file://%s%s\033\\" "$host" "${PWD}"
 }
 
 # The semantic precmd and prexec functions generate semantic

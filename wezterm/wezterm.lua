@@ -2,9 +2,11 @@ local wezterm = require 'wezterm';
 
 local shell;
 local MODKEY = "SUPER"
+local FONT_SIZE = 14
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	shell = {"wsl.exe"}
 	MODKEY = "ALT"
+	FONT_SIZE = 12
 end
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
@@ -69,7 +71,7 @@ return {
 	-- debug_key_events = true,
 
 
-	font_size = 14,
+	font_size = FONT_SIZE,
 	-- unicode_version = 14,
 	-- treat_east_asian_ambiguous_width_as_wide = true,
 	-- allow_square_glyphs_to_overflow_width = "Always",
