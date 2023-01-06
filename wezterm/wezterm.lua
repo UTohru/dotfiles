@@ -28,23 +28,30 @@ wezterm.on('update-right-status', function(window, pane)
 		table.insert(elements, {Text = icons["left"] .. " " .. text .. " "})
 	end
 
+	-- 
+	-- # see zsh/wezterm.sh >> __wezterm_osc7()
+	-- 
 	local cwd = pane:get_current_working_dir()
-	-- push( ' ' .. wezterm.hostname(), 'magenta')
-	local username = os.getenv("USER")
+	local username = ""
 	local hostname = ""
 	local hostcolor = 'cyan'
+	-- push( ' ' .. wezterm.hostname(), 'magenta')
 	if cwd then
 		cwd = cwd:sub(8)
 		local slash = cwd:find '/'
 		hostname = cwd:sub(1, slash -1)
+		local at = hostname:find '[.]'
+		username = hostname:sub(1, at-1)
+		hostname = hostname:sub(at+1, -1)
+
 		local dot = hostname:find '[.]'
 		if dot then
 			hostname = hostname:sub(1, dot -1)
 		end
 
-		if hostname ~= string.lower(wezterm.hostname()) then
-			username = ""
-			hostcolor = 'magenta'
+		local wezhost = string.lower(wezterm.hostname())
+		if hostname ~= wezhost:sub(1, wezhost:find "[.]" -1) then
+			hostcolor = 'mageta'
 		end
 		cwd = cwd:sub(slash)
 		if string.len(cwd) > 28 then

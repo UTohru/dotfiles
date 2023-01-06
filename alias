@@ -90,6 +90,12 @@ else
 fi
 
 
+if [ -n "${ZSH_VERSION}" -a -f ~/.fzf.zsh ]; then
+	source ~/.fzf.zsh
+elif [ -n "${BASH_VERSION}" -a -f ~/.fzf.bash ]; then
+	source ~/.fzf.bash
+fi
+
 if command -V fzf > /dev/null 2>&1; then
 	if command -V fd > /dev/null 2>&1; then
 		export FZF_DEFAULT_COMMAND='fd --type f'

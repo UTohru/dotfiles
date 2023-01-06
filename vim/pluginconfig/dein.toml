@@ -103,7 +103,7 @@ repo = 'lambdalisue/guise.vim'
 
 [[plugins]]
 repo = 'junegunn/fzf'
-build = './install --all'
+build = './install --bin'
 merged = 0
 
 [[plugins]]

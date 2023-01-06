@@ -1,5 +1,7 @@
 # shellcheck shell=bash
 
+# https://github.com/wez/wezterm/blob/main/docs/shell-integration.md
+
 # This file hooks up shell integration for wezterm.
 # It is suitable for zsh and bash.
 #
@@ -394,16 +396,17 @@ fi
 # command provided by wezterm if wezterm is installed, but falls
 # back to a simple printf command otherwise.
 __wezterm_osc7() {
-  if hash wezterm 2>/dev/null ; then
-    wezterm set-working-directory 2>/dev/null && return 0
-    # If the command failed (perhaps the installed wezterm
-    # is too old?) then fall back to the simple version below.
-  fi
+  # if hash wezterm 2>/dev/null ; then
+  #   wezterm set-working-directory 2>/dev/null && return 0
+  #   # If the command failed (perhaps the installed wezterm
+  #   # is too old?) then fall back to the simple version below.
+  # fi
+
   local host=$HOSTNAME
   if [ -n "${ZSH_VERSION}" ]; then
     host=$HOST
   fi
-  printf "\033]7;file://%s%s\033\\" "$host" "${PWD}"
+  printf "\033]7;file://%s%s\033\\" "${USER}.${host}" "${PWD}"
 }
 
 # The semantic precmd and prexec functions generate semantic
