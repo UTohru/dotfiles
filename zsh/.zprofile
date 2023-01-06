@@ -31,3 +31,9 @@ if command -V firefox > /dev/null 2>&1; then
 	export BROWSER=`which firefox`
 fi
 
+
+# ======================
+# wezterm shell integration
+# ======================
+source ${ZDOTDIR}/wezterm.sh
+
