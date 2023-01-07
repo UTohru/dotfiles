@@ -13,6 +13,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 	return {{Text = ' ' .. tab.tab_index+1 .. ' '}}
 end)
 
+
 wezterm.on('update-right-status', function(window, pane)
 	local icons ={
 		left = utf8.char(0xf054),
@@ -50,8 +51,13 @@ wezterm.on('update-right-status', function(window, pane)
 		end
 
 		local wezhost = string.lower(wezterm.hostname())
-		if hostname ~= wezhost:sub(1, wezhost:find "[.]" -1) then
-			hostcolor = 'mageta'
+		dot = wezhost:find '[.]'
+		if dot then
+			wezhost = wezhost:sub(1, dot -1)
+		end
+
+		if hostname ~= wezhost then
+			hostcolor = 'magenta'
 		end
 		cwd = cwd:sub(slash)
 		if string.len(cwd) > 28 then
