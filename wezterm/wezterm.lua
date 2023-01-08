@@ -16,7 +16,9 @@ end)
 
 wezterm.on('update-right-status', function(window, pane)
 	local icons ={
-		left = utf8.char(0xf054),
+		-- left = utf8.char(0xe0b6),
+		left = utf8.char(0xe0b2),
+		right = utf8.char(0xf054),
 		user = utf8.char(0xf2be),
 		host = utf8.char(0xf108),
 		branch = utf8.char(0xe725),
@@ -24,9 +26,13 @@ wezterm.on('update-right-status', function(window, pane)
 
 	local elements = {}
 	-- push into elements
-	function push(text, color_fg)
-		table.insert(elements, {Foreground = {Color = color_fg }})
-		table.insert(elements, {Text = icons["left"] .. " " .. text .. " "})
+	function push(text, color, before_color)
+		table.insert(elements, {Foreground = {Color = color }})
+		table.insert(elements, {Background = {Color = before_color }})
+		table.insert(elements, {Text = icons["left"] })
+		table.insert(elements, {Foreground = {Color = "midnightblue" }})
+		table.insert(elements, {Background = {Color = color }})
+		table.insert(elements, {Text = ' ' .. text .. ' '})
 	end
 
 	-- 
@@ -35,8 +41,8 @@ wezterm.on('update-right-status', function(window, pane)
 	local cwd = pane:get_current_working_dir()
 	local username = ""
 	local hostname = ""
-	local hostcolor = 'cyan'
-	-- push( ' ' .. wezterm.hostname(), 'magenta')
+	local hostcolor = 'royalblue'
+	local cbuf = 'none'
 	if cwd then
 		cwd = cwd:sub(8)
 		local slash = cwd:find '/'
@@ -57,16 +63,17 @@ wezterm.on('update-right-status', function(window, pane)
 		end
 
 		if hostname ~= wezhost then
-			hostcolor = 'magenta'
+			hostcolor = 'blueviolet'
 		end
 		cwd = cwd:sub(slash)
 		if string.len(cwd) > 28 then
 			cwd = '..' .. cwd:sub(-28)
 		end
-		push( cwd, 'lightsteelblue')
+		push( cwd, 'lightsteelblue', cbuf)
+		cbuf = 'lightsteelblue'
 	end
-	push(icons["user"] .. ' ' .. username, 'lightgreen')
-	push(icons["host"] .. ' ' .. hostname, hostcolor)
+	push(icons["user"] .. ' ' .. username, 'lightseagreen', cbuf)
+	push(icons["host"] .. ' ' .. hostname, hostcolor, 'lightseagreen')
 
 	-- local date = wezterm.strftime '%a %b %-d %H:%M'
 	-- push(date, 'white')
@@ -92,10 +99,10 @@ return {
 	adjust_window_size_when_changing_font_size = false,
 
 	window_padding = {
-		top = 1,
-		bottom = 1,
-		left = 4,
-		right = 2,
+		top = 0,
+		bottom = 0,
+		left = 1,
+		right = 0,
 	},
 	
 	-- style:  {Steady, Blink} , {Block, Underline, Bar}
@@ -105,10 +112,12 @@ return {
 	cursor_blink_ease_out = 'Constant',
 	cursor_blink_rate = 0,
 
+	-- hide_tab_bar_if_only_one_tab = true,
+	tab_bar_at_bottom = true,
 	-- tab bar font
 	use_fancy_tab_bar = false,
 
-	-- candidate { 'Dracula', 'Neon (terminal.sexy)', 'Pro Light' }
+	-- color candidate { 'Dracula', 'Neon (terminal.sexy)', 'Pro Light' }
 	color_scheme = "Pro Light",
 
 	colors ={
@@ -133,7 +142,6 @@ return {
 	},
 	window_background_opacity = 0.5,
 
-	-- hide_tab_bar_if_only_one_tab = true,
 	
 	keys = {
 		{key='t', mods=MODKEY, action=wezterm.action{SpawnTab="DefaultDomain"}},

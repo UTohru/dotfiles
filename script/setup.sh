@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 set -eo pipefail
 
 #
@@ -8,7 +8,10 @@ set -eo pipefail
 cdir=$(cd $(dirname $0);cd ..;pwd)
 
 # restrict  git add localconf
-ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
+if [ ! -f ${cdir}/.git/hooks/pre-commit ]; then
+	rm ${cdir}/.git/hooks/pre-commit
+	ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
+fi
 
 # vim
 vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
@@ -26,7 +29,7 @@ if [ $vim_version_check -eq 1 ]; then
 	ln -sf ${cdir}/.vimrc ~/.vimrc
 else
 	echo "[warning] vim version is too low"
-	echo "Configure <mini-vimrc> without plugins\n"
+	echo "Configure \"mini-vimrc\" without plugins\n"
 	ln -sf ${cdir}/others/mini-vimrc ~/.vimrc
 fi
 
