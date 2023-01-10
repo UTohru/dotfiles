@@ -74,7 +74,7 @@ function __show_status() {
 # PROMPT='%{%F{green}%}%1{'$'\UF2be''%} %n %{%F{$HOST_COLOR}%}%1{'$'\UF108''%} %m%{%F{white}%}[%.$(rprompt-git-current-branch)]$(__show_status)%# '
 
 ## no-icon short version
-PROMPT='%.$(rprompt-git-current-branch)$(__show_status) : '
+PROMPT='[%.$(rprompt-git-current-branch)]$(__show_status) : '
 
 
 
