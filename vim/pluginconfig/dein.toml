@@ -71,8 +71,15 @@ repo = 'tyru/caw.vim'
 hook_add = '''
 " numToStr/Comment.nvim , preservim/nerdcommenter"
 " _ == /
-nmap <C-\> <Plug>(caw:hatpos:toggle)
-vmap <C-\> <Plug>(caw:hatpos:toggle)
+
+" current environment"
+if g:wsl || has('win32')
+	nmap <C-_> <Plug>(caw:hatpos:toggle)
+	vmap <C-_> <Plug>(caw:hatpos:toggle)
+else
+	nmap <C-/> <Plug>(caw:hatpos:toggle)
+	vmap <C-/> <Plug>(caw:hatpos:toggle)
+endif
 '''
 
 [[plugins]]
