@@ -8,10 +8,10 @@ set -eo pipefail
 cdir=$(cd $(dirname $0);cd ..;pwd)
 
 # restrict  git add localconf
-if [ ! -f ${cdir}/.git/hooks/pre-commit ]; then
+if [ -f ${cdir}/.git/hooks/pre-commit ]; then
 	rm ${cdir}/.git/hooks/pre-commit
-	ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
 fi
+ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
 
 # vim
 vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
@@ -43,6 +43,10 @@ ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
 ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
 ln -sf ${cdir}/.xprofile ~/.xprofile
 
+if [ ! -d ~/.config ]; then
+	mkdir ~/.config
+fi
+
 if [ -d ~/.config/i3 ]; then
 	rm -rf ~/.config/i3
 fi
@@ -66,3 +70,13 @@ if [ -d ~/.config/wezterm ]; then
 fi
 ln -sf ${cdir}/wezterm ~/.config/wezterm
 
+
+# === wsl (ubuntu) ===
+if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+	if command -V powershell.exe > /dev/null 2>&1; then
+		WIN_USER=$(powershell.exe '$env:USERNAME' | sed -e 's/^M//g')
+		ln -sf /mnt/c/Users/$WIN_USER/Desktop ~/desktop
+	fi
+	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
+	sudo update-locale LANG=ja_JP.UTF8
+fi
