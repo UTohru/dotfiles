@@ -20,6 +20,8 @@ if [ $vim_version_check -eq 1 ]; then
 	# deno install
 	if ! builtin command -V deno > /dev/null 2>&1; then
 		curl -fsSL https://deno.land/x/install/install.sh | sh
+		echo "export DENO_INSTALL=/home/$USER/.deno" >> ~/dotfiles/zsh/localconf/rc.zsh
+		echo "export PATH=\"$DENO_INSTALL/bin:$PATH\"" >> ~/dotfiles/zsh/localconf/rc.zsh
 	fi
 
 	if [ -d ~/.vim ]; then
@@ -74,7 +76,7 @@ ln -sf ${cdir}/wezterm ~/.config/wezterm
 # === wsl (ubuntu) ===
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
-		WIN_USER=$(powershell.exe '$env:USERNAME' | sed -e 's/^M//g')
+		WIN_USER=$(powershell.exe '$env:USERNAME' | sed -e 's/[\r\n]\+//g')
 		ln -sf /mnt/c/Users/$WIN_USER/Desktop ~/desktop
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev

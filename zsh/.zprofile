@@ -2,7 +2,7 @@
 source ${ZDOTDIR}/localconf/profile.zsh
 
 # about ssh
-if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then 
+if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if [ -d "$HOME/.local/bin" ] ; then
 		PATH="$HOME/.local/bin:$PATH"
 	fi

@@ -28,6 +28,7 @@ let g:lsp_settings = {
 '''
 
 
+
 [[plugins]]
 repo = 'prabirshrestha/vim-lsp'
 on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go']
@@ -75,21 +76,21 @@ hook_source = '''
 call ddc#custom#patch_global('sources', ['ultisnips', 'file', 'around'])
 call ddc#custom#patch_global('sourceOptions', {
 \	'_': {
-\		'ignorecase': v:true,
+\		'ignoreCase': v:true,
 \		'matchers': ['matcher_head'],
 \		'minAutoCompleteLength': 2,
 \		'sorters' : ['sorter_rank'],
 \	},
 \	'around': {
 \		'mark': 'A',
-\		'maxCandidates': 5,
+\		'maxItems': 5,
 \	},
 \	'vim-lsp': {
 \		'mark': 'LSP',
 \		'isVolatile': v:true,
 \		'forceCompletionPattern': '\.\w*|:\w*|->\w*',
 \		'matchers': ['matcher_head'],
-\		'maxCandidates': 5,
+\		'maxItems': 5,
 \	},
 \	'file': {
 \		'mark': 'F',
@@ -111,7 +112,6 @@ call ddc#custom#patch_filetype(
 \)
 
 call ddc#custom#patch_global('ui', 'pum')
-call ddc#custom#patch_global('completionMenu', 'pum.vim')
 call ddc#custom#patch_global('backspaceCompletion', v:true)
 call ddc#enable()
 '''
