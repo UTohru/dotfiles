@@ -14,10 +14,12 @@ cd ${SRC_DIR}
 
 if [ ! -d ${SRC_DIR}/vim ]; then
 	git clone --depth=1 https://github.com/vim/vim
+	cd vim/src
 else
+	cd vim
 	git pull
+	cd src
 fi
-cd vim/src
 
 
 # Python
