@@ -1,0 +1,53 @@
+
+# fzf
+if [ -n "${ZSH_VERSION}" -a -f ~/.fzf.zsh ]; then
+	source ~/.fzf.zsh
+elif [ -n "${BASH_VERSION}" -a -f ~/.fzf.bash ]; then
+	source ~/.fzf.bash
+fi
+
+if command -V fzf > /dev/null 2>&1; then
+	if command -V fd > /dev/null 2>&1; then
+		export FZF_DEFAULT_COMMAND='fd --type f'
+	fi
+fi
+
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    #alias ls='ls --color=auto'
+    #alias dir='dir --color=auto'
+    #alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+
+#
+# usually used interactive mode
+# 
+
+# yarn
+if [ -d "$HOME/.yarn" ]; then
+	export PATH="$HOME/.yarn/bin:$PATH"
+fi
+
+# python
+if [ -d "$HOME/.asdf" ]; then
+	. "$HOME/.asdf/asdf.sh"
+elif [ -d "$HOME/.pyenv" ]; then
+	export PATH="$HOME/.pyenv/bin:$PATH"
+	eval "$(pyenv init -)"
+fi
+
+# deno
+if [ -d "$HOME/.deno" ]; then
+	export DENO_INSTALL="$HOME/.deno"
+	export PATH="$DENO_INSTALL/bin:$PATH"
+fi
+
+# rust
+if [ -d "$HOME/.cargo" ]; then
+	. "$HOME/.cargo/env"
+fi

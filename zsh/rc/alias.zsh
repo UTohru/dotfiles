@@ -1,1 +1,1 @@
-../../alias
+../../_shell/alias

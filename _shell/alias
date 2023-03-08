@@ -1,41 +1,7 @@
 
-# less option
-export LESS='-R -S -g -x4'
-
-
-# global  pushd/popd
-dir_stack="${HOME}/.dir_stack"
-if [ ! -e $dir_stack ]; then
-	touch $dir_stack && chmod 600 $dir_stack
-fi
-function gpushd(){
-	echo $(pwd) >> $dir_stack
-	builtin cd $1
-}
-function gpopd(){
-	if [ ! -s $dir_stack ];  then
-		 return
-	fi
-	newdir=$(sed -n '$p' $dir_stack)
-	sed -i -e '$d' $dir_stack
-	if [ ! -d $newdir ]; then
-		return
-	fi
-	builtin cd $newdir
-	unset -v newdir
-}
-
-
-
 if command -V vim > /dev/null 2>&1; then
 	alias vimplane='vim -u NONE -N'
-	export EDITOR=vim
 fi
-
-#which open > /dev/null 2>&1
-#if [ $? -ne 0 ]; then
-#	alias open='xdg-open'
-#fi
 
 alias ipa="ip -br -c a"
 alias ipr="ip -br -c route"
@@ -61,11 +27,33 @@ if command -V python > /dev/null 2>&1; then
 	function setenv(){
 		if [ -d ".venv" ]; then
 			source ./.venv/bin/activate
-		else
+		elif [ -d ".venv" ]; then
 			source ./.env/bin/activate
 		fi
 	}
 fi
+
+# global  pushd/popd
+dir_stack="${HOME}/.dir_stack"
+if [ ! -e $dir_stack ]; then
+	touch $dir_stack && chmod 600 $dir_stack
+fi
+function gpushd(){
+	echo $(pwd) >> $dir_stack
+	builtin cd $1
+}
+function gpopd(){
+	if [ ! -s $dir_stack ];  then
+		 return
+	fi
+	newdir=$(sed -n '$p' $dir_stack)
+	sed -i -e '$d' $dir_stack
+	if [ ! -d $newdir ]; then
+		return
+	fi
+	builtin cd $newdir
+	unset -v newdir
+}
 
 
 # openssl rand -hex 8
@@ -90,19 +78,6 @@ else
 fi
 
 
-if [ -n "${ZSH_VERSION}" -a -f ~/.fzf.zsh ]; then
-	source ~/.fzf.zsh
-elif [ -n "${BASH_VERSION}" -a -f ~/.fzf.bash ]; then
-	source ~/.fzf.bash
-fi
-
-if command -V fzf > /dev/null 2>&1; then
-	if command -V fd > /dev/null 2>&1; then
-		export FZF_DEFAULT_COMMAND='fd --type f'
-	fi
-fi
-
-
 # === wsl ===
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	#export WIN_USER=\$(printenv | grep -m1 /mnt/c/Users | sed -r 's/.*\/c\/Users\/([^\/]+).*/\\\1/')
@@ -112,5 +87,3 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 fi
 
 
-scriptdir=$(cd $(dirname $(readlink -f $0)); pwd)/script/util
-export PATH="$scriptdir:$PATH"
