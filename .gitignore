@@ -10,4 +10,4 @@ mlterm/msg.log
 mlterm/pts_*
 mlterm/challenge
 
-zsh/.zcompdump
+zsh/.zcompdump*

@@ -7,13 +7,15 @@ set -eo pipefail
 
 cdir=$(cd $(dirname $0);cd ..;pwd)
 
-# restrict  git add localconf
-if [ -f ${cdir}/.git/hooks/pre-commit ]; then
-	rm ${cdir}/.git/hooks/pre-commit
-fi
-ln -s ${cdir}/others/pre-commit ${cdir}/.git/hooks/
+#
+# ignore localconf
+# 
+ignore_list=("${cdir}/zsh/localconf/rc.zsh" "${cdir}/zsh/localconf/profile.zsh" "${cdir}/i3/enable/local.conf")
+git update-index --skip-worktree ${ignore_list[@]}
 
+#
 # vim
+#
 vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
 vim_version_check=$(echo "scale=2;$vim_version >= 8.2" | bc)
 if [ $vim_version_check -eq 1 ]; then
