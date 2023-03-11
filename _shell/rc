@@ -28,6 +28,7 @@ fi
 # usually used interactive mode
 # 
 
+
 # yarn
 if [ -d "$HOME/.yarn" ]; then
 	export PATH="$HOME/.yarn/bin:$PATH"
@@ -36,6 +37,9 @@ fi
 # python
 if [ -d "$HOME/.asdf" ]; then
 	. "$HOME/.asdf/asdf.sh"
+	if [ -n "${ZSH_VERSION}" ]; then
+		fpath=(${ASDF_DIR}/completions $fpath)
+	fi
 elif [ -d "$HOME/.pyenv" ]; then
 	export PATH="$HOME/.pyenv/bin:$PATH"
 	eval "$(pyenv init -)"

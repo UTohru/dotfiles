@@ -1,10 +1,10 @@
 ## main setup
 ```bash
-$ ./script/setup.sh
+$ ./setup.sh
 ```
 ## font local-install
 ```
-$ ./script/font_install.sh
+$ ./font_install.sh
 ```
 
 ## vim local-install

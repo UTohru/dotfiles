@@ -1,3 +1,0 @@
-
-inoremap ` ``<Left>
-inoremap `` ``

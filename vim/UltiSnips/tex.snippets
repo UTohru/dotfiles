@@ -19,6 +19,7 @@ snippet figure "set fugure" b
 	\\centering
 	\\includegraphics[width=${2:\\columnwidth}]{${3:path}}
 	\\caption{$4}
+	% \\ecaption{$6}
 	\\label{fig:$5}
 \\end{figure}
 endsnippet
@@ -27,6 +28,7 @@ snippet table "set table" b
 \\begin{table}[${1:t}]
 	\\centering
 	\\caption{$2}
+	% \\ecaption{$6}
 	\\begin{tabular}{$3}\\hline
 		$5
 	\\end{tabular}
@@ -57,6 +59,7 @@ snippet subcaption "set subcaption" b
 		\\includegraphics[width=${4:\\columnwidth}]{${5:img/path}}
 	}
 	\\caption{${6:caption_name}}
+	% \\ecaption{$8}
 	\\label{fig:$7}
 \\end{figure}
 endsnippet
@@ -65,12 +68,13 @@ snippet subfigure_table "set subfigure using table" b
 \\begin{table*}[${1:t}]
 	\\centering
 	\\caption{$2}
+	% \\ecaption{$7}
 	\\subfigure[\\label{tab:$3}tabname]{
 		\\begin{tabular}{$4}\\hline
 			$5
 		\\end{tabular}
 	}
-	\\label{tab:$5}
+	\\label{tab:$6}
 \\end{table*}
 endsnippet
 
@@ -122,4 +126,8 @@ snippet algorithm "set algorithm" b
 		$5
 	\\end{algorithmic}
 \\end{algorithm}
+endsnippet
+
+snippet footnote "set footnote with url" i
+\\footnote{\url{$1}}
 endsnippet

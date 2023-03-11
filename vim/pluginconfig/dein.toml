@@ -130,3 +130,8 @@ nnoremap [fzf]g :<C-u>GFiles<CR>
 nnoremap [fzf]l :<C-u>Lines<CR>
 nnoremap [fzf]r :<C-u>Rg<CR>
 '''
+
+#
+# [[plugins]]
+# repo = 'dstein64/vim-startuptime'
+
