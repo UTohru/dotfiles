@@ -106,15 +106,19 @@ endsnippet
 snippet eqnarray "set eqnarray" b
 \\begin{eqnarray}
 	\\label{$1}
-	$2 &= \\nonumber
+	$2 &=& \\nonumber
 \\end{eqnarray}
 endsnippet
 
-snippet aligned "set aligned" b
-\\begin{aligned}
-	$1
-\\end{aligned}
+snippet align "set align and split" b
+\\begin{align}
+	\\begin{split}
+		% \\label{$1}
+		$2 &=& 
+	\\end{split}
+\\end{align}
 endsnippet
+
 
 snippet algorithm "set algorithm" b
 \\begin{algorithm}

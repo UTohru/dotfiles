@@ -73,6 +73,7 @@ on_ft = ['tex']
 hook_add = '''
 " zm command"
 "let g:tex_fold_sec_char = '>'
+let g:tex_fold_use_default_envs = 0
 '''
 
 [[plugins]]
