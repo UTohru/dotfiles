@@ -1,5 +1,5 @@
 #!/bin/bash
-set -eo pipefail
+set -e
 
 #
 # Mainly create symbolic link
@@ -74,6 +74,10 @@ if [ -d ~/.config/wezterm ]; then
 fi
 ln -sf ${cdir}/wezterm ~/.config/wezterm
 
+if [ -d ~/.config/efm-langserver ]; then
+	rm -rf ~/.config/efm-langserver
+fi
+ln -sf ${cdir}/efm-langserver ~/.config/efm-langserver
 
 # === wsl (ubuntu) ===
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then

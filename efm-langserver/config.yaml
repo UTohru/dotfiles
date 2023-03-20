@@ -1,0 +1,15 @@
+version: 2
+tools:
+  text-textlint: &text-textlint
+    lint-command: 'deno run -A --node-modules-dir npm:textlint@latest --f unix --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - '%f:%l:%c: %m [%trror/%r]'
+    root-markers:
+      - .textlintrc
+languages:
+  markdown:
+    - <<: *text-textlint
+  tex:
+    - <<: *text-textlint
