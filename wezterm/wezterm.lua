@@ -25,12 +25,18 @@ wezterm.on('update-right-status', function(window, pane)
 		host = utf8.char(0xf108),
 		branch = utf8.char(0xe725),
 	}
+	local colors ={
+		host = "royalblue",
+		remote_host = "magenta",
+		user = "darkturquoise",
+		cwd = "limegreen",
+	}
 
 	local elements = {}
 	-- push into elements
-	function push(text, color, before_color)
+	function push(text, color, prev_color)
 		table.insert(elements, {Foreground = {Color = color }})
-		table.insert(elements, {Background = {Color = before_color }})
+		table.insert(elements, {Background = {Color = prev_color }})
 		table.insert(elements, {Text = icons["left"] })
 		table.insert(elements, {Foreground = {Color = "midnightblue" }})
 		table.insert(elements, {Background = {Color = color }})
@@ -43,25 +49,23 @@ wezterm.on('update-right-status', function(window, pane)
 	if dot then
 		hostname = hostname:sub(1, dot -1)
 	end
-	local hostcolor = 'royalblue'
+	local hostcolor = colors["host"]
 	local wezhost = string.lower(wezterm.hostname())
 	if hostname ~= wezhost then
-		hostcolor = 'blueviolet'
+		hostcolor = colors["remote_host"]
 	end
 
 	local cwd = pane:get_current_working_dir()
-	local prev_color = 'none'
 	if cwd then
 		cwd = cwd:sub((cwd:sub(8):find '/') + 7)
 		local cdir_size = 23
 		if string.len(cwd) > cdir_size then
 			cwd = '..' .. cwd:sub(-cdir_size)
 		end
-		push( cwd, 'lightsteelblue', prev_color)
-		prev_color = 'lightsteelblue'
+		push( cwd, colors["cwd"], 'none')
 	end
-	push(icons["user"] .. ' ' .. username, 'lightseagreen', prev_color)
-	push(icons["host"] .. ' ' .. hostname, hostcolor, 'lightseagreen')
+	push(icons["user"] .. ' ' .. username, colors["user"], colors["cwd"])
+	push(icons["host"] .. ' ' .. hostname, hostcolor, colors["user"])
 
 	window:set_right_status(wezterm.format(elements))
 end)
