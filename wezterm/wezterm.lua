@@ -39,6 +39,10 @@ wezterm.on('update-right-status', function(window, pane)
 
 	local username = pane:get_user_vars().WEZTERM_USER
 	local hostname = string.lower(pane:get_user_vars().WEZTERM_HOST)
+	local dot = hostname:find '[.]'
+	if dot then
+		hostname = hostname:sub(1, dot -1)
+	end
 	local hostcolor = 'royalblue'
 	local wezhost = string.lower(wezterm.hostname())
 	if hostname ~= wezhost then
