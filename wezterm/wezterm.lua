@@ -15,6 +15,8 @@ end)
 
 
 wezterm.on('update-right-status', function(window, pane)
+	-- # see _shell/wezterm.sh
+	
 	local icons ={
 		-- left = utf8.char(0xe0b6),
 		left = utf8.char(0xe0b2),
@@ -35,48 +37,27 @@ wezterm.on('update-right-status', function(window, pane)
 		table.insert(elements, {Text = ' ' .. text .. ' '})
 	end
 
-	-- 
-	-- # see zsh/wezterm.sh >> __wezterm_osc7()
-	-- 
-	local cwd = pane:get_current_working_dir()
-	local username = ""
-	local hostname = ""
+	local username = pane:get_user_vars().WEZTERM_USER
+	local hostname = string.lower(pane:get_user_vars().WEZTERM_HOST)
 	local hostcolor = 'royalblue'
-	local cbuf = 'none'
-	if cwd then
-		cwd = cwd:sub(8)
-		local slash = cwd:find '/'
-		hostname = cwd:sub(1, slash -1)
-		local at = hostname:find '[.]'
-		username = hostname:sub(1, at-1)
-		hostname = hostname:sub(at+1, -1)
-
-		local dot = hostname:find '[.]'
-		if dot then
-			hostname = hostname:sub(1, dot -1)
-		end
-
-		local wezhost = string.lower(wezterm.hostname())
-		dot = wezhost:find '[.]'
-		if dot then
-			wezhost = wezhost:sub(1, dot -1)
-		end
-
-		if hostname ~= wezhost then
-			hostcolor = 'blueviolet'
-		end
-		cwd = cwd:sub(slash)
-		if string.len(cwd) > 28 then
-			cwd = '..' .. cwd:sub(-28)
-		end
-		push( cwd, 'lightsteelblue', cbuf)
-		cbuf = 'lightsteelblue'
+	local wezhost = string.lower(wezterm.hostname())
+	if hostname ~= wezhost then
+		hostcolor = 'blueviolet'
 	end
-	push(icons["user"] .. ' ' .. username, 'lightseagreen', cbuf)
+
+	local cwd = pane:get_current_working_dir()
+	local prev_color = 'none'
+	if cwd then
+		cwd = cwd:sub((cwd:sub(8): find '/'))
+		if string.len(cwd) > 23 then
+			cwd = '..' .. cwd:sub(-23)
+		end
+		push( cwd, 'lightsteelblue', prev_color)
+		prev_color = 'lightsteelblue'
+	end
+	push(icons["user"] .. ' ' .. username, 'lightseagreen', prev_color)
 	push(icons["host"] .. ' ' .. hostname, hostcolor, 'lightseagreen')
 
-	-- local date = wezterm.strftime '%a %b %-d %H:%M'
-	-- push(date, 'white')
 	window:set_right_status(wezterm.format(elements))
 end)
 

@@ -1,6 +1,7 @@
 # shellcheck shell=bash
 
-# https://github.com/wez/wezterm/blob/main/docs/shell-integration.md
+# see
+# https://github.com/wez/wezterm/blob/main/assets/shell-integration/wezterm.sh
 
 # This file hooks up shell integration for wezterm.
 # It is suitable for zsh and bash.
@@ -13,6 +14,8 @@
 # WEZTERM_SHELL_SKIP_ALL - disables all
 # WEZTERM_SHELL_SKIP_SEMANTIC_ZONES - disables zones
 # WEZTERM_SHELL_SKIP_CWD - disables OSC 7 cwd setting
+# WEZTERM_SHELL_SKIP_USER_VARS - disable user vars that capture information
+#                                about running programs
 
 # shellcheck disable=SC2166
 if [ -z "${BASH_VERSION}" -a -z "${ZSH_NAME}" ] ; then
@@ -145,10 +148,9 @@ __bp_trim_whitespace() {
 # writes the resulting string to the variable name passed as $1. Used for
 # manipulating substrings in PROMPT_COMMAND
 __bp_sanitize_string() {
-    local var=${1:?} text=${2:-} sanitized
-    __bp_trim_whitespace sanitized "$text"
-    sanitized=${sanitized%;}
-    sanitized=${sanitized#;}
+    iocaltespace sanitized "$text"
+       sanitized=${sanitized%;}
+       sanitized=${sanitized#;}
     __bp_trim_whitespace sanitized "$sanitized"
     printf -v "$var" '%s' "$sanitized"
 }
@@ -169,9 +171,9 @@ __bp_precmd_invoke_cmd() {
     __bp_last_ret_value="$?" BP_PIPESTATUS=("${PIPESTATUS[@]}")
 
     # Don't invoke precmds if we are inside an execution of an "original
-    # prompt command" by another precmd execution loop. This avoids infinite
-    # recursion.
-    if (( __bp_inside_precmd > 0 )); then
+	    # prompt command" by another precmd execution loop. This avoids infinite
+	    # recursion.
+	    if (( __bp_inside_precmd > 0 )); then
       return
     fi
     local __bp_inside_precmd=1
@@ -391,22 +393,40 @@ if [[ ! -n "$BLE_VERSION" ]]; then
   __wezterm_install_bash_prexec
 fi
 
+# This function emits an OSC 1337 sequence to set a user var
+# associateD with the current terminal pan ))}var=${1:?} text=${2:-} slocal host=anitized
+# It requires the `base64` utility to be available in the path.
+__wezterm_set_user_var() {
+  if hash base64 2>/dev/null ; then
+      if [[ -z "${TMUX}"  ]] ; then
+	        printf "\033]1337;SetUserVar=%s=%s\007" "$1" `echo -n "$2" | base64`
+		    else
+			      # <https://github.com/tmux/tmux/wiki/FAQ#what-is-the-passthrough-escape-sequence-and-how-do-i-use-it>
+			        # Note that you ALSO need to add "set -g allow-passthrough on" to your tmux.conf
+				      printf "\033Ptmux;\033\033]1337;SetUserVar=%s=%s\007\033\\" "$1" `echo -n "$2" | base64`
+    fi
+  fi
+}
+
 # This function emits an OSC 7 sequence to inform the terminal
 # of the current working directory.  It prefers to use a helper
 # command provided by wezterm if wezterm is installed, but falls
 # back to a simple printf command otherwise.
 __wezterm_osc7() {
   # if hash wezterm 2>/dev/null ; then
-  #   wezterm set-working-directory 2>/dev/null && return 0
-  #   # If the command failed (perhaps the installed wezterm
+  #     wezterm set-working-directory 2>/dev/null && return 0
+  #     # If the command failed (perhaps the installed wezterm
   #   # is too old?) then fall back to the simple version below.
   # fi
-
-  local host=$HOSTNAME
-  if [ -n "${ZSH_VERSION}" ]; then
-    host=$HOST
+  local host
+  if hash hostname 2>/dev/null ; then
+    host="$(hostname)"
+  elif hash hostnamectl 2>/dev/null ; then
+    host="$(hostnamectl hostname)"
+  else
+  	host=""
   fi
-  printf "\033]7;file://%s%s\033\\" "${USER}.${host}" "${PWD}"
+  printf "\033]7;file://%s%s\033\\" "${host}" "${PWD}"
 }
 
 # The semantic precmd and prexec functions generate semantic
@@ -446,6 +466,35 @@ function __wezterm_semantic_preexec() {
   __wezterm_semantic_precmd_executing=1
 }
 
+__wezterm_user_vars_precmd() {
+  __wezterm_set_user_var "WEZTERM_PROG" ""
+  __wezterm_set_user_var "WEZTERM_USER" "$(id -un)"
+
+  # Indicate whether this pane is running inside tmux or not
+  if [[ -n "${TMUX}" ]] ; then
+    __wezterm_set_user_var "WEZTERM_IN_TMUX" "1"
+  else
+    __wezterm_set_user_var "WEZTERM_IN_TMUX" "0"
+  fi
+
+  # You may set WEZTERM_HOSTNAME to a name you want to use instead
+  # of calling out to the hostname executable on every prompt print.
+  if [[ -z "${WEZTERM_HOSTNAME}" ]] ; then
+    if hash hostname 2>/dev/null ; then
+      __wezterm_set_user_var "WEZTERM_HOST" "$(hostname)"
+    elif hash hostnamectl 2>/dev/null ; then
+      __wezterm_set_user_var "WEZTERM_HOST" "$(hostnamectl hostname)"
+    fi
+  else
+    __wezterm_set_user_var "WEZTERM_HOST" "${WEZTERM_HOSTNAME}"
+  fi
+}
+
+__wezterm_user_vars_preexec() {
+  # Tell wezterm the full command that is being run
+  __wezterm_set_user_var "WEZTERM_PROG" "$1"
+}
+
 # Register the various functions; take care to perform osc7 after
 # the semantic zones as we don't want to perturb the last command
 # status before we've had a chance to report it to the terminal
@@ -456,6 +505,16 @@ if [[ -z "${WEZTERM_SHELL_SKIP_SEMANTIC_ZONES}" ]]; then
   else
     precmd_functions+=(__wezterm_semantic_precmd)
     preexec_functions+=(__wezterm_semantic_preexec)
+  fi
+fi
+
+if [[ -z "${WEZTERM_SHELL_SKIP_USER_VARS}" ]]; then
+  if [[ -n "$BLE_VERSION" ]]; then
+    blehook PRECMD+=__wezterm_user_vars_precmd
+    blehook PREEXEC+=__wezterm_user_vars_preexec
+  else
+    precmd_functions+=(__wezterm_user_vars_precmd)
+    preexec_functions+=(__wezterm_user_vars_preexec)
   fi
 fi
 
