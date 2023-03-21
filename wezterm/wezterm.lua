@@ -52,9 +52,10 @@ wezterm.on('update-right-status', function(window, pane)
 	local cwd = pane:get_current_working_dir()
 	local prev_color = 'none'
 	if cwd then
-		cwd = cwd:sub((cwd:sub(8): find '/'))
-		if string.len(cwd) > 23 then
-			cwd = '..' .. cwd:sub(-23)
+		cwd = cwd:sub((cwd:sub(8):find '/') + 7)
+		local cdir_size = 23
+		if string.len(cwd) > cdir_size then
+			cwd = '..' .. cwd:sub(-cdir_size)
 		end
 		push( cwd, 'lightsteelblue', prev_color)
 		prev_color = 'lightsteelblue'
