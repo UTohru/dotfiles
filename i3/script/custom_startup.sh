@@ -24,11 +24,10 @@ fi
 
 if [ "$XDG_SESSION_TYPE" == "x11" ]; then
 	# compositor
-	comp=""
 	if builtin command -V compton > /dev/null 2>&1; then
-		$comp="compton"
+		comp="compton"
 	elif builtin command -V picom > /dev/null 2>&1; then
-		$comp="picom"
+		comp="picom"
 	fi
 
 	if [ -n $comp ]; then

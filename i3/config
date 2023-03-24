@@ -8,6 +8,7 @@
 #
 
 # i3 config file (v4)
+set $mod Mod1
 set $Power ~/.config/i3/script/exit.sh
 
 include ~/.config/i3/enable/*.conf

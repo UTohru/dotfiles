@@ -18,7 +18,6 @@ wezterm.on('update-right-status', function(window, pane)
 	-- # see _shell/wezterm.sh
 	
 	local icons ={
-		-- left = utf8.char(0xe0b6),
 		left = utf8.char(0xe0b2),
 		right = utf8.char(0xf054),
 		user = utf8.char(0xf2be),
@@ -30,6 +29,8 @@ wezterm.on('update-right-status', function(window, pane)
 		remote_host = "magenta",
 		user = "darkturquoise",
 		cwd = "limegreen",
+		-- FG
+		text = "midnightblue"
 	}
 
 	local elements = {}
@@ -38,7 +39,7 @@ wezterm.on('update-right-status', function(window, pane)
 		table.insert(elements, {Foreground = {Color = color }})
 		table.insert(elements, {Background = {Color = prev_color }})
 		table.insert(elements, {Text = icons["left"] })
-		table.insert(elements, {Foreground = {Color = "midnightblue" }})
+		table.insert(elements, {Foreground = {Color = colors["text"] }})
 		table.insert(elements, {Background = {Color = color }})
 		table.insert(elements, {Text = ' ' .. text .. ' '})
 	end
@@ -58,7 +59,7 @@ wezterm.on('update-right-status', function(window, pane)
 	local cwd = pane:get_current_working_dir()
 	if cwd then
 		cwd = cwd:sub((cwd:sub(8):find '/') + 7)
-		local cdir_size = 23
+		local cdir_size = 20
 		if string.len(cwd) > cdir_size then
 			cwd = '..' .. cwd:sub(-cdir_size)
 		end
