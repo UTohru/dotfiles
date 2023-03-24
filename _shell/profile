@@ -10,7 +10,7 @@ if command -V vim > /dev/null 2>&1; then
 fi
 
 # about ssh
-if [ -z "${SSH_AUTH_SOCK}" ]; then 
+if [ -n "${SSH_AUTH_SOCK}" ]; then 
 	if [ -r "/run/user/$(id -u)/keyring/ssh" ]; then
 		# Already Started
 		export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
@@ -24,14 +24,12 @@ if [ -z "${SSH_AUTH_SOCK}" ]; then
 fi
 
 # add local path
-# if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ] || [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-if [ -z "$DESKTOP_SESSION" ]; then 
-	if [ -d "$HOME/.local/bin" ] ; then
-		PATH="$HOME/.local/bin:$PATH"
-	fi
-	if [ -d "$HOME/bin" ] ; then
-		PATH="$HOME/bin:$PATH"
-	fi
+# if [ -z "$DESKTOP_STARTUP_ID" ]; then 
+if [ -d "$HOME/.local/bin" ] ; then
+	PATH="$HOME/.local/bin:$PATH"
+fi
+if [ -d "$HOME/bin" ] ; then
+	PATH="$HOME/bin:$PATH"
 fi
 
 dotdir=$(cd $(dirname $(dirname $(readlink -f $0))); pwd)
@@ -41,5 +39,3 @@ export PATH="$dotdir/script/util:$PATH"
 # wezterm shell integration
 # ======================
 source ${dotdir}/_shell/wezterm.sh
-
-

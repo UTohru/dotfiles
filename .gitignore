@@ -6,6 +6,9 @@ i3/wallpaper/*
 i3/lock.png
 i3/enable/*.conf
 
+sway/lock.png
+sway/wallpaper
+
 mlterm/msg.log
 mlterm/pts_*
 mlterm/challenge
