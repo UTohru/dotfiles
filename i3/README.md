@@ -4,7 +4,8 @@ Initially, the C-d launcher can be used
 
 ### add config
 ```
-$ ln -s $HOME/.config/i3/available/<file> $HOME/.config/i3/enable/
+$ cd ./enable
+$ ln -s ../available/<file>
 ```
 
 ### term 
