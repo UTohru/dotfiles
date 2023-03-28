@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# LightDM wraypper to run around Wayland session
+
+echo "Running Weyland session wrapper"
+
+# Systemd Environment
+set -a
+eval $(/usr/lib/systemd/user-environment-generators/30-systemd-environment-d-generator)
+set +a
+
+sleep 1
+exec $@

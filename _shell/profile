@@ -1,10 +1,8 @@
 
-# less option
-export LESS='-R -S -g -x4'
-
 if command -V firefox > /dev/null 2>&1; then
 	export BROWSER=`which firefox`
 fi
+
 if command -V vim > /dev/null 2>&1; then
 	export EDITOR=vim
 fi
@@ -32,8 +30,6 @@ if [ -d "$HOME/bin" ] ; then
 	PATH="$HOME/bin:$PATH"
 fi
 
-dotdir=$(cd $(dirname $(dirname $(readlink -f $0))); pwd)
-export PATH="$dotdir/script/util:$PATH"
 
 # ======================
 # wezterm shell integration

@@ -1,3 +1,5 @@
+# less option
+export LESS='-R -S -g -x4'
 
 # fzf
 if [ -n "${ZSH_VERSION}" -a -f ~/.fzf.zsh ]; then
@@ -23,6 +25,9 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+
+dotdir=$(cd $(dirname $(dirname $(readlink -f $0))); pwd)
+export PATH="$dotdir/script/util:$PATH"
 
 #
 # usually used interactive mode
@@ -52,7 +57,7 @@ if [ -d "$HOME/.deno" ]; then
 fi
 
 # rust
-if [ -d "$HOME/.cargo" ]; then
+if [ -f "$HOME/.cargo/env" ]; then
 	. "$HOME/.cargo/env"
 fi
 
