@@ -32,20 +32,30 @@ esac
 
 case "$1" in
 	lock | suspend | hibernate)
+		default_color=696969
 		if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
 			img=~/.config/sway/lock.png
 			locker=swaylock
-		else
+			ss=grim
+		elif [ "$XDG_SESSION_TYPE" == "x11" ]; then
 			img=~/.config/i3/lock.png
 			locker=i3lock
+			ss=maim
 		fi
 
-		if builtin command -V maim > /dev/null 2>&1; then
-			maim $img
-		elif builtin command -V grim > /dev/null 2>&1; then
-			grim $img
+		if builtin command -V $ss > /dev/null 2>&1; then
+			$ss $img
 		fi
-		$locker -i $img
+
+		if [ -f $img ]; then
+			if [ "$locker" == "swaylock" ]; then
+				$locker -e -i $img --effect-blur 7x5 --effect-vignette 0.5:0.5 --daemonize
+			else
+				$locker -e -i $img
+			fi
+		else
+			$locker -e -c $default_color
+		fi
 		;;
 	*)
 		;;

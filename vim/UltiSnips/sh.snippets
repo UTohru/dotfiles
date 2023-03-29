@@ -12,8 +12,9 @@ cdir="$(cd "$(dirname "$(readlink -e "\$0" || echo "\$0")")"; pwd -P)"
 $1
 endsnippet
 
+# if builtin command -V $1 > /dev/null 2>&1; then
 snippet commandFound "command found" b
-if builtin command -V $1 > /dev/null 2>&1; then
+if [ -x "$(command -v $1)" ]; then
 	$2
 fi
 endsnippet
