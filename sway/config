@@ -1,7 +1,7 @@
 
 set $mod Mod1
 set $Power ~/.config/sway/script/exit.sh
-set $status_cmd i3status
+set $status_cmd i3status -c ~/.config/sway/i3status.conf
 
 include ~/.config/sway/enable/*.conf
 
