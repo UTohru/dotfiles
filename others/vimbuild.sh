@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# localization
-# sudo apt install gettext
+# 1. install asdf or pyenv, and python dependencies.
+# 2. install gettext (for localization)
+# 3. use this script
 
 #SRC_DIR="/usr/src"
 SRC_DIR="$HOME/src/"
