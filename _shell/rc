@@ -51,7 +51,7 @@ elif [ -d "$HOME/.pyenv" ]; then
 fi
 
 # deno
-if [ -d "$HOME/.deno" ]; then
+if [ -d "$HOME/.deno/bin" ]; then
 	export DENO_INSTALL="$HOME/.deno"
 	export PATH="$DENO_INSTALL/bin:$PATH"
 fi
@@ -63,4 +63,9 @@ fi
 
 if [ -d "/usr/local/go" ]; then
 	export PATH=$PATH:/usr/local/go/bin
+fi
+
+# wsl
+if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+	export PATH="$PATH:/mnt/c/Windows:/mnt/c/Windows/System32"
 fi

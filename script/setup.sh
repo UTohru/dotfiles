@@ -12,7 +12,7 @@ cdir=$(cd $(dirname $0);cd ..;pwd)
 # ===============
 # required check
 # ===============
-package_list=("curl" "unzip" "bc")
+package_list=("curl" "unzip" "bc" "jq")
 for p in "${package_list[@]}"
 do
 	if ! builtin command -V $p > /dev/null 2>&1; then
@@ -136,17 +136,6 @@ else
 fi
 
 
-# ===============
-# install Cica font
-# ===============
-if [ ! -d ~/.local/share/fonts/Cica ]; then
-	mkdir -p ~/.local/share/fonts/Cica
-
-	cd /tmp
-	curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
-	unzip -o Cica.zip -d ~/.local/share/fonts/Cica
-	fc-cache -fv
-fi
 
 
 # ===============
@@ -154,9 +143,23 @@ fi
 # ===============
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
-		WIN_USER=$(powershell.exe '$env:USERNAME' | sed -e 's/[\r\n]\+//g')
-		ln -sf /mnt/c/Users/$WIN_USER/Desktop ~/desktop
+		WIN_USERDIR=$(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g')
+		ln -sf /mnt/c/Users/$WIN_USERDIR/Desktop ~/desktop
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
 	sudo update-locale LANG=ja_JP.UTF8
+	echo -e "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf >/dev/null
+	echo "set bell-style none" > ~/.inputrc
+else
+	# ===============
+	# install Cica font
+	# ===============
+	if [ ! -d ~/.local/share/fonts/Cica ]; then
+		mkdir -p ~/.local/share/fonts/Cica
+
+		cd /tmp
+		curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
+		unzip -o Cica.zip -d ~/.local/share/fonts/Cica
+		fc-cache -fv
+	fi
 fi

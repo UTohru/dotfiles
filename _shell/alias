@@ -80,10 +80,9 @@ fi
 
 # === wsl ===
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-	#export WIN_USER=\$(printenv | grep -m1 /mnt/c/Users | sed -r 's/.*\/c\/Users\/([^\/]+).*/\\\1/')
 	alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
-	alias explorer='explorer.exe .'";
-	alias cmd='cmd.exe'";
+	alias explorer='explorer.exe .';
+	alias cmd='cmd.exe';
 fi
 
 

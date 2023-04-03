@@ -4,7 +4,7 @@ local shell;
 local MODKEY = "SUPER"
 local FONT_SIZE = 14
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-	shell = {"wsl.exe"}
+	shell = {"wsl.exe", "~"}
 	MODKEY = "ALT"
 	FONT_SIZE = 12
 end
