@@ -144,7 +144,7 @@ fi
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
 		WIN_USERDIR=$(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g')
-		ln -sf /mnt/c/Users/$WIN_USERDIR/Desktop ~/desktop
+		ln -sf $(wslpath -ua "$WIN_USERDIR")/Desktop ~/desktop
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
 	sudo update-locale LANG=ja_JP.UTF8
