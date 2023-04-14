@@ -13,14 +13,18 @@ cdir=$(cd $(dirname $0);cd ..;pwd)
 # required check
 # ===============
 package_list=("curl" "unzip" "bc" "jq")
+not_exist_package=()
 for p in "${package_list[@]}"
 do
 	if ! builtin command -V $p > /dev/null 2>&1; then
-		echo "[ ${package_list[@]} ] these packages are required"
-		exit 127
+		not_exist_package+=($p)
 	fi
 done
 
+if [ ${#not_exist_package[@]} != 0 ]; then
+	echo "[ ${not_exist_package[@]} ] these packages are required"
+	exit 127
+fi
 
 # ===============
 # ignore localconf
@@ -90,9 +94,9 @@ fi
 
 if [ ! -d ${cdir}/i3/wallpaper ]; then
 	mkdir ${cdir}/i3/wallpaper
-	if [ ! -d ${cdir}/sway/wallpaper ]; then
-		ln -s ${cdir}/i3/wallpaper ~/.config/sway/wallpaper
-	fi
+fi
+if [ ! -d ${cdir}/sway/wallpaper ]; then
+	ln -s ${cdir}/i3/wallpaper ~/.config/sway/wallpaper
 fi
 
 # ===============
@@ -124,7 +128,7 @@ if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
 	# 	fi
 	# done < ${cdir}/.xprofile
 	# IFS=$oldifs
-	
+
 	# sudo cp ${cdir}/others/Wsession /etc/lightdm/
 else
 	if [ -d ~/.config/i3 ]; then
