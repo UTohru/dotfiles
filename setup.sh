@@ -7,7 +7,7 @@ set -e
 #
 # ===============
 
-cdir=$(cd $(dirname $0);cd ..;pwd)
+cdir=$(cd $(dirname $0);pwd)
 
 # ===============
 # required check
@@ -36,25 +36,25 @@ git update-index --skip-worktree ${ignore_list[@]}
 # ===============
 # vim
 # ===============
-vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
-vim_version_check=$(echo "scale=2;$vim_version >= 8.2" | bc)
-if [ $vim_version_check -eq 1 ]; then
-	# deno install
-	if ! builtin command -V deno > /dev/null 2>&1; then
-		curl -fsSL https://deno.land/x/install/install.sh | sh
-		echo "export DENO_INSTALL=/home/$USER/.deno" >> ~/dotfiles/zsh/localconf/rc.zsh
-		echo "export PATH=\"$DENO_INSTALL/bin:$PATH\"" >> ~/dotfiles/zsh/localconf/rc.zsh
-	fi
+if [ -x "$(command -v vim)" ]; then
+	vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
+	vim_version_check=$(echo "scale=2;$vim_version >= 8.2" | bc)
+	if [ $vim_version_check -eq 1 ]; then
+		# deno install
+		if ! builtin command -V deno > /dev/null 2>&1; then
+			curl -fsSL https://deno.land/x/install/install.sh | sh
+		fi
 
-	if [ -d ~/.vim ]; then
-		rm -rf ~/.vim
+		if [ -d ~/.vim ]; then
+			rm -rf ~/.vim
+		fi
+		ln -sf ${cdir}/vim ~/.vim
+		ln -sf ${cdir}/.vimrc ~/.vimrc
+	else
+		echo "[warning] vim version is too low"
+		echo "Configure \"mini-vimrc\" without plugins\n"
+		ln -sf ${cdir}/others/mini-vimrc ~/.vimrc
 	fi
-	ln -sf ${cdir}/vim ~/.vim
-	ln -sf ${cdir}/.vimrc ~/.vimrc
-else
-	echo "[warning] vim version is too low"
-	echo "Configure \"mini-vimrc\" without plugins\n"
-	ln -sf ${cdir}/others/mini-vimrc ~/.vimrc
 fi
 
 

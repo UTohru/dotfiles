@@ -97,7 +97,7 @@ build='make install'
 on_ft = ['python']
 hook_add = '''
 let g:pydocstring_formatter = 'google'
-nnoremap <silent> <Space>cp :<C-u>Pydocstring<CR>
+nnoremap <silent> <Space>dq :<C-u>Pydocstring<CR>
 '''
 
 

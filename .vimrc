@@ -24,24 +24,18 @@ if &compatible
 endif
 
 if dein#load_state(s:dein_dir)
-	let g:dein#inline_vimrcs = split(expand('~/.vim/rc/*'), '\n')
+	" let g:dein#inline_vimrcs = split(expand('~/.vim/rc/*'), '\n')
 
 	call dein#begin(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/dein.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/dein_lazy.toml', {'lazy':1})
 
-	if v:version >= 802
-		call dein#load_toml('~/.vim/pluginconfig/ddc.toml', {'lazy':1})
-	elseif v:version >= 800
-		call dein#load_toml('~/.vim/pluginconfig/coc.toml', {'lazy':1})
-	endif
+	call dein#load_toml('~/.vim/pluginconfig/ddc.toml', {'lazy':1})
+	" call dein#load_toml('~/.vim/pluginconfig/coc.toml', {'lazy':1})
 
 	call dein#end()
 	call dein#save_state()
 else
-	for s:f in split(glob('~/.vim/rc/*.vim'), '\n')
-		execute 'source ' . s:f
-	endfor
 endif
 
 filetype plugin indent on
@@ -68,14 +62,11 @@ endif
 "End dein Scripts 
 " =====================================
 
-
 set encoding=UTF-8
 set fileencodings=UTF-8,ISO-2022-JP,euc-jp,sjis
 scriptencoding utf-8
 
-
 augroup myvimrc
-
 	"前回中断した行から
 	autocmd BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
 	\ exe "normal g`\"" | endif
@@ -91,6 +82,9 @@ augroup myvimrc
 augroup END
 
 
+for s:f in split(glob('~/.vim/rc/*.vim'), '\n')
+	execute 'source ' . s:f
+endfor
 
 " denops plugin test
 "set runtimepath^=~/program/tutorial/dps-plugins
