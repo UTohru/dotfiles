@@ -8,6 +8,8 @@ alias ipr="ip -br -c route"
 
 alias bc='bc -l'
 
+# alias deletefiles="find . -type f -exec sleep 0.01 \; -delete"
+
 if command -V python > /dev/null 2>&1; then
 	alias urlencode='python -c "import sys; import urllib.parse; print(urllib.parse.quote(sys.argv[1]));"'
 	alias urldecode='python -c "import sys; import urllib.parse; print(urllib.parse.unquote(sys.argv[1]));"'

@@ -147,13 +147,21 @@ fi
 # ===============
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
-		WIN_USERDIR=$(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g')
-		ln -sf $(wslpath -ua "$WIN_USERDIR")/Desktop ~/desktop
+		WIN_USERDIR=$(wslpath -ua $(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g'))
+		ln -sf $WIN_USERDIR/Desktop ~/desktop
+		echo "export WIN_USER=${WIN_USERDIR##*/}" >> ~/.zsh/localconf/profile.zsh
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
 	sudo update-locale LANG=ja_JP.UTF8
 	echo -e "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf >/dev/null
 	echo "set bell-style none" > ~/.inputrc
+
+	if [ ! -d ~/.local/bin ]; then
+		mkdir -p ~/.local/bin
+	fi
+	ln -s /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
+	ln -s /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
+	ln -s /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
 else
 	# ===============
 	# install Cica font

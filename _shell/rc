@@ -62,8 +62,3 @@ fi
 if [ -d "/usr/local/go/bin" ]; then
 	export PATH=$PATH:/usr/local/go/bin
 fi
-
-# wsl
-if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
-	export PATH="$PATH:/mnt/c/Windows:/mnt/c/Windows/System32"
-fi
