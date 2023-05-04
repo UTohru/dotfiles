@@ -96,7 +96,7 @@ if [ ! -d ${cdir}/i3/wallpaper ]; then
 	mkdir ${cdir}/i3/wallpaper
 fi
 if [ ! -d ${cdir}/sway/wallpaper ]; then
-	ln -s ${cdir}/i3/wallpaper ~/.config/sway/wallpaper
+	ln -s ${cdir}/i3/wallpaper ${cdir}/sway/wallpaper
 fi
 
 # ===============
@@ -148,8 +148,10 @@ fi
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
 		WIN_USERDIR=$(wslpath -ua $(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g'))
-		ln -sf $WIN_USERDIR/Desktop ~/desktop
-		echo "export WIN_USER=${WIN_USERDIR##*/}" >> ~/.zsh/localconf/profile.zsh
+		if [ ! -f $HOME/desktop ]; then
+			ln -sf $WIN_USERDIR/Desktop ~/desktop
+		fi
+		echo "export WIN_USER=${WIN_USERDIR##*/}" >> ~/.config/zsh/localconf/profile.zsh
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
 	sudo update-locale LANG=ja_JP.UTF8
