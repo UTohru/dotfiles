@@ -18,3 +18,16 @@ if [ -x "$(command -v $1)" ]; then
 	$2
 fi
 endsnippet
+
+snippet getFiles "for file list"
+for filepath in \`find ${1:DIRPATH} -maxdepth 1 -type f\`; do
+	$2
+done
+endsnippet
+	
+snippet case "case"
+case "$1" in
+	*)
+		;;
+esac
+endsnippet
