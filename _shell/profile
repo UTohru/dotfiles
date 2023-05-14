@@ -7,22 +7,24 @@ if command -V vim > /dev/null 2>&1; then
 	export EDITOR=vim
 fi
 
-# about ssh
-if [ -n "${SSH_AUTH_SOCK}" ]; then 
+# about ssh-agent
+if [ -z "${SSH_AUTH_SOCK}" ]; then 
 	if [ -r "/run/user/$(id -u)/keyring/ssh" ]; then
-		# Already Started
 		export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
+	elif [ -r "$HOME/.ssh/agent.sock" ]; then
+		export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
 	else
-		# gnome-keyring
+		# create new agent
 		if command -V gnome-keyring-daemon > /dev/null 2>&1; then
-			eval $(gnome-keyring-daemon --start) #--components=ssh,secrets)
+			eval $(gnome-keyring-daemon --start --components=ssh,secrets)
 			export SSH_AUTH_SOCK
+		elif command -V ssh-agent > /dev/null 2>&1; then
+			eval `ssh-agent -a $HOME/.ssh/agent.sock`
 		fi
 	fi
 fi
 
 # add local path
-# if [ -z "$DESKTOP_STARTUP_ID" ]; then 
 if [ -d "$HOME/.local/bin" ] ; then
 	PATH="$HOME/.local/bin:$PATH"
 fi
