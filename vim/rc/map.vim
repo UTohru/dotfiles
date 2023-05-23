@@ -41,8 +41,7 @@ nnoremap <silent> ZZ :<C-u>bd<CR>
 nnoremap U <C-r>
 
 " toggle option
-nnoremap <silent> <C-n> :<C-u>set number!<CR>
-nnoremap <silent> <C-s> :<C-u>set wrap!<CR>
+nnoremap <silent> <C-n> :<C-u>set number!<CR>:set wrap!<CR>
 
 " paste full filepath"
 nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
