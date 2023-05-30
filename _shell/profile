@@ -9,7 +9,9 @@ fi
 
 # about ssh-agent
 if [ -z "${SSH_AUTH_SOCK}" ]; then 
-	if [ -r "/run/user/$(id -u)/keyring/ssh" ]; then
+	if [ -r "/run/user/$(id -u)/gcr/ssh" ]; then
+		export SSH_AUTH_SOCK="/run/user/$(id -u)/gcr/ssh"
+	elif [ -r "/run/user/$(id -u)/keyring/ssh" ]; then
 		export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
 	elif [ -r "$HOME/.ssh/agent.sock" ]; then
 		export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"

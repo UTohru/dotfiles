@@ -48,7 +48,7 @@ case "$1" in
 		fi
 
 		if [ -f $img ]; then
-			if [ "$locker" == "swaylock" ]; then
+			if [ "$locker" = "swaylock" ]; then
 				$locker -e -i $img --effect-blur 7x5 --effect-vignette 0.5:0.5 --daemonize
 			else
 				$locker -e -i $img
