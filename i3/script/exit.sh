@@ -45,11 +45,14 @@ case "$1" in
 
 		if builtin command -V $ss > /dev/null 2>&1; then
 			$ss $img
+			if [ -x "$(command -v convert)" ]; then
+				convert $img -blur 7x5 -background black -vignette 0x80-20%-2% $img
+			fi
 		fi
 
 		if [ -f $img ]; then
 			if [ "$locker" = "swaylock" ]; then
-				$locker -e -i $img --effect-blur 7x5 --effect-vignette 0.5:0.5 --daemonize
+				$locker -e -i $img --daemonize
 			else
 				$locker -e -i $img
 			fi
