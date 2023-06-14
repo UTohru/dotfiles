@@ -140,13 +140,29 @@ return {
 
 	
 	keys = {
-		{key='t', mods=MODKEY, action=wezterm.action{SpawnTab="DefaultDomain"}},
-		{key='h', mods=MODKEY, action=wezterm.action{ ActivateTabRelative = -1}},
-		{key='l', mods=MODKEY, action=wezterm.action{ ActivateTabRelative =  1}},
-		{key='h', mods=MODKEY.."|CTRL", action=wezterm.action{ MoveTabRelative = -1}},
-		{key='l', mods=MODKEY.."|CTRL", action=wezterm.action{ MoveTabRelative =  1}},
+		-- PANE
+		{key='-', mods=MODKEY, action=wezterm.action{ SplitVertical = {domain = "CurrentPaneDomain"} }},
+		{key='|', mods=MODKEY.."|SHIFT", action=wezterm.action{ SplitHorizontal = {domain = "CurrentPaneDomain"} }},
+		{key='h', mods=MODKEY, action=wezterm.action{ ActivatePaneDirection = 'Left' }},
+		{key='l', mods=MODKEY, action=wezterm.action{ ActivatePaneDirection = 'Right' }},
+		{key='j', mods=MODKEY, action=wezterm.action{ ActivatePaneDirection = 'Down' }},
+		{key='k', mods=MODKEY, action=wezterm.action{ ActivatePaneDirection = 'Up' }},
+		{key='h', mods=MODKEY.."|SHIFT", action=wezterm.action{ AdjustPaneSize = {'Left', 1 }}},
+		{key='l', mods=MODKEY.."|SHIFT", action=wezterm.action{ AdjustPaneSize = {'Right', 1}}},
+		{key='j', mods=MODKEY.."|SHIFT", action=wezterm.action{ AdjustPaneSize = {'Down', 1 }}},
+		{key='k', mods=MODKEY.."|SHIFT", action=wezterm.action{ AdjustPaneSize = {'Up', 1 }}},
+
+		-- WINDOW (TAB)
+		{key='t', mods=MODKEY.."|CTRL", action=wezterm.action{SpawnTab="DefaultDomain"}},
+		{key='h', mods=MODKEY.."|CTRL", action=wezterm.action{ ActivateTabRelative = -1}},
+		{key='l', mods=MODKEY.."|CTRL", action=wezterm.action{ ActivateTabRelative =  1}},
+
+		-- CLIP
 		{key='v', mods="CTRL|SHIFT", action=wezterm.action{ PasteFrom =  "Clipboard"}},
 		{key='c', mods="CTRL|SHIFT", action=wezterm.action{ CopyTo =  "ClipboardAndPrimarySelection"}},
+
+		-- OTHER
+		--  Press CTRL|SHIFT to use
 		{key='_', mods="CTRL", action="DisableDefaultAssignment"},
 		{key='-', mods="CTRL", action="DisableDefaultAssignment"},
 		-- {key='/', mods="CTRL", action="Nop"},
