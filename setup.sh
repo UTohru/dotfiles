@@ -103,7 +103,7 @@ fi
 # x or wayland
 # ===============
 
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 	if [ -d ~/.config/sway ]; then
 		rm -rf ~/.config/sway
 	fi

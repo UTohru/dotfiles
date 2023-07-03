@@ -5,7 +5,7 @@
 # ===
 
 
-if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 	cmd=swaymsg
 else
 	cmd=i3-msg
@@ -22,7 +22,7 @@ elif builtin command -V fcitx >/dev/null 2>&1; then
 fi
 
 
-if [ "$XDG_SESSION_TYPE" == "x11" ]; then
+if [ "$XDG_SESSION_TYPE" = "x11" ]; then
 	# compositor
 	if builtin command -V compton > /dev/null 2>&1; then
 		comp="compton"

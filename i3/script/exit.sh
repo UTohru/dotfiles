@@ -11,7 +11,7 @@ case "$1" in
 		systemctl hibernate
 		;;
 	logout)
-		if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 			cmd=swaymsg
 		else
 			cmd=i3-msg
@@ -33,11 +33,11 @@ esac
 case "$1" in
 	lock | suspend | hibernate)
 		default_color=696969
-		if [ "$XDG_SESSION_TYPE" == "wayland" ]; then
+		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 			img=~/.config/sway/lock.png
 			locker=swaylock
 			ss=grim
-		elif [ "$XDG_SESSION_TYPE" == "x11" ]; then
+		elif [ "$XDG_SESSION_TYPE" = "x11" ]; then
 			img=~/.config/i3/lock.png
 			locker=i3lock
 			ss=maim

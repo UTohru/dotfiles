@@ -16,7 +16,7 @@ exec --no-startup-id "$HOME/.config/i3/script/wallpaper_random.sh"
 bindsym $mod+Shift+s exec "$HOME/.config/sway/script/screenshot.sh"
 #bindsym $mod+Ctrl+s exec "~/.config/i3/script/video_capture.sh"
 
-# xclip replace
-bindsym $mod+x exec "~/.config/i3/script/xclip_replace.sh"
+# clipboard(primary) replace
+bindsym $mod+x exec "~/.config/i3/script/primary_selection_replace.sh"
 
 bindsym $mod+Shift+o exec "/usr/bin/arandr"
