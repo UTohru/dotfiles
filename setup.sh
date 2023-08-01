@@ -70,6 +70,7 @@ ln -sf ${cdir}/mlterm ~/.mlterm
 ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
 ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
 
+
 ln -sf ${cdir}/.zshenv ~/.zshenv
 if [ -d ~/.config/zsh ]; then
 	rm -rf ~/.config/zsh
@@ -86,6 +87,13 @@ if [ -d ~/.config/efm-langserver ]; then
 	rm -rf ~/.config/efm-langserver
 fi
 ln -sf ${cdir}/efm-langserver ~/.config/efm-langserver
+ln -sf ${cdir}/others/textlintrc ~/.textlintrc
+
+if [ ! -d ~/.local/share/deno_ts ]; then
+	mkdir -p ~/.local/share/deno_ts
+fi
+ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
+
 
 
 if [ ! -d ~/.config ]; then
