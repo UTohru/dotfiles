@@ -2,7 +2,7 @@
 repo = 'mattn/vim-lsp-settings'
 on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go', 'markdown', 'tex']
 
-# [python] globalのpipの補完をする場合，pylsp[all]をインストールして，Sリンクで偽装すればok
+# globalのpipの補完をする場合，pylsp[all]をインストールして，Sリンクで偽装する
 hook_add = '''
 ""\				'configurationSources': ['flake8'],
 ""\					'rope': {'extensionModules': ["numpy", "pandas", "matplotlib", "sklearn", "os.path", "os", "sys"]},
@@ -138,7 +138,6 @@ inoremap <expr> <CR> pum#visible() ?
 \lexima#expand('<LT>CR>', 'i')
 
 hi Pmenu ctermfg=250 ctermbg=238
-"hi Pmenu ctermfg=165 ctermbg=none
 '''
 
 [[plugins]]

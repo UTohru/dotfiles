@@ -25,7 +25,6 @@ nnoremap T gT
 nmap <Leader>w <C-w>
 
 set termwinkey=<C-g>
-nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
 tnoremap <ESC> <C-\><C-n>
 
 nnoremap > >>
@@ -40,19 +39,6 @@ nnoremap <silent> ZZ :<C-u>bd<CR>
 " redo
 nnoremap U <C-r>
 
-" toggle option
-nnoremap <silent> <C-n> :<C-u>set number!<CR>:set wrap!<CR>
-
-" paste full filepath"
-nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
-" basic replace
-nnoremap <C-f> :<C-u>%s<Space>/
-
-
-
-" inc dec (-: conflict)
-"nnoremap + <C-a>
-"nnoremap - <C-x>
 
 " leave insert
 inoremap jk <ESC>
@@ -65,17 +51,32 @@ inoremap <C-]> <ESC>g<C-]>
 nnoremap <Leader>o <C-o>
 
 
-"code"
+" insert move
 inoremap <C-l> <Right>
 inoremap <C-h> <Left>
 
-" command"
+" command hist"
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
 vnoremap J <NOP>
+vnoremap K <NOP>
 
 onoremap a" 2i"
 onoremap a' 2i'
 onoremap a` 2i`
 
+"
+" SHORTCUT
+"
+
+" url open in vim
+nnoremap <Leader>O :<C-u>r!curl -s ''<Left>
+" toggle view option
+nnoremap <silent> <C-n> :<C-u>set number!<CR>:set wrap!<CR>
+" paste full filepath"
+nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
+" basic replace
+nnoremap <C-f> :<C-u>%s<Space>/
+" terminal
+nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>

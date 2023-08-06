@@ -1,11 +1,10 @@
-
 #################################  OPTION  #################################
 unsetopt promptcr
 
 
 # === history ===
-setopt extended_history			# 開始・経過時刻を追加
-setopt append_history			# 毎回履歴を作らない
+setopt extended_history
+setopt append_history
 setopt hist_ignore_all_dups
 # setopt hist_ignore_dups
 # setopt hist_ignore_space

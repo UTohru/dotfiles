@@ -1,9 +1,4 @@
-
 #################################  PROMPT  #################################
-
-
-
-# git
 autoload -Uz VCS_INFO_get_data_git; VCS_INFO_get_data_git 2> /dev/null
 setopt prompt_subst
 
@@ -75,7 +70,4 @@ function __show_status() {
 
 ## no-icon short version
 PROMPT='[%.$(rprompt-git-current-branch)]$(__show_status) : '
-
-
-
 

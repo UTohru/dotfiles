@@ -40,6 +40,7 @@ if [ -d "$HOME/.yarn" ]; then
 	export PATH="$HOME/.yarn/bin:$PATH"
 fi
 
+# python
 if [ -d "$HOME/.asdf" ]; then
 	. "$HOME/.asdf/asdf.sh"
 	if [ -n "${ZSH_VERSION}" ]; then
@@ -66,7 +67,3 @@ fi
 if [ -d "/usr/local/go/bin" ]; then
 	export PATH=$PATH:/usr/local/go/bin
 fi
-
-
-# === wezterm shell integration ===
-source ${dotdir}/_shell/wezterm.sh

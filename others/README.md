@@ -1,2 +1,2 @@
 # Others
-置き場に困ったり，テンプレートだったりするやつ
+Relocate later...

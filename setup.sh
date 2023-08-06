@@ -10,7 +10,7 @@ set -e
 cdir=$(cd $(dirname $0);pwd)
 
 # ===============
-# required check
+# required check in this
 # ===============
 package_list=("curl" "unzip" "bc" "jq")
 not_exist_package=()
@@ -38,23 +38,19 @@ git update-index --skip-worktree ${ignore_list[@]}
 # ===============
 if [ -x "$(command -v vim)" ]; then
 	vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
-	vim_version_check=$(echo "scale=2;$vim_version >= 8.2" | bc)
+	vim_version_check=$(echo "scale=2;$vim_version >= 9.0" | bc)
 	if [ $vim_version_check -eq 1 ]; then
 		# deno install
 		if ! builtin command -V deno > /dev/null 2>&1; then
 			curl -fsSL https://deno.land/x/install/install.sh | sh
 		fi
-
-		if [ -d ~/.vim ]; then
-			rm -rf ~/.vim
-		fi
-		ln -sf ${cdir}/vim ~/.vim
-		ln -sf ${cdir}/.vimrc ~/.vimrc
-	else
-		echo "[warning] vim version is too low"
-		echo "Configure \"mini-vimrc\" without plugins\n"
-		ln -sf ${cdir}/others/mini-vimrc ~/.vimrc
 	fi
+
+	if [ -d ~/.vim ]; then
+		rm -rf ~/.vim
+	fi
+	ln -sf ${cdir}/vim ~/.vim
+	ln -sf ${cdir}/.vimrc ~/.vimrc
 fi
 
 
@@ -62,14 +58,18 @@ fi
 # other links
 # ===============
 
+if [ ! -d ~/.config ]; then
+	mkdir ~/.config
+fi
+
 if [ -d ~/.mlterm ]; then
 	rm -rf ~/.mlterm
 fi
+
 ln -sf ${cdir}/mlterm ~/.mlterm
 
 ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
 ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
-
 
 ln -sf ${cdir}/.zshenv ~/.zshenv
 if [ -d ~/.config/zsh ]; then
@@ -77,6 +77,11 @@ if [ -d ~/.config/zsh ]; then
 fi
 ln -sf ${cdir}/zsh ~/.config/zsh
 
+if [ ! -d ~/.config/i3status ]; then
+	mkdir ~/.config/i3status
+fi
+ln -sf ${cdir}/others/i3status.conf ~/.config/i3status/i3status.conf
+ln -sf ${cdir}/others/i3status-rust.conf ~/.config/i3status/i3status-rust.conf
 
 if [ -d ~/.config/wezterm ]; then
 	rm -rf ~/.config/wezterm
@@ -94,11 +99,6 @@ if [ ! -d ~/.local/share/deno_ts ]; then
 fi
 ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
 
-
-
-if [ ! -d ~/.config ]; then
-	mkdir ~/.config
-fi
 
 if [ ! -d ${cdir}/i3/wallpaper ]; then
 	mkdir ${cdir}/i3/wallpaper
@@ -126,17 +126,6 @@ if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 		rm ~/.config/environment.d/wayland.conf
 	fi
 	ln -s ${cdir}/others/systemd_env_sway.conf ~/.config/environment.d/wayland.conf
-
-	# exportを削除してコピー
-	# oldifs=$IFS
-	# IFS=''
-	# while read line; do
-	# 	if [ "${line% *}" = "export" ]; then
-	# 		echo ${line#* } >> ~/.config/environment.d/wayland.conf
-	# 	fi
-	# done < ${cdir}/.xprofile
-	# IFS=$oldifs
-
 	# sudo cp ${cdir}/others/Wsession /etc/lightdm/
 else
 	if [ -d ~/.config/i3 ]; then
@@ -156,7 +145,7 @@ fi
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
 		WIN_USERDIR=$(wslpath -ua $(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g'))
-		if [ ! -f $HOME/desktop ]; then
+		if [ ! -L $HOME/desktop ]; then
 			ln -sf $WIN_USERDIR/Desktop ~/desktop
 		fi
 		echo "export WIN_USER=${WIN_USERDIR##*/}" >> ~/.config/zsh/localconf/profile.zsh
@@ -169,9 +158,9 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	if [ ! -d ~/.local/bin ]; then
 		mkdir -p ~/.local/bin
 	fi
-	ln -s /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
-	ln -s /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
-	ln -s /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
+	ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
+	ln -sf /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
+	ln -sf /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
 else
 	# ===============
 	# install Cica font

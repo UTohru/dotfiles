@@ -1,6 +1,4 @@
 
-
-
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
@@ -86,8 +84,8 @@ hook_add='''
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 hook_add='''
-vnoremap <silent> t :<C-u>'<,'>MakeTable! \t<CR>
-vnoremap <silent> T :<C-u>UnmakeTable \t<CR>
+vnoremap <silent> t :<C-u>'<,'>MakeTable! ,<CR>
+vnoremap <silent> T :<C-u>UnmakeTable ,<CR>
 '''
 
 

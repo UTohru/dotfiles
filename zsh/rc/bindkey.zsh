@@ -1,13 +1,11 @@
-
 bindkey -v # vi
-#bindkey -e # vi
+#bindkey -e # 
 
 # move
 bindkey "^H" backward-word
 bindkey "^L" forward-word # use clear command
 
 # delete char
-#bindkey "^[[3~"  # delete
 bindkey "^[[3;5~" delete-word # ctrl + delete
 
 # history search
@@ -21,5 +19,3 @@ bindkey "^N" history-beginning-search-forward-end
 # comp single enter
 zmodload -i zsh/complist
 bindkey -M menuselect '^M' .accept-line
-
-

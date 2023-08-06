@@ -1,9 +1,7 @@
-
 #################################  BASE  #################################
-# history
-HISTFILE=$HOME/.zsh-history # 履歴を保存するファイル
-SAVEHIST=10000 # ファイルに保存する履歴のサイズ
-HISTSIZE=2000 # メモリ上に保存する履歴のサイズ
+HISTFILE=$HOME/.zsh-history 
+SAVEHIST=10000 # in file
+HISTSIZE=2000 # in memory
 
 autoload -Uz add-zsh-hook
 

@@ -1,13 +1,7 @@
-
 set $mod Mod1
 set $Power ~/.config/i3/script/exit.sh
-# set $status_cmd i3status -c ~/.config/i3/i3status.conf
-set $status_cmd i3status-rs ~/.config/i3/i3status-rust.toml
 
 include ~/.config/i3/enable/*.conf
-
-# exec --no-startup-id "exec path"
-# exec_always --no-startup-id feh --randomize --bg-scale ~/.config/i3/wallpaper/*
 
 exec --no-startup-id "$HOME/.config/i3/script/custom_startup.sh"
 

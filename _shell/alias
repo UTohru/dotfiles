@@ -63,7 +63,6 @@ alias rndpass='openssl rand -base64 16 | fold -w 10 | head -n 1'
 
 
 if command -V trash-put > /dev/null 2>&1; then
-	alias rm='echo "rm is dangerous!  use trash-put comand."'
 	alias rt='trash-put'
 fi
 

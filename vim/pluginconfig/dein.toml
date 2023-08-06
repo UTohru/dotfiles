@@ -6,9 +6,6 @@ hi DiffChange ctermbg=33
 '''
 
 [[plugins]]
-repo = 'vim-denops/denops.vim'
-
-[[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
 
 
@@ -70,9 +67,7 @@ endfunction
 repo = 'tyru/caw.vim'
 hook_add = '''
 " numToStr/Comment.nvim , preservim/nerdcommenter"
-" _ == /
 
-" current environment"
 if g:wsl || has('win32')
 	nmap <C-_> <Plug>(caw:hatpos:toggle)
 	vmap <C-_> <Plug>(caw:hatpos:toggle)

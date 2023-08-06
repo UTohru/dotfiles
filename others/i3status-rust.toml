@@ -1,7 +1,6 @@
 
 [theme]
 theme = "srcery"
-# theme = "dracula"
 
 [icons]
 icons = "awesome4"
@@ -45,9 +44,6 @@ interval = 10
 format = " $icon $percentage "
 not_charging_format = " $icon "
 missing_format = ""
-
-# [[block]]
-# block = "uptime"
 
 [[block]]
 block = "sound"
