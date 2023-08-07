@@ -1,15 +1,17 @@
+# https://vim-jp.org/vimdoc-ja/quickfix.html#error-file-format
 version: 2
 root-markers:
   - .git/
 tools:
   text-textlint: &text-textlint
-    # lint-command: 'deno run -A --node-modules-dir npm:textlint@latest --f unix --stdin --stdin-filename ${INPUT}'
     lint-stdin: false
     lint-command: 'deno run --allow-sys --allow-env --allow-run --allow-read ~/.local/share/deno_ts/textlint.ts ${INPUT}'
     lint-ignore-exit-code: true
     lint-formats:
-      - '%f:%l:%c: %m [%trror/%r]'
-      # - '%f:%l:%c: %E [%trror/%r]'
+      - "%f:%l:%c: %m [%trror/%r"
+      - "%E%f:%l:%c: %m"
+      - "%C%r"
+      - "%Z [%trror/%r"
     root-markers:
       - .textlintrc
 languages:

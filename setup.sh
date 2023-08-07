@@ -7,7 +7,7 @@ set -e
 #
 # ===============
 
-cdir=$(cd $(dirname $0);pwd)
+cdir="$(cd "$(dirname "$(readlink -e "$0" || echo "$0")")"; pwd -P)"
 
 # ===============
 # required check in this
@@ -81,7 +81,7 @@ if [ ! -d ~/.config/i3status ]; then
 	mkdir ~/.config/i3status
 fi
 ln -sf ${cdir}/others/i3status.conf ~/.config/i3status/i3status.conf
-ln -sf ${cdir}/others/i3status-rust.conf ~/.config/i3status/i3status-rust.conf
+ln -sf ${cdir}/others/i3status-rust.toml ~/.config/i3status/i3status-rust.toml
 
 if [ -d ~/.config/wezterm ]; then
 	rm -rf ~/.config/wezterm
