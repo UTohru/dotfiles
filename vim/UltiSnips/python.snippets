@@ -1,3 +1,4 @@
+extends base
 
 snippet import "import" b
 import ${1:module}
@@ -6,6 +7,13 @@ endsnippet
 snippet from "from_import" b
 from ${1:package} import ${2:module}
 endsnippet
+
+snippet @classmethod "class method" 
+@classmethod
+def ${1:Name}(${2:arg:})${3: -> None}:
+	${4:pass}
+endsnippet
+
 
 snippet class "class format"
 class ${1:Name}(${2:object}):
@@ -20,6 +28,11 @@ endsnippet
 
 snippet #! "make script file" b
 #!/usr/bin/env python
+endsnippet
+
+snippet __main__ "if name == main" b
+if __name__ == '__main__':
+	$1
 endsnippet
 
 snippet ifmain "if name == main" b
@@ -47,7 +60,24 @@ snippet debug "pdb debug" b
 import pdb; pdb.set_trace()
 endsnippet
 
-snippet try "try except finally" b
+snippet dataclass "dataclass" b
+@dataclass
+class ${1: name}:
+    ${2:var}: ${3:type}${4: = None}
+endsnippet
+
+snippet try "try except" b
+try:
+	$1
+except:
+	${2:pass}
+endsnippet
+
+snippet for "for" i
+for ${1:i} in ${2:iterable}
+endsnippet
+
+snippet tryf "try except finally" b
 try:
 	$1
 except:

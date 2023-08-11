@@ -1,14 +1,44 @@
+global !p
+def add_row(snip):
+	row_len = int(''.join(s for s in snip.buffer[snip.line] if s.isdigit()))
+	old_spacing = snip.buffer[snip.line][:snip.buffer[snip.line].rfind('\t') + 1]
+	snip.buffer[snip.line] = ''
+	final_str = old_spacing
+	final_str += " & ".join(['$' + str(j + 1) for j in range(row_len)])
+	final_str += " \\\\\\"
+	snip.expand_anon(final_str)
+endglobal
+
+# ===========
+
+
+pre_expand "add_row(snip)"
+snippet "tr(\d+)" "Add table row of dimension ..." r
+endsnippet
+
+# ===========
+
+# snippet "\\*section" "set section" r
+snippet \section "set section" b
+\\section{${1:title}}
+$2
+endsnippet
+
 snippet section "set section" b
 \\section{${1:title}}
 $2
 endsnippet
 
+snippet \subsection "set subsection" b
+\\subsection{${1:title}}
+$2
+endsnippet
 snippet subsection "set subsection" b
 \\subsection{${1:title}}
 $2
 endsnippet
 
-snippet begin "set begin" b
+snippet \begin "set begin" b
 \\begin{$1}
 	$2
 \\end{$1}
@@ -23,6 +53,15 @@ snippet figure "set fugure" b
 	\\label{fig:$5}
 \\end{figure}
 endsnippet
+snippet figure* "set fugure*" b
+\\begin{figure*}[${1:tb}]
+	\\centering
+	\\includegraphics[width=${2:\\columnwidth}]{${3:path}}
+	\\caption{$4}
+	% \\ecaption{$6}
+	\\label{fig:$5}
+\\end{figure*}
+endsnippet
 
 snippet table "set table" b
 \\begin{table}[${1:t}]
@@ -34,6 +73,17 @@ snippet table "set table" b
 	\\end{tabular}
 	\\label{tab:$4}
 \\end{table}
+endsnippet
+snippet table* "set table" b
+\\begin{table*}[${1:t}]
+	\\centering
+	\\caption{$2}
+	% \\ecaption{$6}
+	\\begin{tabular}{$3}\\hline
+		$5
+	\\end{tabular}
+	\\label{tab:$4}
+\\end{table*}
 endsnippet
 
 snippet bibliography "set bibliography" b
@@ -62,6 +112,17 @@ snippet subcaption "set subcaption" b
 	% \\ecaption{$8}
 	\\label{fig:$7}
 \\end{figure}
+endsnippet
+snippet subcaption* "set subcaption" b
+\\begin{figure*}[tb]
+	\\centering
+	\\subcaptionbox{${2:caption_name}}{
+		\\includegraphics[width=${4:\\columnwidth}]{${5:img/path}}
+	}
+	\\caption{${6:caption_name}}
+	% \\ecaption{$8}
+	\\label{fig:$7}
+\\end{figure*}
 endsnippet
 
 snippet subfigure_table "set subfigure using table" b
@@ -132,6 +193,6 @@ snippet algorithm "set algorithm" b
 \\end{algorithm}
 endsnippet
 
-snippet footnote "set footnote with url" i
+snippet \footnote "set footnote with url" i
 \\footnote{\url{$1}}
 endsnippet

@@ -1,0 +1,10 @@
+# global !p
+# def expand(snip):
+#     if snip.tabstop != 1:
+#         return
+#     vim.eval('feedkeys("\<C-R>=UltiSnips#ExpandSnippet()\<CR>")')
+# endglobal
+
+snippet date "YYYY/MM/DD" w
+`!v strftime("%Y/%m/%d")`
+endsnippet

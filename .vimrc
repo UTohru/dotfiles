@@ -30,6 +30,7 @@ if dein#load_state(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/dein.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/dein_lazy.toml', {'lazy':1})
 
+	call dein#load_toml('~/.vim/pluginconfig/vim-lsp.toml', {'lazy':1})
 	if executable("deno")
 		call dein#load_toml('~/.vim/pluginconfig/denops.toml', {'lazy':0})
 		call dein#load_toml('~/.vim/pluginconfig/ddc.toml', {'lazy':1})
@@ -75,6 +76,7 @@ augroup myvimrc
 
 	" filetype
 	autocmd BufRead,BufNewFile *.tsx set filetype=typescript
+	autocmd BufRead,BufNewFile *.snippets set filetype=snippets
 	autocmd BufRead,BufNewFile */pluginconfig/*.toml call dein#toml#syntax()
 	let g:tex_flavor = 'latex'
 

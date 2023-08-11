@@ -1,83 +1,9 @@
-[[plugins]]
-repo = 'mattn/vim-lsp-settings'
-on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go', 'markdown', 'tex']
-
-# globalのpipの補完をする場合，pylsp[all]をインストールして，Sリンクで偽装する
-hook_add = '''
-""\				'configurationSources': ['flake8'],
-""\					'rope': {'extensionModules': ["numpy", "pandas", "matplotlib", "sklearn", "os.path", "os", "sys"]},
-let g:lsp_settings = {
-\	'pylsp-all':{
-\		'disabled': 0,
-\		'workspace_config': {
-\			'pylsp': {
-\				'plugins': {
-\					'pycodestyle': {'enabled': v:false},
-\					'pydocstyle': {'enabled': v:false},
-\					'pylint': {'enabled': v:false},
-\					'mypy': {'enabled': v:false},
-\					'mccabe': {'enabled': v:false},
-\					'pyflakes': {'enabled': v:false},
-\					'flake8': {'enabled': v:false, 'ignore': ['E203', 'E231', 'E265', 'E266', 'E302', 'E501', 'W191', 'W293']},
-\					'yapf': {'enabled': v:false},
-\				},
-\			}
-\		}
-\	},
-\	'efm-langserver': {
-\		'disabled': 0,
-\		'allowlist': ['markdown', 'tex'],
-\	}
-\}
-'''
-
-
-
-[[plugins]]
-repo = 'prabirshrestha/vim-lsp'
-on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go', 'markdown', 'tex']
-hook_add = '''
-
-let g:lsp_format_sync_timeout = 1000
-let g:lsp_competion_resolve_timeout = 50
-
-" [debug]
-" let g:lsp_log_file = expand('~/vim-lsp.log')
-
-let g:asyncomplete_auto_popup = 1
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_document_code_action_signs_hint = {'text': "\uea77"}
-let g:lsp_diagnostics_signs_error = {'text': "\uf467"}
-let g:lsp_diagnostics_signs_warning = {'text': "!"}
-let g:lsp_diagnostics_signs_hint = {'text': "\uf400"} " icons require GUI
-let g:lsp_diagnostics_float_cursor = 1
-" let g:lsp_diagnostics_highlights_enabled = 0
-let g:lsp_preview_float = 1
-
-function! s:on_lsp_buffer_enabled() abort
-	setlocal signcolumn=yes
-	nmap <buffer> <Space>c [lsp]
-	nmap <buffer> K <Plug>(lsp-hover)
-	nmap <buffer> [lsp]d <Plug>(lsp-definition)
-	nmap <buffer> [lsp]r <Plug>(lsp-references)
-	nmap <buffer> [lsp]t <Plug>(lsp-type-definition)
-	nmap <buffer> [lsp][ <Plug>(lsp-previous-diagnostic)
-	nmap <buffer> [lsp]] <Plug>(lsp-next-diagnostic)
-	nmap <buffer> [lsp]<C-f> <Plug>(lsp-rename)
-	nnoremap <buffer> [lsp]f :<C-u>LspDocumentFormat<CR>
-	vnoremap <buffer> <C-f> :<C-u>LspDocumentRangeFormat<CR>
-endfunction
-
-augroup myvimrc
-	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-'''
 
 
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
-on_event = ['VimEnter']
+on_event = ['InsertEnter']
 
 hook_source = '''
 
@@ -108,6 +34,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \	},
 \	'ultisnips': {
 \		'mark': 'S',
+\		'keywordPattern': '[a-zA-Z_\\\[\]<>\*]+',
 \		'isVolatile': v:true,
 \		'minAutoCompleteLength': 1,
 \	},
@@ -127,13 +54,15 @@ call ddc#enable()
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-depends = ['ultisnips', 'lexima.vim']
+depends = ['ddc.vim', 'ultisnips', 'lexima.vim']
+on_source = ['ddc.vim']
 hook_post_source = '''
 inoremap <expr> <Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(+1)<CR>" : "\<Tab>"
 inoremap <expr> <S-Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(-1)<CR>" : "\<S-Tab>"
 
+"\!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
 inoremap <expr> <CR> pum#visible() ? 
-\!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
+\UltiSnips#CanExpandSnippet() ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
 \"<CMD>call pum#map#confirm()<CR>" : 
 \lexima#expand('<LT>CR>', 'i')
 
@@ -174,17 +103,8 @@ on_source = ['ddc.vim', 'vim-lsp']
 
 
 [[plugins]]
-repo = 'SirVer/ultisnips'
-on_event = 'VimEnter'
-hook_add = '''
-let g:UltiSnipsExpandTrigger="<C-j>"
-
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
-'''
-[[plugins]]
 repo = 'matsui54/ddc-ultisnips'
-on_source = 'ddc.vim'
+on_source = ['ddc.vim', 'ultisnips']
 
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'
