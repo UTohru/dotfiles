@@ -75,7 +75,6 @@ augroup myvimrc
 	\ exe "normal g`\"" | endif
 
 	" filetype
-	autocmd BufRead,BufNewFile *.tsx set filetype=typescript
 	autocmd BufRead,BufNewFile *.snippets set filetype=snippets
 	autocmd BufRead,BufNewFile */pluginconfig/*.toml call dein#toml#syntax()
 	let g:tex_flavor = 'latex'

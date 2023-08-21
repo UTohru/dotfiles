@@ -1,4 +1,3 @@
-
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
@@ -10,7 +9,7 @@ nnoremap <Space>F :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><S
 [[plugins]]
 repo = 'lambdalisue/fern-renderer-nerdfont.vim'
 on_source = ['fern.vim']
-hook_add = '''
+hook_source = '''
 let g:fern#renderer = 'nerdfont'
 hi Directory ctermfg=39
 '''
@@ -28,27 +27,11 @@ let g:sandwich#recipes += [
 '''
 
 [[plugins]]
-repo = 't9md/vim-quickhl'
-on_event = ['CursorMoved', 'CursorHold']
-hook_add = '''
-nmap <Space>M ^v$<Plug>(quickhl-manual-this)<ESC>
-
-nmap <Space>mm <Plug>(quickhl-manual-this)
-nmap <Space>mM <Plug>(quickhl-manual-reset)
-
-nmap <Space>mn <Plug>(quickhl-manual-go-to-next)<SID><Space>m
-nmap <Space>mp <Plug>(quickhl-manual-go-to-prev)<SID><Space>m
-nnoremap <silent><script> <SID><Space>mn :<C-u>QuickhlManualGoToNext<CR><SID><Space>m
-nnoremap <silent><script> <SID><Space>mp :<C-u>QuickhlManualGoToPrev<CR><SID><Space>m
-nmap <SID><Space>m <Nop>
-'''
-
-
-[[plugins]]
 repo = 'thinca/vim-quickrun'
-on_ft = ['python', 'tex']
 hook_add = '''
 nnoremap <silent> <F5> :<C-u>w<CR>:QuickRun<CR>
+'''
+hook_source = '''
 let g:quickrun_config = {
 \	'_': {
 \		'runner': 'terminal',
@@ -61,29 +44,23 @@ let g:quickrun_config = {
 \	},
 \	'python': {
 \		'command': 'python',
-\	}
+\	},
 \}
 '''
 
 [[plugins]]
 repo = 'matze/vim-tex-fold'
 on_ft = ['tex']
-hook_add = '''
-" zm command"
-"let g:tex_fold_sec_char = '>'
+hook_source = '''
+" zi: toggle
 let g:tex_fold_use_default_envs = 0
 '''
 
-[[plugins]]
-repo = 'mattn/vim-sonictemplate'
-on_event = ['CursorHold', 'CursorMoved']
-hook_add='''
-'''
 
 [[plugins]]
 repo = 'SirVer/ultisnips'
 on_event = 'InsertEnter'
-hook_add = '''
+hook_source = '''
 let g:UltiSnipsExpandTrigger="<C-j>"
 
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
@@ -93,7 +70,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 [[plugins]]
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
-hook_add='''
+hook_source='''
 vnoremap <silent> t :<C-u>'<,'>MakeTable! ,<CR>
 vnoremap <silent> T :<C-u>UnmakeTable ,<CR>
 '''
@@ -103,7 +80,7 @@ vnoremap <silent> T :<C-u>UnmakeTable ,<CR>
 repo = 'heavenshell/vim-pydocstring'
 build='make install'
 on_ft = ['python']
-hook_add = '''
+hook_source = '''
 let g:pydocstring_formatter = 'google'
 nnoremap <silent> <Space>dq :<C-u>Pydocstring<CR>
 '''
@@ -112,7 +89,7 @@ nnoremap <silent> <Space>dq :<C-u>Pydocstring<CR>
 [[plugins]]
 repo = 'previm/previm'
 on_ft = ['markdown']
-hook_add='''
+hook_source='''
 if(g:wsl)
 	let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 	let g:previm_wsl_mode = 1
@@ -120,7 +97,7 @@ else
 	let g:previm_open_cmd = 'firefox'
 endif
 
-" :PrevimUpdateAssets (一括更新)
+" :PrevimUpdateAssets 
 let g:previm_extra_libraries = [
 \	{
 \		'name': 'katex',
@@ -197,14 +174,14 @@ let g:previm_extra_libraries = [
 [[plugins]]
 repo = 'mattn/emmet-vim'
 on_ft = ['html']
-hook_add='''
+hook_source='''
 let g:user_emmet_leader_key='<C-e>'
 '''
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
 on_event = ['InsertEnter']
-hook_add='''
+hook_source='''
 let g:lexima_enable_basic_rules = 1
 let g:lexima_enable_newline_rules = 1
 let g:lexima_enable_endwise_rules = 0

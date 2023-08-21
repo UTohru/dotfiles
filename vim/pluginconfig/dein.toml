@@ -1,4 +1,3 @@
-
 [[plugins]]
 repo = 'Shougo/dein.vim'
 hook_add = '''
@@ -15,7 +14,6 @@ hook_add = '''
 let s:lspfunc = "LLLspStatus" 
 "let s:lspfunc = "coc#status"
 
-""\	'enable': {'statusline':1, 'tabline':0},
 let g:lightline = {
 \	'enable': {'statusline':1, 'tabline':0},
 \	'active': {
@@ -31,22 +29,6 @@ let g:lightline = {
 \		'filetype' : 'LLFiletype'
 \	}
 \}
-""let g:lightline.tab = {
-""\	'active': ['tabnum' , 'filename', 'modified'],
-""\	'inactive': ['tabnum' , 'filename', 'modified']
-""\}
-""let g:lightline.tab_component_function ={
-""\	'filename': 'LLFileName',
-""\	'tabnum': 'lightline#tab#tabnum',
-""\	'modified': 'lightline#tab#modified',
-""\}
-""
-""function! LLFileName(n) abort
-""	let buflist = tabpagebuflist(a:n)
-""	let winnr = tabpagewinnr(a:n)
-""	let _ = pathshorten(expand('#'.buflist[winnr-1].':f'))
-""	return _ !=# '' ? _ : '[No Name]'
-""endfunction
 
 function! LLLspStatus() abort
 	let l:counts = lsp#get_buffer_diagnostics_counts()
@@ -67,7 +49,6 @@ endfunction
 repo = 'tyru/caw.vim'
 hook_add = '''
 " numToStr/Comment.nvim , preservim/nerdcommenter"
-
 if g:wsl || has('win32')
 	nmap <C-_> <Plug>(caw:hatpos:toggle)
 	vmap <C-_> <Plug>(caw:hatpos:toggle)
@@ -127,7 +108,23 @@ nnoremap [fzf]l :<C-u>Lines<CR>
 nnoremap [fzf]r :<C-u>Rg<CR>
 '''
 
-#
+[[plugins]]
+repo = 't9md/vim-quickhl'
+# on_if = '&readonly && &buftype ==# ""'
+hook_add = '''
+nmap <Space>M ^v$<Plug>(quickhl-manual-this)<ESC>
+
+nmap <Space>mm <Plug>(quickhl-manual-this)
+nmap <Space>mM <Plug>(quickhl-manual-reset)
+
+nmap <Space>mn <Plug>(quickhl-manual-go-to-next)<SID><Space>m
+nmap <Space>mN <Plug>(quickhl-manual-go-to-prev)<SID><Space>m
+nnoremap <silent><script> <SID><Space>mn :<C-u>QuickhlManualGoToNext<CR><SID><Space>m
+nnoremap <silent><script> <SID><Space>mN :<C-u>QuickhlManualGoToPrev<CR><SID><Space>m
+nmap <SID><Space>m <Nop>
+'''
+
+
 # [[plugins]]
 # repo = 'dstein64/vim-startuptime'
 

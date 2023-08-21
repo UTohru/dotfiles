@@ -12,7 +12,6 @@ def ${1:Name}(${2:arg:})${3: -> None}:
 	${4:pass}
 endsnippet
 
-
 snippet class "class format"
 class ${1:Name}(${2:object}):
 	def __init__(self):
@@ -28,21 +27,16 @@ snippet #! "make script file" b
 #!/usr/bin/env python
 endsnippet
 
-snippet __main__ "if name == main" b
-if __name__ == '__main__':
-	$1
-endsnippet
-
 snippet ifmain "if name == main" b
 if __name__ == '__main__':
-	$1
+	${0:${VISUAL}}
 endsnippet
 
 snippet docstrings "create Docstrings"
-"""${1:desciption}
+"""${0:${VISUAL}}
 
 Args:
-	${2:arg (type) : description}
+	${1:arg (type) : description}
 
 Returns:
 
@@ -61,7 +55,7 @@ endsnippet
 snippet dataclass "dataclass" b
 @dataclass
 class ${1: name}:
-    ${2:var}: ${3:type}${4: = None}
+	${2:var}: ${3:type}${4: = None}
 endsnippet
 
 snippet try "try except" b
@@ -82,4 +76,10 @@ except:
 	${2:pass}
 finally:
 	${3:pass}
+endsnippet
+
+snippet time_elapsed "elapsed time count" b
+# import time
+perf_start_time = time.perf_time()
+print(time.perf_time() - perf_start_time)
 endsnippet

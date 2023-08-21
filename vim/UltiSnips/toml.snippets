@@ -1,0 +1,10 @@
+snippet plugin "plugin" b
+[[plugins]]
+repo = '$1'
+endsnippet
+
+snippet hook "hook_" b
+hook_{$1:add} = '''
+$2
+'''
+endsnippet
