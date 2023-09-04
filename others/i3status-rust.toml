@@ -1,9 +1,20 @@
 
 [theme]
-theme = "srcery"
+theme = "native"
+[theme.overrides]
+idle_fg = "#32cd32"
+good_fg = "#32cd32"
+info_fg = "#32cd32"
+warning_fg = "#ffc107"
+critical_fg = "#f44336"
 
 [icons]
-icons = "awesome4"
+icons = "awesome6"
+[icons.overrides]
+cpu = "\uf4bc"
+memory_mem = "\ue266"
+disk_drive = "\uf472"
+time = "\ue641"
 
 [[block]]
 block = "cpu"
@@ -21,7 +32,7 @@ cmd = "nm-connection-editor"
 block = "disk_space"
 path = "/"
 info_type = "available"
-format = " $icon $available.eng(w:4) ($total)"
+format = " $icon $available.eng(w:4) ($total) "
 interval = 30
 warning = 30.0
 alert = 10.0
@@ -29,11 +40,12 @@ alert = 10.0
 [[block]]
 block = "memory"
 # format = " $icon $mem_used_percents.eng(w:2) "
-format = " $icon $mem_used.eng(p:M, hide_prefix:true, hide_unit:true)/$mem_total.eng(p:M) "
+format = " $icon $mem_used.eng(p:G, hide_prefix:true, hide_unit:true) /$mem_total.eng(p:G) "
 
 [[block]]
 block = "memory"
 format = " swap $swap_used_percents.eng(w:2) "
+format_alt = " swap $swap_used.eng(p:G, hide_prefix:true, hide_unit:true) /$swap_total.eng(p:G) "
 
 
 [[block]]
@@ -51,6 +63,9 @@ missing_format = ""
 block = "sound"
 step_width = 5
 format = " $icon $volume.eng(w:2) "
+[[block.click]]
+button = "left"
+cmd = "pavucontrol"
 
 [[block]]
 block = "time"
