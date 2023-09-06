@@ -80,7 +80,10 @@ end)
 return {
 	default_prog = shell,
 	-- exit_behavior = "Close",
-	font = wezterm.font("Cica"),
+	font = wezterm.font_with_fallback({
+			{ family = "Cica" },
+			{ family = "Cica", assume_emoji_presentation = true },
+	}),
 	use_ime = true,
 	ime_preedit_rendering = "Builtin",
 	-- disable_default_key_bindings = True,

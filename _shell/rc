@@ -25,4 +25,5 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # === wezterm shell integration ===
+dotdir=$(cd $(dirname $(readlink -f ${ZDOTDIR})); pwd)
 source ${dotdir}/_shell/wezterm.sh
