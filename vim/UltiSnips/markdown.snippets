@@ -14,20 +14,37 @@ $1
 -->
 endsnippet
 
-#snippet mathjax "latex math conf"
-#<script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
-#</script>
-#<script type="text/x-mathjax-config">
-#	MathJax.Hub.Config({
-#	tex2jax: {
-#	inlineMath: [['$', '$'] ],
-#	displayMath: [ ['$$','$$'], ["\\\\[","\\\\]"] ]
-#	}
-#	});
-#</script>
-#endsnippet
 
-snippet class
+snippet tex "katex code block" 
+\`\`\`katex
+${1:c = \\pm\\sqrt{a^2 + b^2}}
+\`\`\`
+endsnippet
+
+snippet plotly "plotlyjs code block" 
+\`\`\`plotlyjs
+[
+	{
+		"$1": $2
+	}
+]
+\`\`\`
+endsnippet
+
+snippet plotly_pie "plotlyjs pie chart" 
+\`\`\`plotlyjs
+[
+	{
+		"values": [$1]
+		"labels": [$2]
+		"type": "pie"
+	}
+]
+\`\`\`
+endsnippet
+
+
+snippet uml_class
 \`\`\`plantuml
 @startuml
 hide class circle
@@ -42,7 +59,7 @@ $1
 \`\`\`
 endsnippet
 
-snippet sequence
+snippet uml_sequence
 \`\`\`plantuml
 @startuml
 /' define participants '/

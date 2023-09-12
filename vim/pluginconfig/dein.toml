@@ -125,6 +125,14 @@ nmap <SID><Space>m <Nop>
 '''
 
 
+[[plugins]]
+repo = 'kana/vim-textobj-user'
+[[plugins]]
+repo = 'sgur/vim-textobj-parameter'
+[[plugins]]
+repo = 'machakann/vim-textobj-functioncall'
+
+
 # [[plugins]]
 # repo = 'dstein64/vim-startuptime'
 

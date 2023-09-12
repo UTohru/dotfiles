@@ -1,7 +1,6 @@
 [[plugins]]
 repo = 'lambdalisue/fern.vim'
 hook_add = '''
-"nnoremap <Space>fw :<C-u>Fern .<CR>:set nonumber<CR>
 "nnoremap <Space>f :<C-u>Fern . -drawer<CR>:set nonumber<CR>
 nnoremap <Space>F :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
 '''
@@ -17,14 +16,6 @@ hi Directory ctermfg=39
 [[plugins]]
 repo = 'machakann/vim-sandwich'
 on_event = ['CursorMoved', 'CursorHold']
-hook_post_source = '''
-let g:sandwich#recipes = deepcopy(g:sandwich#default_recipes)
-let g:sandwich#recipes += [
-			\ {'buns': ['「', '」'], 'match_syntax': 1},
-			\ {'buns': ['『', '』'], 'match_syntax': 1},
-			\ {'buns': ['（', '）'], 'match_syntax': 1},
-			\]
-'''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -84,6 +75,10 @@ hook_source = '''
 let g:pydocstring_formatter = 'google'
 nnoremap <silent> <Space>dq :<C-u>Pydocstring<CR>
 '''
+
+[[plugins]]
+repo = 'mattn/vim-goimports'
+on_ft = ['go']
 
 
 [[plugins]]

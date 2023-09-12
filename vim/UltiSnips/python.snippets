@@ -32,22 +32,6 @@ if __name__ == '__main__':
 	${0:${VISUAL}}
 endsnippet
 
-snippet docstrings "create Docstrings"
-"""${0:${VISUAL}}
-
-Args:
-	${1:arg (type) : description}
-
-Returns:
-
-Examples:
-
-Note:
-
-"""
-endsnippet
-
-
 snippet debug "pdb debug" b
 import pdb; pdb.set_trace()
 endsnippet
@@ -76,10 +60,4 @@ except:
 	${2:pass}
 finally:
 	${3:pass}
-endsnippet
-
-snippet time_elapsed "elapsed time count" b
-# import time
-perf_start_time = time.perf_time()
-print(time.perf_time() - perf_start_time)
 endsnippet
