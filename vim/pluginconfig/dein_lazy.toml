@@ -31,7 +31,6 @@ let g:quickrun_config = {
 \	},
 \	'tex': {
 \		'command': 'latexmk',
-\		'args': '-pv-'
 \	},
 \	'python': {
 \		'command': 'python',
