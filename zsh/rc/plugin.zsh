@@ -12,7 +12,7 @@ if ! test -d "$ZPLGDIR"; then
 fi
 
 typeset -gAH ZPLGM
-ZPLGM[HOME_DIR]="${ZPLGDIR}"
+ZPLGM["${HOME}"]="${ZPLGDIR}"
 source "$ZPLGDIR/bin/zinit.zsh"
 autoload -Uz _zinit
 (( ${+_comps} )) && _comps[zinit]=_zinit
@@ -36,16 +36,11 @@ zinit wait'0b' lucid \
 	atload"source $ZDOTDIR/pluginconf/zsh-autosuggestions_l.zsh" \
 	light-mode for @zsh-users/zsh-autosuggestions
 
-# zinit wait'0a' lucid \
-# 	atinit"source $ZDOTDIR/pluginconf/zsh-autocomplete_i.zsh" \
-# 	light-mode for @marlonrichert/zsh-autocomplete
+zinit wait'0a' lucid \
+	atinit"source $ZDOTDIR/pluginconf/zsh-autocomplete_i.zsh" \
+	atload"source $ZDOTDIR/pluginconf/zsh-autocomplete_l.zsh" \
+	light-mode for @marlonrichert/zsh-autocomplete
 
-
-
-# zinit wait'1a' lucid \
-# 	from"gh-r" as"program" pick"bin/exa" \
-# 	atload"source $ZDOTDIR/pluginconf/exa_l.zsh" \
-# 	light-mode for @ogham/exa
 
 # zinit wait'1b' lucid \
 # 	light-mode for @chitoku-k/fzf-zsh-completions

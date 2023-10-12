@@ -56,6 +56,7 @@ function gpopd(){
 	builtin cd $newdir
 	unset -v newdir
 }
+alias cdg='cd `git rev-parse --show-toplevel`'
 
 
 # openssl rand -hex 8
@@ -66,11 +67,11 @@ if command -V trash-put > /dev/null 2>&1; then
 	alias rt='trash-put'
 fi
 
-if command -V exa > /dev/null 2>&1; then
-	alias ls="exa "
-	alias la="exa -a --icons"
-	alias ll="exa -l --icons -snew -T -L1"
-	alias l="exa"
+if command -V eza > /dev/null 2>&1; then
+	alias ls="eza "
+	alias la="eza -a --icons"
+	alias ll="eza -l --icons -snew -T -L1"
+	alias l="eza"
 else
 	alias ls='ls --color=auto'
 	alias la='ls -A'
