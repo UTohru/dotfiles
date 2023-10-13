@@ -29,7 +29,7 @@ fi
 # ===============
 # ignore localconf
 # ===============
-ignore_list=("${cdir}/zsh/localconf/rc.zsh" "${cdir}/zsh/localconf/profile.zsh" "${cdir}/i3/enable/local.conf" "${cdir}/sway/enable/local.conf")
+ignore_list=("${cdir}/.config/zsh/localconf/rc.zsh" "${cdir}/.config/zsh/localconf/profile.zsh" "${cdir}/.config/i3/enable/local.conf" "${cdir}/.config/sway/enable/local.conf")
 git update-index --skip-worktree ${ignore_list[@]}
 
 
@@ -55,49 +55,44 @@ fi
 
 
 # ===============
-# other links
+# config links
 # ===============
 
-if [ ! -d ~/.config ]; then
-	mkdir ~/.config
+function ln_config() {
+	if [ ! -d ~/.config ]; then
+		mkdir ~/.config
+	fi
+	for path in "${cdir}"/.config/*
+	do
+		src="$(basename "${path}")"
+		if [ -d ~/.config/"${src}" ]; then
+			rm -rf ~/.config/"${src}"
+		fi
+		ln -sf "${path}" ~/.config/"${src}"
+	done
+}
+
+ln_config
+
+if [ ! -d ${cdir}/.config/i3/wallpaper ]; then
+	mkdir ${cdir}/.config/i3/wallpaper
 fi
+
+# ===============
+# other links
+# ===============
 
 if [ -d ~/.mlterm ]; then
 	rm -rf ~/.mlterm
 fi
-
 ln -sf ${cdir}/mlterm ~/.mlterm
 
 ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
 ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
 
 ln -sf ${cdir}/.zshenv ~/.zshenv
-if [ -d ~/.config/zsh ]; then
-	rm -rf ~/.config/zsh
-fi
-ln -sf ${cdir}/zsh ~/.config/zsh
 
-if [ ! -d ~/.config/i3status ]; then
-	mkdir ~/.config/i3status
-fi
-ln -sf ${cdir}/others/i3status.conf ~/.config/i3status/i3status.conf
-ln -sf ${cdir}/others/i3status-rust.toml ~/.config/i3status/i3status-rust.toml
-
-if [ -d ~/.config/wezterm ]; then
-	rm -rf ~/.config/wezterm
-fi
-ln -sf ${cdir}/wezterm ~/.config/wezterm
-
-if [ -d ~/.config/efm-langserver ]; then
-	rm -rf ~/.config/efm-langserver
-fi
-ln -sf ${cdir}/efm-langserver ~/.config/efm-langserver
-ln -sf ${cdir}/others/textlintrc ~/.textlintrc
-
-if [ -d ~/.config/sheldon ]; then
-	rm -rf ~/.config/sheldon
-fi
-ln -sf ${cdir}/sheldon ~/.config/sheldon
+ln -sf ${cdir}/.textlintrc ~/.textlintrc
 
 if [ ! -d ~/.local/share/deno_ts ]; then
 	mkdir -p ~/.local/share/deno_ts
@@ -105,43 +100,7 @@ fi
 ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
 
 
-if [ ! -d ${cdir}/i3/wallpaper ]; then
-	mkdir ${cdir}/i3/wallpaper
-fi
-if [ ! -d ${cdir}/sway/wallpaper ]; then
-	ln -s ${cdir}/i3/wallpaper ${cdir}/sway/wallpaper
-fi
-
-# ===============
-# x or wayland
-# ===============
-
-if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
-	if [ -d ~/.config/sway ]; then
-		rm -rf ~/.config/sway
-	fi
-	ln -sf ${cdir}/sway ~/.config/sway
-	ln -sf ${cdir}/i3/available/sway_input.conf ~/.config/sway/enable/sway_input.conf
-
-	if [ ! -d ~/.config/environment.d ]; then
-		mkdir ~/.config/environment.d
-	fi
-	
-	if [ -f ~/.config/environment.d/wayland.conf ]; then
-		rm ~/.config/environment.d/wayland.conf
-	fi
-	ln -s ${cdir}/others/systemd_env_sway.conf ~/.config/environment.d/wayland.conf
-	# sudo cp ${cdir}/others/Wsession /etc/lightdm/
-else
-	if [ -d ~/.config/i3 ]; then
-		rm -rf ~/.config/i3
-	fi
-	ln -sf ${cdir}/i3 ~/.config/i3
-	ln -sf ${cdir}/compton.conf ~/.config/compton.conf
-	ln -sf ${cdir}/.xprofile ~/.xprofile
-fi
-
-
+ln -sf ${cdir}/.xprofile ~/.xprofile
 
 
 # ===============

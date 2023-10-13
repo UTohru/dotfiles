@@ -1,4 +1,0 @@
-cargo:exa
-cargo:fd-find
-cargo:ripgrep
-go:github.com/junegunn/fzf

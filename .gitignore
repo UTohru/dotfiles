@@ -2,15 +2,15 @@
 vim/.netrwhist
 vim/dein
 
-i3/wallpaper/*
-i3/lock.png
-i3/enable/*.conf
+.config/i3/wallpaper/*
+.config/i3/lock.png
+.config/i3/enable/*.conf
 
-sway/lock.png
-sway/wallpaper
+.config/sway/lock.png
+.config/sway/wallpaper
 
 mlterm/msg.log
 mlterm/pts_*
 mlterm/challenge
 
-zsh/.zcompdump*
+.config/zsh/.zcompdump*

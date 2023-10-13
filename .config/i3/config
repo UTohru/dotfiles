@@ -8,7 +8,7 @@ exec --no-startup-id "$HOME/.config/i3/script/custom_startup.sh"
 exec --no-startup-id "$HOME/.config/i3/script/wallpaper_random.sh"
 
 # # screen shot
-bindsym $mod+Shift+s exec "$HOME/.config/sway/script/screenshot.sh"
+bindsym $mod+Shift+s exec "$HOME/.config/i3/script/screenshot.sh"
 #bindsym $mod+Ctrl+s exec "~/.config/i3/script/video_capture.sh"
 
 # clipboard(primary) replace
