@@ -94,6 +94,11 @@ fi
 ln -sf ${cdir}/efm-langserver ~/.config/efm-langserver
 ln -sf ${cdir}/others/textlintrc ~/.textlintrc
 
+if [ -d ~/.config/sheldon ]; then
+	rm -rf ~/.config/sheldon
+fi
+ln -sf ${cdir}/sheldon ~/.config/sheldon
+
 if [ ! -d ~/.local/share/deno_ts ]; then
 	mkdir -p ~/.local/share/deno_ts
 fi

@@ -1,0 +1,18 @@
+# `sheldon` configuration file
+# ----------------------------
+
+shell = "zsh"
+
+[plugins]
+
+[plugins.zsh-autocomplete]
+github = "marlonrichert/zsh-autocomplete"
+[plugins.zsh-autocomplete.hooks]
+pre = "source $ZDOTDIR/pluginconf/zsh-autocomplete_pre.zsh"
+post = "source $ZDOTDIR/pluginconf/zsh-autocomplete_post.zsh"
+
+[plugins.zsh-autosuggestions]
+github = "zsh-users/zsh-autosuggestions"
+use = ["{{ name }}.zsh"]
+[plugins.zsh-autosuggestions.hooks]
+post = "source $ZDOTDIR/pluginconf/zsh-autosuggestions_post.zsh"

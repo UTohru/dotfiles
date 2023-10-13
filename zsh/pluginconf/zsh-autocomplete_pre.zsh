@@ -14,7 +14,7 @@ zstyle ':autocomplete:tab:*' fzf-completion yes
 zstyle ':completion:*:' group-order \
 	expansions options \
 	executables local-directories directories \
-	aliases functions builtins reserved-words commands
+	aliases functions builtins commands
 
 
 autoload -Uz compinit
