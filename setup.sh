@@ -87,12 +87,9 @@ if [ -d ~/.mlterm ]; then
 fi
 ln -sf ${cdir}/mlterm ~/.mlterm
 
-ln -sf ${cdir}/.tmux.conf ~/.tmux.conf
-ln -sf ${cdir}/.latexmkrc ~/.latexmkrc
-
 ln -sf ${cdir}/.zshenv ~/.zshenv
 
-ln -sf ${cdir}/.textlintrc ~/.textlintrc
+ln -sf ${cdir}/others/.textlintrc ~/.textlintrc
 
 if [ ! -d ~/.local/share/deno_ts ]; then
 	mkdir -p ~/.local/share/deno_ts
