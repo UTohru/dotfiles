@@ -10,7 +10,7 @@ fi
 
 if command -V fzf > /dev/null 2>&1; then
 	if command -V fd > /dev/null 2>&1; then
-		export FZF_DEFAULT_COMMAND='fd --type f'
+		export FZF_DEFAULT_COMMAND='fd --hidden --exclude .git'
 	fi
 fi
 
@@ -25,5 +25,5 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 # === wezterm shell integration ===
-dotdir="$(cd "$(dirname "$(readlink -e "$0" || echo "$0")")"; pwd -P)"
-source ${dotdir}/wezterm.sh
+cdir="$(cd "$(dirname "$(readlink -e "$0" || echo "$0")")"; pwd -P)"
+source ${cdir}/wezterm.sh

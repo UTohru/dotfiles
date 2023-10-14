@@ -5,14 +5,24 @@ shell = "zsh"
 
 [plugins]
 
-[plugins.zsh-autocomplete]
-github = "marlonrichert/zsh-autocomplete"
-[plugins.zsh-autocomplete.hooks]
-pre = "source $ZDOTDIR/pluginconf/zsh-autocomplete_pre.zsh"
-post = "source $ZDOTDIR/pluginconf/zsh-autocomplete_post.zsh"
+[plugins.zsh-defer]
+github = "romkatv/zsh-defer"
+[templates]
+defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks | get: \"post\" | nl }}"
+
+[plugins.fzf-zsh-completions]
+github = "chitoku-k/fzf-zsh-completions"
+
+# [plugins.zsh-autocomplete]
+# github = "marlonrichert/zsh-autocomplete"
+# [plugins.zsh-autocomplete.hooks]
+# pre = "source $ZDOTDIR/pluginconf/zsh-autocomplete_pre.zsh"
+# post = "source $ZDOTDIR/pluginconf/zsh-autocomplete_post.zsh"
+
 
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
+apply = ["defer"]
 [plugins.zsh-autosuggestions.hooks]
 post = "source $ZDOTDIR/pluginconf/zsh-autosuggestions_post.zsh"
