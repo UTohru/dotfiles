@@ -16,28 +16,24 @@ bindkey "^P" history-beginning-search-backward-end
 bindkey "^N" history-beginning-search-forward-end
 
 
-# function fzf-select-files() {
-# 	local lbuf pref
-# 	pref="${LBUFFER##* }"
-# 	lbuf="${LBUFFER% *}"
-#
-# 	BUFFER="${lbuf} $(fd --type f --hidden -p --exclude .git \'${pref}\' | fzf --height 70% --layout reverse --preview "bat --color=always" --query=${pref})"
-# 	CURSOR=$#BUFFER
-# 	zle reset-prompt
-# }
-# zle -N fzf-select-files
-# bindkey '^s^f' fzf-select-files
+# single command
 function fzf-select-dirs() {
-	local lbuf pref
+	local lbuf pref search_dir fd_arg
 	pref="${LBUFFER##* }"
 	lbuf="${LBUFFER% *}"
+	search_dir="$(dirname ${pref})"
 
-	BUFFER="${lbuf} $(fd --type d --hidden -p --exclude .git ${pref} | fzf --height 70% --layout reverse --query=${pref})" && zle accept-line
+	if [ -d "${search_dir}" -a "${search_dir}" != "." ]; then
+		fd_arg="--type d --hidden -p --exclude .git ${search_dir} --search-path ${search_dir}"
+	else
+		fd_arg="--type d --hidden -p --exclude .git ${pref}"
+	fi
+	BUFFER="${lbuf} $(fd ${=fd_arg} | fzf --height 70% --layout reverse --query=${pref})" && zle accept-line
 	CURSOR=$#BUFFER
 	zle reset-prompt
 }
 zle -N fzf-select-dirs
-bindkey '^s' fzf-select-dirs
+bindkey '^[[Z' fzf-select-dirs
 
 
 # comp single enter

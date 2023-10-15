@@ -81,21 +81,13 @@ fi
 # ===============
 # other links
 # ===============
-
-if [ -d ~/.mlterm ]; then
-	rm -rf ~/.mlterm
-fi
-ln -sf ${cdir}/mlterm ~/.mlterm
-
 ln -sf ${cdir}/.zshenv ~/.zshenv
 
 ln -sf ${cdir}/others/.textlintrc ~/.textlintrc
-
 if [ ! -d ~/.local/share/deno_ts ]; then
 	mkdir -p ~/.local/share/deno_ts
 fi
 ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
-
 
 ln -sf ${cdir}/.xprofile ~/.xprofile
 
