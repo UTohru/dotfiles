@@ -8,7 +8,8 @@ fi
 endsnippet
 
 snippet cdir "script path" b
-cdir="$(cd "$(dirname "$(readlink -e "\$0" || echo "\$0")")"; pwd -P)"
+cdir="$(realpath "$(dirname $0)")"
+# cdir="$(cd "$(dirname "$(readlink -e -n "\$0" || echo "\$0")")"; pwd -P)"
 $1
 endsnippet
 

@@ -7,11 +7,10 @@ shell = "zsh"
 
 [plugins.zsh-defer]
 github = "romkatv/zsh-defer"
+
 [templates]
 defer = "{{ hooks | get: \"pre\" | nl }}{% for file in files %}zsh-defer source \"{{ file }}\"\n{% endfor %}{{ hooks | get: \"post\" | nl }}"
-
-[plugins.fzf-zsh-completions]
-github = "chitoku-k/fzf-zsh-completions"
+# install_sh = "if [ ! -x \"$(command -v {{ name }})\" ]; then {{ dir }}/install.sh; fi"
 
 # [plugins.zsh-autocomplete]
 # github = "marlonrichert/zsh-autocomplete"
@@ -19,10 +18,10 @@ github = "chitoku-k/fzf-zsh-completions"
 # pre = "source $ZDOTDIR/pluginconf/zsh-autocomplete_pre.zsh"
 # post = "source $ZDOTDIR/pluginconf/zsh-autocomplete_post.zsh"
 
-
 [plugins.zsh-autosuggestions]
 github = "zsh-users/zsh-autosuggestions"
 use = ["{{ name }}.zsh"]
 apply = ["defer"]
 [plugins.zsh-autosuggestions.hooks]
 post = "source $ZDOTDIR/pluginconf/zsh-autosuggestions_post.zsh"
+

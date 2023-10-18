@@ -20,11 +20,17 @@ bindkey "^N" history-beginning-search-forward-end
 function fzf-select-dirs() {
 	local lbuf pref search_dir fd_arg
 	pref="${LBUFFER##* }"
+	pref="${pref/#\~/"${HOME}"}"
 	lbuf="${LBUFFER% *}"
-	search_dir="$(dirname ${pref})"
+	if [ -d "${pref}" ]; then
+		search_dir="${pref}"
+	else
+		search_dir="$(realpath -m "$(dirname "${pref:-"."}")")"
+	fi
 
-	if [ -d "${search_dir}" -a "${search_dir}" != "." ]; then
+	if [ -d "${search_dir}" ]; then
 		fd_arg="--type d --hidden -p --exclude .git ${search_dir} --search-path ${search_dir}"
+		pref="$(basename ${pref})"
 	else
 		fd_arg="--type d --hidden -p --exclude .git ${pref}"
 	fi
