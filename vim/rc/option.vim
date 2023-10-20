@@ -8,7 +8,6 @@ else
 	set t_vb=
 endif
 
-
 set laststatus=2
 set tabstop=4
 set shiftwidth=4
@@ -19,8 +18,13 @@ set number
 
 set list
 set shortmess-=S
-set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~ "非表示文字の可視化"
-"set listchars=tab:--\|,nbsp:%,trail:~ "非表示文字の可視化"
+
+" 非表示文字
+if v:version < 802
+	set listchars=tab:--\|,nbsp:%,trail:~
+else
+	set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~
+endif
 
 set tags=./tags;$HOME
 
