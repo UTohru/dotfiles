@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # 1. install asdf or pyenv, and python dependencies.
 # 2. install gettext (for localization)

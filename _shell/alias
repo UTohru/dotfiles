@@ -72,13 +72,19 @@ if command -V eza > /dev/null 2>&1; then
 	alias la="eza -a --icons"
 	alias ll="eza -l --icons -snew -T -L1"
 	alias l="eza"
+	alias tree="eza -Tl -L 3"
 else
 	alias ls='ls --color=auto'
 	alias la='ls -A'
 	alias ll='ls -alhF'
 	alias l='ls -CF'
 fi
-alias duh="du -hd 1 . | sort -hr | head -n 10"
+
+if [ -x "$(command -v dust)" ]; then
+	alias duh="dust -rb -d 1 -n 10"
+else
+	alias duh="du -hd 1 . | sort -hr | head -n 10"
+fi
 
 
 # === wsl ===
