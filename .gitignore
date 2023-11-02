@@ -3,10 +3,10 @@ vim/.netrwhist
 vim/dein
 
 .config/i3/wallpaper/*
-.config/i3/lock.png
 .config/i3/enable/*.conf
+.config/i3/*lock.png
 
-.config/sway/lock.png
+.config/sway/*lock.png
 .config/sway/wallpaper
 
 mlterm/msg.log
