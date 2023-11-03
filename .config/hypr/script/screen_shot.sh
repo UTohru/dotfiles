@@ -1,0 +1,1 @@
+../../i3/script/screen_shot.sh

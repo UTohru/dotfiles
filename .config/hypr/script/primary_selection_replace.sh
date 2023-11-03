@@ -1,0 +1,1 @@
+../../i3/script/primary_selection_replace.sh
