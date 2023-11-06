@@ -10,9 +10,16 @@ case "$1" in
 		if [ "$XDG_SESSION_TYPE" = "wayland" ]; then
 			imgdir=~/.config/sway
 			locker=swaylock
-			$lock_args="$lock_args -f"
+			lock_args="${lock_args} -f"
+
+			if [ "$DESKTOP_SESSION" = "sway" ]; then
+				msgcmd="swaymsg -t get_outputs"
+			elif [ "$DESKTOP_SESSION" = "hyprland" ]; then
+				msgcmd="hyprctl -j monitors"
+			fi
+
 			if [ -x "$(command -v mogrify)" -a -x "$(command -v grim)" ]; then
-				for MONITOR in `swaymsg -t get_outputs | jq -r '.[] | select(.active == true) | .name'`
+				for MONITOR in `$msgcmd | jq -r '.[] | .name'`
 				do
 					img="$imgdir/${MONITOR}-lock.png"
 					grim -o "${MONITOR}" "${img}"

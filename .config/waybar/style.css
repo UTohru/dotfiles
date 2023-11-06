@@ -1,0 +1,149 @@
+/* import css definitions for current theme */
+
+
+/* -----------------------------------------------------------------------------
+ * Base styles
+ * -------------------------------------------------------------------------- */
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0px;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    font-family: "RobotoMono Nerd Font", "Roboto Mono", sans-serif;
+}
+
+/* The whole bar */
+#waybar {
+    background: #333333;
+    color: #ffffff;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+/* Each module */
+#custom-help,
+#battery,
+#clock,
+#cpu,
+#memory,
+#network,
+#pulseaudio,
+#temperature,
+#backlight,
+#tray {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
+/* -----------------------------------------------------------------------------
+ * Module styles
+ * -------------------------------------------------------------------------- */
+
+#workspaces button {
+    padding-top: 5px;
+    padding-bottom: 1px;
+    padding-left: 10px;
+}
+
+
+#workspaces .active * {
+    border-radius: 5px;
+    background-color: #14e5fd;
+    color: #282a16;
+}
+
+
+#workspaces .focused * {
+    background-color: #6495ed;
+    color: #484a36;
+}
+
+
+#workspaces button.urgent {
+    border-color: red;
+    color: red;
+}
+
+#cpu,#memory,#disk {
+    background: rgba(240,240,240, 1);
+    color: rgba(90,90,90,1);
+}
+
+#cpu.warning {
+    color: orange;
+}
+#cpu.critical {
+    color: red;
+}
+
+#memory.warning {
+    color: orange;
+}
+#memory.critical {
+    color: red;
+}
+
+#network.disconnected {
+    color: orange;
+}
+
+
+#battery,#temperature,#pulseaudio,#backlight {
+    background: #ffff75;
+    color: rgba(90,90,90,1);
+}
+
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.critical {
+    color: red;
+}
+
+
+#temperature.critical {
+    color: red;
+}
+
+#pulseaudio {
+    border-radius: 0px;
+}
+#pulseaudio.muted {
+    color: orange;
+}
+
+#backlight {
+    margin-right: 5px;
+}
+
+
+
+#clock {
+    font-weight: bold;
+    color: lightgray;
+}
+
+#tray {
+    margin-right: 2px;
+    background: rgba(0,175,255,1.0);
+    border-radius: 20px;
+    margin-left: 10px;
+}
+
+/* left */
+#cpu,#battery {
+    border-radius: 20px 0px 0px 20px;
+    margin-left: 10px;
+}
+
+/* right */
+#disk,#backlight {
+    border-radius: 0px 20px 20px 0px;
+    margin-right: 10px;
+}

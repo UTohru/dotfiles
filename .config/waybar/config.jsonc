@@ -1,0 +1,121 @@
+{
+    // -------------------------------------------------------------------------
+    // Global configuration
+    // -------------------------------------------------------------------------
+
+    "layer": "top",
+    "height": 40,
+    "position": "bottom",
+
+    "modules-left": ["sway/workspaces", "hyprland/workspaces"],
+    // "modules-center": [""],
+    "modules-right": [
+        "cpu",
+        // "network",
+        "memory",
+        "disk",
+        "battery",
+        "pulseaudio",
+        "backlight",
+        "tray",
+        "clock#date",
+        "clock#time"
+    ],
+
+    // -------------------------------------------------------------------------
+    // Modules
+    // -------------------------------------------------------------------------
+
+    "cpu": {
+        "interval": 5,
+        "format": "\uf463 {usage:2}%",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "network": {
+        "interval": 5,
+        "format-wifi": "  {essid}",
+        "format-ethernet": "\uf0e8 {ifname}: {ipaddr}",
+        "format-disconnected": "\uead0 dissconnect",
+        "tooltip-format": "{ifname}: {ipaddr} ({signalStrength}%)"
+    },
+
+    "memory": {
+        "interval": 5,
+        "format": "\ue266  {used:3}/ {total:3}GiB",
+        "states": {
+            "warning": 70,
+            "critical": 90
+        }
+    },
+
+    "disk": {
+        "format": "\uf472 {free}({total})"
+    },
+
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format-charging": " {capacity}%",
+        "format": "{icon} {capacity}%",
+        "format-icons": ["", "", "", "", "", ""],
+        "tooltip": true
+    },
+
+    // "temperature": {
+    //     "critical-threshold": 90,
+    //     "interval": 10,
+    //     "format": "{icon} {temperatureC}°",
+    //     "format-icons": ["", "", ""],
+    //     "tooltip": false
+    // },
+
+    "clock#date": {
+        "interval": 60,
+        "format": "{:%Y-%m-%d (%a)}",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%B %Y}</big>\n<tt>{calendar}</tt>"
+    },
+    "clock#time": {
+        "interval": 5,
+        "format": "{:%H:%M}"
+    },
+
+
+    "backlight": {
+        "interval": 10,
+        "format": "\uf522 {percent}%",
+        "on-scroll-up": "light -A 5",
+        "on-scroll-down": "light -U 5"
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%  {format_source}",
+        "format-muted": "\uf466 Muted",
+        "format-source": "\uf130",
+        "format-source-muted": " ",
+        "format-icons": {
+            "headphone": "",
+            "headset": "",
+            "default": ["\uf027", "\uf028"]
+        },
+        "tooltip-format": "{icon} {volume}% {format_source}",
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "on-right-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    },
+
+
+    "tray": {
+        "icon-size": 21,
+        "spacing": 5
+    }
+}

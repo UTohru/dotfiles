@@ -8,7 +8,7 @@ batch_cmd=""
 
 # Notification
 if builtin command -V dunst > /dev/null 2>&1; then
-	bacth_cmd="$batch_cmd dispatch exec-once dunst ;"
+	bacth_cmd="$batch_cmd dispatch exec dunst ;"
 fi
 
 # im
