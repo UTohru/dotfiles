@@ -15,6 +15,10 @@ if builtin command -V dunst > /dev/null 2>&1; then
 	$cmd "exec --no-startup-id dunst"
 fi
 
+if [ -x "$(command -v ulauncher)" ]; then
+	$cmd "exec --no-startup-id systemctl --user start ulauncher"
+fi
+
 if builtin command -V fcitx5 >/dev/null 2>&1; then
 	$cmd "exec --no-startup-id fcitx5 -rd"
 elif builtin command -V fcitx >/dev/null 2>&1; then

@@ -1,6 +1,5 @@
 
 ## i3 config
-Initially, the C-d launcher can be used
 
 ### add config
 ```
@@ -8,7 +7,7 @@ $ cd ./enable
 $ ln -s ../available/<file>
 ```
 
-### term 
+### term setup
 
 1. terminal install
 1. set x-terminal-emulator 

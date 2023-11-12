@@ -18,6 +18,13 @@ elif builtin command -V fcitx >/dev/null 2>&1; then
 	batch_cmd="${batch_cmd} dispatch exec fcitx -rd ;"
 fi
 
+# launcher
+if [ -x "$(command -v ulauncher)" ]; then
+	batch_cmd="${batch_cmd} dispatch exec systemctl --user start ulauncher ;"
+	batch_cmd="${batch_cmd} keyword bind ALT,D,ulauncher-toggle ;"
+elif [ -x "$(command -v dmenu)" ]; then
+	batch_cmd="${batch_cmd} keyword bind ALT,D,dmenu_run ;"
+fi
 
 
 # pulseaudio  systemtray
