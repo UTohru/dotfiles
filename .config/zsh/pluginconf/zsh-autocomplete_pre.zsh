@@ -1,5 +1,5 @@
 zstyle ':autocomplete:*' default-context ''
-zstyle ':autocomplete:*' min-delay 0.08
+zstyle ':autocomplete:*' min-delay 0.05
 zstyle ':autocomplete:*' min-input 1
 zstyle ':autocomplete:*' ignored-input ''
 

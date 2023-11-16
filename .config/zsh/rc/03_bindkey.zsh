@@ -45,4 +45,5 @@ bindkey '^[[Z' fzf-select-dirs
 # comp single enter
 zmodload -i zsh/complist
 bindkey -M menuselect '^M' .accept-line
+bindkey -M menuselect '\t' menu-complete "$terminfo[kcbt]" reverse-menu-complete
 # bindkey -M menuselect '\r' .accept-line
