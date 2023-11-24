@@ -8,12 +8,13 @@
     "position": "bottom",
 
     "modules-left": ["sway/workspaces", "hyprland/workspaces"],
-    // "modules-center": [""],
+    "modules-center": ["mpris#left", "mpris#main", "mpris#right"],
     "modules-right": [
+		// "mpris",
         "cpu",
-        // "network",
         "memory",
-        "disk",
+        "network",
+        // "disk",
         "battery",
         "pulseaudio",
         "backlight",
@@ -37,15 +38,17 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "  {essid}",
-        "format-ethernet": "\uf0e8 {ifname}: {ipaddr}",
-        "format-disconnected": "\uead0 dissconnect",
-        "tooltip-format": "{ifname}: {ipaddr} ({signalStrength}%)"
+		"format": "\uf093 {bandwidthUpBytes:>} \uf019 {bandwidthDownBytes:>}",
+        // "format-wifi": "  ({signalStrength}%)",
+        // "format-ethernet": "\uf0e8 : {ipaddr}/{cidr}",
+        // "format-disconnected": "\uead0 dissconnect",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr} {essid}"
     },
 
     "memory": {
-        "interval": 5,
-        "format": "\ue266  {used:3}/ {total:3}GiB",
+        "interval": 10,
+        "format": "\ue266  {used:3}",
+        "tooltip-format": "{used} / {total}GiB used",
         "states": {
             "warning": 70,
             "critical": 90
@@ -53,7 +56,9 @@
     },
 
     "disk": {
-        "format": "\uf472 {free}({total})"
+		"interval": 60,
+        "format": "\uf472 {percentage_used}% ",
+        "tooltip-format": "{path} : {free} ({total})"
     },
 
     "battery": {
@@ -65,6 +70,7 @@
         "format-charging": " {capacity}%",
         "format": "{icon} {capacity}%",
         "format-icons": ["", "", "", "", "", ""],
+		// "tooltip-format": "{capacity}%: {timeTo}",
         "tooltip": true
     },
 
@@ -89,7 +95,7 @@
 
 
     "backlight": {
-        "interval": 10,
+        "interval": 20,
         "format": "\uf522 {percent}%",
         "on-scroll-up": "light -A 5",
         "on-scroll-down": "light -U 5"
@@ -98,7 +104,7 @@
     "pulseaudio": {
         "scroll-step": 5,
         "format": "{icon} {volume}%  {format_source}",
-        "format-muted": "\uf466 Muted",
+        "format-muted": "\uf466 Muted {format_source}",
         "format-source": "\uf130",
         "format-source-muted": " ",
         "format-icons": {
@@ -112,6 +118,27 @@
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
     },
+
+	"mpris#left": {
+		"format": " \uf137 |",
+		"on-click": "playerctl before",
+        "tooltip": false
+	},
+	"mpris#main": {
+		"format": " {status_icon} {artist} \uf001 <b>{title}</b> ",
+		"artist-len": 12,
+		"title-len": 30,
+		"status-icons": {
+			"playing": "\uf28b",
+			"paused": "\uf500"
+		},
+		"on-click": "playerctl play-pause"
+	},
+	"mpris#right": {
+		"format": "| \uf138 ",
+		"on-click": "playerctl next",
+        "tooltip": false
+	},
 
 
     "tray": {

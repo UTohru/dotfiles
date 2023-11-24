@@ -11,6 +11,10 @@ if builtin command -V dunst > /dev/null 2>&1; then
 	bacth_cmd="$batch_cmd dispatch exec dunst ;"
 fi
 
+if [ -x "$(command -v ulauncher)" ]; then
+	batch_cmd="$batch_cmd dispatch exec systemctl --user start ulauncher ;"
+fi
+
 # im
 if builtin command -V fcitx5 >/dev/null 2>&1; then
 	batch_cmd="${batch_cmd} dispatch exec fcitx5 -rd ;"

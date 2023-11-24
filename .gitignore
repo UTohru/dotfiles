@@ -6,8 +6,9 @@ vim/dein
 .config/i3/enable/*.conf
 .config/i3/*lock.png
 
-.config/sway/*lock.png
 .config/sway/wallpaper
+.config/sway/enable/*.conf
+.config/sway/*lock.png
 
 mlterm/msg.log
 mlterm/pts_*

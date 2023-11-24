@@ -1,6 +1,7 @@
 set $mod Mod1
 set $Power ~/.config/sway/script/exit.sh
 set $menu "ulauncher-toggle"
+set $bar_cmd waybar
 
 include ~/.config/sway/enable/*.conf
 
@@ -16,3 +17,4 @@ bindsym $mod+x exec "$HOME/.config/sway/script/primary_selection_replace.sh"
 bindsym $mod+Shift+o exec "wdisplays"
 
 exec "$HOME/.config/sway/script/custom_startup.sh"
+
