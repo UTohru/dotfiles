@@ -1,7 +1,6 @@
 set $mod Mod1
 set $Power ~/.config/sway/script/exit.sh
 set $menu "ulauncher-toggle"
-set $bar_cmd waybar
 
 include ~/.config/sway/enable/*.conf
 
