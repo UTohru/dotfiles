@@ -36,7 +36,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \		'mark': 'S',
 \		'keywordPattern': '[a-zA-Z_\\\[\]<>\*]+',
 \		'isVolatile': v:true,
-\		'minAutoCompleteLength': 1,
+\		'minAutoCompleteLength': 2,
 \	},
 \})
 
@@ -70,23 +70,23 @@ hi Pmenu ctermfg=250 ctermbg=238
 '''
 
 [[plugins]]
-repo = 'Shougo/ddc-around'
+repo = 'Shougo/ddc-source-around'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-matcher_head'
+repo = 'Shougo/ddc-filter-matcher_head'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'Shougo/ddc-sorter_rank'
+repo = 'Shougo/ddc-filter-sorter_rank'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'LumaKernel/ddc-file'
+repo = 'LumaKernel/ddc-source-file'
 on_source = 'ddc.vim'
 
 [[plugins]]
-repo = 'shun/ddc-vim-lsp'
+repo = 'shun/ddc-source-vim-lsp'
 on_source = ['ddc.vim', 'vim-lsp']
 
 
