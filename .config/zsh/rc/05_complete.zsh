@@ -26,7 +26,7 @@ zstyle ':completion:*:processes' command 'ps x -o pid,user,s,args'
 
 zstyle ':completion:*' file-patterns '
     *(D-/):directories:"directory"
-    ^*.(D-^/*):files:"file"
+    ^*.(D-^/):files:"file"
 '
 zstyle ':completion:*:*:vim:*:*' group-order files directory
 
@@ -40,4 +40,4 @@ fi
 zstyle ':completion:*:*:(ssh|sftp|rsync):*:hosts' hosts $h
 # zstyle ':completion:*:*:(ssh|sftp|rsync):*:hosts' ignored-patterns loopback ip6-loopback ip6-localhost bloadcast localhost
 
-zstyle ':completion:*' use-cache true
+# zstyle ':completion:*' use-cache true

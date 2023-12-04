@@ -25,10 +25,11 @@ wezterm.on('update-right-status', function(window, pane)
 		branch = utf8.char(0xe725),
 	}
 	local colors ={
-		host = "royalblue",
+		-- host = "darkturquoise",
+		host = "deepskyblue",
 		remote_host = "magenta",
-		user = "darkturquoise",
-		cwd = "limegreen",
+		user = "lightskyblue",
+		cwd = "powderblue",
 		-- FG
 		text = "midnightblue"
 	}
