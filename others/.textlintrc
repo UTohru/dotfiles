@@ -5,7 +5,10 @@
     "preset-ja-technical-writing": {
       "ja-no-weak-phrase": false,
       "ja-no-mixed-period": false,
-      "no-exclamation-question-mark": false
+      "no-exclamation-question-mark": false,
+      "sentence-length": {
+          "max": 200
+      }
     },
     "preset-jtf-style": {
       "1.2.1.句点(。)と読点(、)": false,

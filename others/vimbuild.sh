@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # 1. install asdf or pyenv, and python dependencies.
-# 2. install gettext (for localization)
+# 2. install gettext(for localization), libxmu-dev(for clipboard, clientserver)
 # 3. use this script
 
 #SRC_DIR="/usr/src"
@@ -25,7 +25,8 @@ fi
 
 # Python
 CONFIGURE_OPTS="--enable-shared" \
-echo "Installing $PYTHON3 ..."
+# PYTHON3=
+echo "Installing Python $PYTHON3 ..."
 if builtin command -V asdf > /dev/null 2>&1; then
 	PYTHON3=$(asdf latest python)
 	asdf install python $PYTHON3

@@ -82,9 +82,6 @@ nnoremap [Git]g :<C-u>Ggrep<Space>
 '''
 
 [[plugins]]
-repo = 'lambdalisue/guise.vim'
-
-[[plugins]]
 repo = 'junegunn/fzf'
 build = './install --all --no-update-rc'
 merged = 0

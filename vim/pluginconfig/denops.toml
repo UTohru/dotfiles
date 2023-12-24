@@ -2,6 +2,8 @@
 [[plugins]]
 repo = 'vim-denops/denops.vim'
 
+[[plugins]]
+repo = 'lambdalisue/guise.vim'
 
 # [[plugins]]
 # repo = 'skanehira/denops-silicon.vim'

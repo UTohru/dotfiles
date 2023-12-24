@@ -148,9 +148,10 @@ __bp_trim_whitespace() {
 # writes the resulting string to the variable name passed as $1. Used for
 # manipulating substrings in PROMPT_COMMAND
 __bp_sanitize_string() {
-    iocaltespace sanitized "$text"
-       sanitized=${sanitized%;}
-       sanitized=${sanitized#;}
+    local var=${1:?} text=${2:-} sanitized
+    __bp_trim_whitespace sanitized "$text"
+    sanitized=${sanitized%;}
+    sanitized=${sanitized#;}
     __bp_trim_whitespace sanitized "$sanitized"
     printf -v "$var" '%s' "$sanitized"
 }
