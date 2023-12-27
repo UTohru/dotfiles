@@ -19,6 +19,7 @@ hi Special ctermfg=154
 hi Title ctermfg=82
 " hi LineNr ctermfg=241 ctermbg=234
 " hi SignColumn ctermfg=20 ctermbg=235
+hi Pmenu ctermfg=244 ctermbg=235
 
 
 " === "
