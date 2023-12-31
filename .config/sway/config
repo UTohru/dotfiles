@@ -1,19 +1,4 @@
-set $mod Mod1
-set $Power ~/.config/sway/script/exit.sh
-set $menu "ulauncher-toggle"
-
 include ~/.config/sway/enable/*.conf
 
-exec --no-startup-id "$HOME/.config/sway/script/wallpaper_random.sh"
-
-# # screen shot
-bindsym $mod+Shift+s exec "$HOME/.config/sway/script/screen_shot.sh"
-#bindsym $mod+Ctrl+s exec "~/.config/i3/script/video_capture.sh"
-
-# clipboard(primary) replace
-bindsym $mod+x exec "$HOME/.config/sway/script/primary_selection_replace.sh"
-
 bindsym $mod+Shift+o exec "wdisplays"
-
-exec "$HOME/.config/sway/script/custom_startup.sh"
 
