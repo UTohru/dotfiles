@@ -59,3 +59,6 @@ if builtin command -V blueman-applet > /dev/null 2>&1; then
 	$cmd "exec --no-startup-id blueman-applet"
 fi
 
+if builtin command -V google-drive-ocamlfuse > /dev/null 2>&1; then
+	${HOME}/.config/i3/script/mount_gdrive.sh
+fi

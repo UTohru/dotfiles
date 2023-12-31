@@ -1,3 +1,4 @@
+set $mod Mod1
 include ~/.config/i3/enable/*.conf
 
 bindsym $mod+Shift+o exec "/usr/bin/arandr"
