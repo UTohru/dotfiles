@@ -79,6 +79,8 @@ end)
 
 
 return {
+	enable_wayland = false,
+
 	default_prog = shell,
 	-- exit_behavior = "Close",
 	font = wezterm.font_with_fallback({
@@ -141,6 +143,8 @@ return {
 		},
 	},
 	window_background_opacity = 0.5,
+
+	quick_select_patterns = { 'github_pat_[0-9a-zA-Z_]+'},
 
 	
 	keys = {
