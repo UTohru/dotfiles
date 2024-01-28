@@ -14,22 +14,23 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 end)
 
 
-wezterm.on('update-right-status', function(window, pane)
-	-- # see _shell/wezterm.sh
-	
+wezterm.on('update-status', function(window, pane)
 	local icons ={
-		left = utf8.char(0xe0b2),
-		right = utf8.char(0xf054),
+		-- left = utf8.char(0xe0b2),
+		-- right = utf8.char(0xf054),
+		left = utf8.char(0xe0b6),
+		right = utf8.char(0xe0b4),
 		user = utf8.char(0xf2be),
 		host = utf8.char(0xf108),
 		branch = utf8.char(0xe725),
 	}
 	local colors ={
-		-- host = "darkturquoise",
-		host = "deepskyblue",
-		remote_host = "magenta",
-		user = "lightskyblue",
-		cwd = "powderblue",
+		-- host = "rgba(0, 191, 255, 0.5)", -- "deepskyblue", 
+		host = "rgba(82, 188, 222, 0.5)",
+		-- remote_host = "rgba(221, 160, 221, 0.5)", -- "plum",
+		remote_host = "rgba(255, 51, 153, 0.5)",
+		user = "rgba(135, 206, 250, 0.5)", -- "lightskyblue",
+		cwd = "rgba(176, 224, 230, 0.5)", -- "powderblue",
 		-- FG
 		text = "midnightblue"
 	}
@@ -37,12 +38,9 @@ wezterm.on('update-right-status', function(window, pane)
 	local elements = {}
 	-- push into elements
 	function push(text, color, prev_color)
-		table.insert(elements, {Foreground = {Color = color }})
-		table.insert(elements, {Background = {Color = prev_color }})
-		table.insert(elements, {Text = icons["left"] })
 		table.insert(elements, {Foreground = {Color = colors["text"] }})
 		table.insert(elements, {Background = {Color = color }})
-		table.insert(elements, {Text = ' ' .. text .. ' '})
+		table.insert(elements, {Text = ' ' ..  text .. ' ' })
 	end
 
 	local username = pane:get_user_vars().WEZTERM_USER
@@ -61,10 +59,10 @@ wezterm.on('update-right-status', function(window, pane)
 	if hostname ~= wezhost then
 		hostcolor = colors["remote_host"]
 	end
-
+	-- 
 	local cwd = pane:get_current_working_dir()
 	if cwd then
-		cwd = cwd:sub((cwd:sub(8):find '/') + 7)
+		cwd = cwd.path
 		local cdir_size = 20
 		if string.len(cwd) > cdir_size then
 			cwd = '..' .. cwd:sub(-cdir_size)
@@ -79,7 +77,7 @@ end)
 
 
 return {
-	enable_wayland = false,
+	-- enable_wayland = false,
 
 	default_prog = shell,
 	-- exit_behavior = "Close",
@@ -174,6 +172,10 @@ return {
 		{key='_', mods="CTRL", action="DisableDefaultAssignment"},
 		{key='-', mods="CTRL", action="DisableDefaultAssignment"},
 		-- {key='/', mods="CTRL", action="Nop"},
+
+		{ key = "UpArrow", mods="SHIFT", action = wezterm.action.ScrollToPrompt(-1) },
+		{ key = "DownArrow", mods="SHIFT", action = wezterm.action.ScrollToPrompt(1) },
+
 	},
 
 	-- disable_default_mouse_bindings = true,
