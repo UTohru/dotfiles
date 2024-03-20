@@ -1,0 +1,5 @@
+
+snippet set_result "assign a command result to var" 
+set ${1:var}=
+for /F "usebackq" %%i in (`${2:command}`) DO @set $1=%%i
+endsnippet

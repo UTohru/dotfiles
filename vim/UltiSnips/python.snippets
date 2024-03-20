@@ -53,6 +53,10 @@ snippet for "for" i
 for ${1:i} in ${2:iterable}
 endsnippet
 
+snippet sort_score "sorting with score" 
+_, ranked_list = zip(*sorted(zip(${1:score_list}, ${2:object_list} ), reverse=True, key=itemgetter(0)))
+endsnippet
+
 snippet tryf "try except finally" b
 try:
 	$1
