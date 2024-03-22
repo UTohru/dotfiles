@@ -116,14 +116,21 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	ln -sf /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
 else
 	# ===============
-	# install Cica font
+	# install font
 	# ===============
 	if [ ! -d ~/.local/share/fonts/Cica ]; then
+		cd /tmp
 		mkdir -p ~/.local/share/fonts/Cica
 
-		cd /tmp
 		curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
 		unzip -o Cica.zip -d ~/.local/share/fonts/Cica
-		fc-cache -fv
 	fi
+	if [ ! -d ~/.local/share/fonts/udev-gothic ]; then
+		cd /tmp
+		mkdir -p ~/.local/share/fonts/udev-gothic
+
+		curl https://api.github.com/repos/yuru7/udev-gothic/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/udev-gothic.zip
+		unzip -j -o udev-gothic.zip -d ~/.local/share/fonts/udev-gothic
+	fi
+	fc-cache -fv
 fi
