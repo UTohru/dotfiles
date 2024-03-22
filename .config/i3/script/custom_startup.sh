@@ -38,10 +38,10 @@ if [ "$XDG_SESSION_TYPE" = "x11" ]; then
 		$cmd "exec --no-startup-id $comp -b --config $HOME/.config/compton.conf"
 	fi
 
-	# which conky > /dev/null 2>&1
-	# if [ $? -eq 0 ]; then
-	# 	$cmd "exec --no-startup-id conky"
-	# fi
+fi
+
+if builtin command -V conky > /dev/null 2>&1; then
+	$cmd "exec --no-startup-id conky"
 fi
 
 # NetworkManager

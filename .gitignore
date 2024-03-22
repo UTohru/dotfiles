@@ -1,4 +1,6 @@
 
+*.swp
+
 vim/.netrwhist
 vim/dein
 
@@ -9,6 +11,8 @@ vim/dein
 .config/sway/wallpaper
 .config/sway/enable/*.conf
 .config/sway/*lock.png
+
+.config/zsh/.zcompcache/
 
 mlterm/msg.log
 mlterm/pts_*
