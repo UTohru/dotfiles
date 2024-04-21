@@ -48,15 +48,28 @@ let g:tex_fold_use_default_envs = 0
 '''
 
 
-[[plugins]]
-repo = 'SirVer/ultisnips'
-on_event = 'InsertEnter'
-hook_source = '''
-let g:UltiSnipsExpandTrigger="<C-j>"
+# [[plugins]]
+# repo = 'SirVer/ultisnips'
+# on_event = 'InsertEnter'
+# hook_source = '''
+# let g:UltiSnipsSnippetDirectories=["~/.vim/snippets/Ultisnips"]
+# let g:UltiSnipsExpandTrigger="<C-j>"
+# 
+# let g:UltiSnipsJumpForwardTrigger="<C-j>"
+# let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+# '''
 
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+[[plugins]]
+repo = "hrsh7th/vim-vsnip"
+on_event = 'InsertEnter'
+hook_add = '''
+let g:vsnip_snippet_dir=expand("~/.vim/snippets/vsnip")
+imap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
+smap <expr> <C-j> vsnip#jumpable(1)   ? '<Plug>(vsnip-jump-next)'      : '<C-j>'
+imap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
+smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
 '''
+
 
 [[plugins]]
 repo = 'mattn/vim-maketable'

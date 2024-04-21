@@ -7,7 +7,7 @@
 #SRC_DIR="/usr/src"
 SRC_DIR="$HOME/src/"
 
-if [ ! -d "${SRC_DIR}/vim" ]; then
+if [ ! -d "${SRC_DIR}" ]; then
 	mkdir -p $SRC_DIR
 fi
 cd ${SRC_DIR}
@@ -24,22 +24,23 @@ fi
 
 
 # Python
-CONFIGURE_OPTS="--enable-shared" \
-# PYTHON3=
+PYTHON3=3.12.0
 echo "Installing Python $PYTHON3 ..."
 if builtin command -V asdf > /dev/null 2>&1; then
-	PYTHON3=$(asdf latest python)
+	# PYTHON3=$(asdf latest python)
 	asdf install python $PYTHON3
 
 	PREFIX="${HOME}/.asdf/installs/python"
+	CONFIGURE_OPTS="--enable-shared" \
 	asdf local python ${PYTHON3}
 elif builtin command -V pyenv > /dev/null 2>&1; then
-	PYTHON3=$(pyenv install -l | \
-		grep -E "^  3\.[0-9]+\.[0-9]+$" | \
-		tail -1 | sed -e 's/^[ ]*//')
+	# PYTHON3=$(pyenv install -l | \
+	# 	grep -E "^  3\.[0-9]+\.[0-9]+$" | \
+	# 	tail -1 | sed -e 's/^[ ]*//')
 	pyenv install $PYTHON3
 
 	PREFIX="${HOME}/.pyenv/versions"
+	CONFIGURE_OPTS="--enable-shared" \
 	pyenv local ${PYTHON3}
 else
 	echo "Error: Python virtual runtime not found"

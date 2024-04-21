@@ -7,7 +7,7 @@ on_event = ['InsertEnter']
 
 hook_source = '''
 
-call ddc#custom#patch_global('sources', ['ultisnips', 'file', 'around'])
+call ddc#custom#patch_global('sources', ['vsnip', 'file', 'around'])
 call ddc#custom#patch_global('sourceOptions', {
 \	'_': {
 \		'ignoreCase': v:true,
@@ -32,7 +32,7 @@ call ddc#custom#patch_global('sourceOptions', {
 \		'minAutoCompleteLength': 3,
 \		'forceCompletionPattern': '\S/\S*',
 \	},
-\	'ultisnips': {
+\	'vsnip': {
 \		'mark': 'S',
 \		'keywordPattern': '[a-zA-Z_\\\[\]<>\*]+',
 \		'isVolatile': v:true,
@@ -43,7 +43,7 @@ call ddc#custom#patch_global('sourceOptions', {
 
 call ddc#custom#patch_filetype(
 \	['python', 'rust', 'typescript', 'go', 'c', 'cpp'], 
-\	'sources', ['ultisnips', 'file', 'vim-lsp', 'around']
+\	'sources', ['vsnip', 'file', 'vim-lsp', 'around']
 \)
 
 call ddc#custom#patch_global('ui', 'pum')
@@ -54,15 +54,15 @@ call ddc#enable()
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-depends = ['ddc.vim', 'ultisnips', 'lexima.vim']
+depends = ['ddc.vim', 'vsnip', 'lexima.vim']
 on_source = ['ddc.vim']
 hook_post_source = '''
 inoremap <expr> <Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(+1)<CR>" : "\<Tab>"
 inoremap <expr> <S-Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(-1)<CR>" : "\<S-Tab>"
 
-"\!empty(UltiSnips#SnippetsInCurrentScope()) ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
+"\UltiSnips#CanExpandSnippet() ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
 inoremap <expr> <CR> pum#visible() ? 
-\UltiSnips#CanExpandSnippet() ? "<CMD>call UltiSnips#ExpandSnippet()<CR>" : 
+\vsnip#expandable() ? "<Plug>(vsnip-expand)" :
 \"<CMD>call pum#map#confirm()<CR>" : 
 \lexima#expand('<LT>CR>', 'i')
 
@@ -102,9 +102,13 @@ on_source = ['ddc.vim', 'vim-lsp']
 #'''
 
 
+# [[plugins]]
+# repo = 'matsui54/ddc-ultisnips'
+# on_source = ['ddc.vim', 'ultisnips']
+
 [[plugins]]
-repo = 'matsui54/ddc-ultisnips'
-on_source = ['ddc.vim', 'ultisnips']
+repo = 'uga-rosa/ddc-source-vsnip'
+on_source = ['ddc.vim', 'vsnip']
 
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'

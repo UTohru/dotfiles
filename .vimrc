@@ -8,8 +8,7 @@ let g:wsl = filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 " =====================================
 " dein Script 
 " =====================================
-" TODO : .cacheに移す(2024)
-let s:dein_dir='~/.vim/dein'
+let s:dein_dir='~/.cache/dein'
 
 let s:dein_repo = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
@@ -89,5 +88,5 @@ for s:f in split(glob('~/.vim/rc/*.vim'), '\n')
 endfor
 
 " denops plugin test
-"set runtimepath^=~/program/tutorial/dps-plugins
-"let g:denops#debug=1
+" set runtimepath^=~/dps-work-dir
+" let g:denops#debug=1

@@ -2,7 +2,6 @@
 *.swp
 
 vim/.netrwhist
-vim/dein
 
 .config/i3/wallpaper/*
 .config/i3/enable/*.conf

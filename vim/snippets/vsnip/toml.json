@@ -1,0 +1,19 @@
+{
+	"plugin": {
+	    "prefix": ["plugin", "[[plugin"],
+		"body": [
+			"[[plugins]]",
+			"${1:repo/github} = \"$2\""
+		],
+		"description": "dein vim plugin format"
+	},
+	"hook_": {
+	    "prefix": "hook_",
+		"body": [
+			"hook_${1:add} = '''",
+			"$2",
+			"'''"
+		],
+		"description": "dein hook"
+	}
+}

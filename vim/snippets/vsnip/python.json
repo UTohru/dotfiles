@@ -1,0 +1,134 @@
+{
+	"classmethod": {
+	    "prefix": "classmethod",
+		"body": [
+			"@classmethod",
+			"def ${1:name}(${2:args})${3: -> None}: ",
+			"\t${pass}"
+		],
+		"description": "class method"
+	},
+	"class": {
+	    "prefix": "class",
+		"body": [
+			"class ${1:Name}(${2:object}):",
+			"\tdef __init__(self):",
+			"\t\t${3:pass}"
+		],
+		"description": "def class"
+	},
+	"dataclass": {
+	    "prefix": "dataclass",
+		"body": [
+			"@dataclass",
+			"class ${1: name}:",
+			"\t${2:var}: ${3:type}${4: = None}"
+		],
+		"description": "def dataclass"
+	},
+	"def": {
+	    "prefix": "def",
+		"body": [
+			"def ${1:Name}(${2:arg:})${3: -> None}:",
+			"\t${4:pass}"
+		],
+		"description": "def function"
+	},
+	"for": {
+	    "prefix": "for",
+		"body": ["for ${1:i} in ${2:iterable}"],
+		"description": "for"
+	},
+	"with": {
+	    "prefix": "with",
+		"body": [
+			"with ${1:expr} as ${2:var}:",
+			"\t{3:pass}"
+		],
+		"description": "with statement"
+	},
+	"try": {
+	    "prefix": "try",
+		"body": [
+			"try:",
+			"\t$1",
+			"except:",
+			"\t${2:pass}"
+		],
+		"description": "try statement"
+	},
+	"try/finally": {
+	    "prefix": "try/finally",
+		"body": [
+			"try:",
+			"\t$1",
+			"except:",
+			"\t${2:pass}",
+			"finally:",
+			"\t${3:pass}"
+		],
+		"description": "try/finally statement"
+	},
+	"try/else": {
+	    "prefix": "try/else",
+		"body": [
+			"try:",
+			"\t$1",
+			"except:",
+			"\t${2:pass}",
+			"else:",
+			"\t${3:pass}"
+		],
+		"description": "try/else statement"
+	},
+	"try/else/finally": {
+	    "prefix": "try/else/finally",
+		"body": [
+			"try:",
+			"\t$1",
+			"except:",
+			"\t${2:pass}",
+			"else:",
+			"\t${3:pass}",
+			"finally:",
+			"\t${4:pass}"
+		],
+		"description": "try/else/finally statement"
+	},
+	"env": {
+	    "prefix": "env",
+		"body": ["#!/usr/bin/env python"],
+		"description": "make python script"
+	},
+	"ifmain": {
+	    "prefix": "ifmain",
+		"body": [
+			"if __name__ == '__main__':",
+			"\t$1"
+			
+		],
+		"description": "if name == main"
+	},
+	"debug": {
+	    "prefix": "debug",
+		"body": ["import pdb; pdb.set_trace()"],
+		"description": "pdb debug"
+	},
+	"sort_score": {
+	    "prefix": "sort_score",
+		"body": [
+			"# from operator import itemgetter",
+			"_, ranked_list = zip(*sorted(zip(${1:score_list}, ${2:object_list} ), reverse=True, key=itemgetter(0)))"
+		],
+		"description": "sort with scores"
+	},
+	"elasped_time": {
+	    "prefix": "elasped_time",
+		"body": [
+			"# import time",
+			"perf_start_time = time.perf_counter()",
+			"print(time.perf_counter() - perf_start_time)"
+		],
+		"description": "elasped time count"
+	}
+}

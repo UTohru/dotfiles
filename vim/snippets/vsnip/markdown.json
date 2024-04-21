@@ -1,0 +1,94 @@
+{
+	"code": {
+	    "prefix": "code",
+		"body": [
+			"```$2",
+			"$1",
+			"```"
+		],
+		"description": "code block"
+	},
+	"url": {
+	    "prefix": "url",
+		"body": ["[${1:text}](https://${2:url})"],
+		"description": "link text"
+	},
+	"comment": {
+	    "prefix": "comment",
+		"body": [
+			"<!--",
+			"$1",
+			"-->"
+		],
+		"description": "comment"
+	},
+	"tex": {
+	    "prefix": "tex",
+		"body": [
+			"```katex",
+			"${1:c = \\pm\\sqrt{a^2 + b^2}}",
+			"```"
+		],
+		"description": "katex code block"
+	},
+	"plotly": {
+	    "prefix": "plotly",
+		"body": [
+			"```plotlyjs",
+			"[",
+			"\t{",
+			"\t\t\"$1\": $2",
+			"\t}",
+			"]",
+			"```"
+		],
+		"description": "plotlyjs codeblock"
+	},
+	"plotly/pie": {
+	    "prefix": "plotly/pie",
+		"body": [
+			"```plotlyjs",
+			"[",
+			"\t{",
+			"\t\t\"values\": $1",
+			"\t\t\"labels\": $2",
+			"\t\t\"type\": \"pie\"",
+			"\t}",
+			"]",
+			"```"
+		],
+		"description": "plotlyjs pie-chart codeblock"
+	},
+	"uml/class": {
+	    "prefix": "uml/class",
+		"body": [
+			"```plantuml",
+			"@startuml",
+			"hide class circle",
+			"skinparam {",
+			"\tclassAttributeIconSize 0",
+			"\tmonochrome true",
+			"}",
+			"skinparam shadowing false",
+			"",
+			"$1",
+			"@enduml",
+			"```"
+		],
+		"description": "plantuml class codeblock"
+	},
+	"uml/sequence": {
+	    "prefix": "uml/sequence",
+		"body": [
+			"```plantuml",
+			"@startuml",
+			"/' define participants '/",
+			"$1",
+			"",
+			"/' messages '/",
+			"@enduml",
+			"```"
+		],
+		"description": "plantuml sequense codeblock"
+	}
+}

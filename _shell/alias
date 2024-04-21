@@ -70,7 +70,7 @@ fi
 if command -V eza > /dev/null 2>&1; then
 	alias ls="eza "
 	alias la="eza -a --icons"
-	alias ll="eza -l --icons -snew -T -L1"
+	alias ll="eza -lg --icons -snew -T -L1 --time-style '+%y/%m/%d %H:%M'"
 	alias l="eza"
 	alias tree="eza -Tl -L 3"
 else

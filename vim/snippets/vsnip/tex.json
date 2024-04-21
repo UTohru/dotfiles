@@ -1,0 +1,174 @@
+{
+	"section": {
+		"prefix": ["section", "\\section"],
+		"body": ["\\section{${1:title}}"],
+		"description": "section"
+	},
+	"subsection": {
+		"prefix": ["subsection", "\\subsection"],
+		"body": ["\\subsection{${1:title}}"],
+		"description": "subsection"
+	},
+	"begin": {
+		"prefix": ["begin", "\\begin"],
+		"body": [
+			"\\begin{$1}",
+			"$2",
+			"\\end{$1}"
+		],
+		"description": "begin state"
+	},
+	"figure": {
+		"prefix": "figure",
+		"body": [
+			"\\begin{figure}[${1:tb}]",
+			"\t\\centering",
+			"\t\\includegraphics[width=${2:\\columnwidth}]{${3:path}}",
+			"\t\\caption{$4}",
+			"\t% \\ecaption{$6}",
+			"\t\\label{fig:$5}",
+			"\\end{figure}"
+		],
+		"description": "figure"
+	},
+	"figure*": {
+		"prefix": "figure*",
+		"body": [
+			"\\begin{figure*}[${1:tb}]",
+			"\t\\centering",
+			"\t\\includegraphics[width=${2:\\columnwidth}]{${3:path}}",
+			"\t\\caption{$4}",
+			"\t% \\ecaption{$6}",
+			"\t\\label{fig:$5}",
+			"\\end{figure*}"
+		],
+		"description": "figure*"
+	},
+	"table": {
+		"prefix": "table",
+		"body": [
+			"\\begin{table}[${1:t}]",
+			"\t\\centering",
+			"\t\\caption{$2}",
+			"\t% \\ecaption{$6}",
+			"\t\\begin{tabular}{$3}\\hline",
+			"\t\t$5",
+			"\t\\end{tabular}",
+			"\t\\label{tab:$4}",
+			"\\end{table}"
+		],
+		"description": "table"
+	},
+	"table*": {
+		"prefix": "table*",
+		"body": [
+			"\\begin{table*}[${1:t}]",
+			"\t\\centering",
+			"\t\\caption{$2}",
+			"\t% \\ecaption{$6}",
+			"\t\\begin{tabular}{$3}\\hline",
+			"\t\t$5",
+			"\t\\end{tabular}",
+			"\t\\label{tab:$4}",
+			"\\end{table*}"
+		],
+		"description": "table*"
+	},
+	"subcaption": {
+		"prefix": "subcaption",
+		"body": [
+			"\\begin{figure}[tb]",
+			"\t\\centering",
+			"\t\\subcaptionbox{${2:caption_name}}{",
+			"\t\t\\includegraphics[width=${4:\\columnwidth}]{${5:img/path}}",
+			"\t}",
+			"\t\\caption{${6:caption_name}}",
+			"\t% \\ecaption{$8}",
+			"\t\\label{fig:$7}",
+			"\\end{figure}"
+		],
+		"description": "subcaption"
+	},
+	"subcaption*": {
+		"prefix": "subcaption*",
+		"body": [
+			"\\begin{figure*}[tb]",
+			"\t\\centering",
+			"\t\\subcaptionbox{${2:caption_name}}{",
+			"\t\t\\includegraphics[width=${4:\\columnwidth}]{${5:img/path}}",
+			"\t}",
+			"\t\\caption{${6:caption_name}}",
+			"\t% \\ecaption{$8}",
+			"\t\\label{fig:$7}",
+			"\\end{figure*}"
+		],
+		"description": "subcaption*"
+	},
+	"enumerate": {
+		"prefix": "enumerate",
+		"body": [
+			"\\begin{enumerate}",
+			"\t\\item $1",
+			"\\end{enumerate}"
+		],
+		"description": "enumerate"
+	},
+	"itemize": {
+		"prefix": "itemize",
+		"body": [
+			"\\begin{itemize}",
+			"\t\\item $1",
+			"\\end{itemize}"
+		],
+		"description": "itemize"
+	},
+	"description": {
+		"prefix": "description",
+		"body": [
+			"\\begin{description}",
+			"\t\\item[$1] $2",
+			"\\end{description}"
+		],
+		"description": "description"
+	},
+	"equation": {
+		"prefix": "equation",
+		"body": [
+			"\\begin{equation}",
+			"\t\\label{$1}",
+			"\t$2",
+			"\\end{equation}"
+		],
+		"description": "equation"
+	},
+	"eqnarray": {
+		"prefix": "eqnarray",
+		"body": [
+			"\\begin{eqnarray}",
+			"\t\\label{$1}",
+			"\t$2 &=& \\nonumber",
+			"\\end{eqnarray}"
+		],
+		"description": "eqnarray"
+	},
+	"algorithm": {
+		"prefix": "algorithm",
+		"body": [
+			"\\begin{algorithm}",
+			"\t\\caption{$1}",
+			"\t\\label{alg:$2}",
+			"\t\\begin{algorithmic}[1]",
+			"\t\t\\Require{${3:Input}}",
+			"\t\t\\Ensure{${4:Output}}",
+			"\t\t$5",
+			"\t\\end{algorithmic}",
+			"\\end{algorithm}"
+		],
+		"description": "algorithm"
+	},
+	"footnote": {
+		"prefix": ["footnote", "\\footnote"],
+		"body": ["\\footnote{\\url{$1}}"],
+		"description": "footnote with url"
+	}
+}

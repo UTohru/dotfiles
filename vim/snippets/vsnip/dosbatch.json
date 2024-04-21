@@ -1,0 +1,10 @@
+{
+	"set_result": {
+	    "prefix": "set_result",
+		"body": [
+			"set ${1:var}=",
+			"for /F "usebackq" %%i in (`${2:command}`) DO @set $1=%%i"
+		],
+		"description": "assign a command result to var"
+	}
+}

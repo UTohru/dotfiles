@@ -65,3 +65,9 @@ except:
 finally:
 	${3:pass}
 endsnippet
+
+snippet elasped_time "elasped time count" b
+# import time
+perf_start_time = time.perf_counter()
+print(time.perf_counter() - perf_start_time)
+endsnippet

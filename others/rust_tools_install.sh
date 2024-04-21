@@ -9,6 +9,7 @@ if [ -d "$HOME/.cargo/bin" ]; then
 	export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+rustup update
 for ((i=0; i<"${#package_list[@]}"; i++));
 do
 	if [ ! -x "$(command -v ${command_list[i]})" ]; then

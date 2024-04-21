@@ -1,0 +1,42 @@
+{
+	"is_interactive": {
+		"prefix": "is_interactive",
+		"body": [
+			"if echo \"\\$-\" | grep -q \"i\"; then",
+			"\t$1",
+			"else;",
+			"\techo \"use 「source」or「.」 command\"",
+			"fi"
+		],
+		"description": "if source"
+	},
+	"cdir": {
+		"prefix": "cdir",
+		"body": ["cdir=\"\\$(realpath \"\\$(dirname \\$0)\")\""],
+		"description": "script path"
+	},
+	"command_executable": {
+		"prefix": "command_executable",
+		"body": [
+			"if [ -x \"\\$(command -v $1)\" ]; then",
+			"\t$2",
+			"fi"
+		],
+		"description": "description"
+	},
+	"case": {
+		"prefix": "case",
+		"body": [
+			"case \"$1\" in",
+			"\t*)",
+			"\t\t;;",
+			"esac"
+		],
+		"description": "case statement"
+	},
+	"if": {
+		"prefix": "if",
+		"body": "if [[ ${1:condition} ]]; then\n\t${0}\nfi",
+		"description": "if statement."
+	}
+}
