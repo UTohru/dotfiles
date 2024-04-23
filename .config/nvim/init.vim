@@ -1,3 +1,4 @@
+
 augroup myvimrc
 	autocmd!
 augroup END
@@ -27,7 +28,7 @@ if dein#load_state(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/dein.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/dein_lazy.toml', {'lazy':1})
 
-	call dein#load_toml('~/.vim/pluginconfig/vim.toml', {'lazy':0})
+	" TODO: use builtin lsp
 	call dein#load_toml('~/.vim/pluginconfig/vim-lsp.toml', {'lazy':1})
 	if executable("deno")
 		call dein#load_toml('~/.vim/pluginconfig/denops.toml', {'lazy':0})
@@ -63,10 +64,6 @@ endif
 "End dein Scripts 
 " =====================================
 
-set encoding=UTF-8
-set fileencodings=UTF-8,ISO-2022-JP,euc-jp,sjis
-scriptencoding utf-8
-
 augroup myvimrc
 	" start previous line
 	autocmd BufRead * if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -81,12 +78,6 @@ augroup myvimrc
 	autocmd VimEnter * colorscheme mycolor
 augroup END
 
-set termwinkey=<C-g>
 for s:f in split(glob('~/.vim/rc/*.vim'), '\n')
 	execute 'source ' . s:f
 endfor
-
-
-" denops plugin test
-" set runtimepath^=~/dps-work-dir
-" let g:denops#debug=1

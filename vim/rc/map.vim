@@ -24,7 +24,6 @@ nnoremap T gT
 
 nmap <Leader>w <C-w>
 
-set termwinkey=<C-g>
 tnoremap <ESC> <C-\><C-n>
 
 nnoremap > >>

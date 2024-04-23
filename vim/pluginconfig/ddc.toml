@@ -54,7 +54,7 @@ call ddc#enable()
 
 [[plugins]]
 repo = 'Shougo/pum.vim'
-depends = ['ddc.vim', 'vsnip', 'lexima.vim']
+depends = ['ddc.vim', 'vim-vsnip', 'lexima.vim']
 on_source = ['ddc.vim']
 hook_post_source = '''
 inoremap <expr> <Tab> pum#visible() ? "<CMD>call pum#map#insert_relative(+1)<CR>" : "\<Tab>"
@@ -108,7 +108,7 @@ on_source = ['ddc.vim', 'vim-lsp']
 
 [[plugins]]
 repo = 'uga-rosa/ddc-source-vsnip'
-on_source = ['ddc.vim', 'vsnip']
+on_source = ['ddc.vim', 'vim-vsnip']
 
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'

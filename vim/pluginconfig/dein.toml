@@ -9,43 +9,6 @@ repo = 'lambdalisue/nerdfont.vim'
 
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-hook_add = '''
-let s:lspfunc = "LLLspStatus" 
-"let s:lspfunc = "coc#status"
-
-let g:lightline = {
-\	'enable': {'statusline':1, 'tabline':0},
-\	'active': {
-\		'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'],['branch'],['lsp']],
-\		'right': [ ['fileformat', 'fileencoding', 'filetype'] ]
-\	},
-\	'separator': {'left': "\ue0b0", 'right':"\ue0b6"},
-\	'subseparator': {'left': "|", 'right':"\ue0b7"},
-\	'component_function': {
-\		'lsp': s:lspfunc,
-\		'branch': 'FugitiveHead',
-\		'fileformat' : 'LLFileFormat',
-\		'filetype' : 'LLFiletype'
-\	}
-\}
-
-function! LLLspStatus() abort
-	let l:counts = lsp#get_buffer_diagnostics_counts()
-	let l:all_counts = l:counts.error + l:counts.warning
-	return l:all_counts==0 ? "\uf00c" : printf("\uf467 %d  \uf071 %d", l:counts.error, l:counts.warning)
-endfunction
-
-function! LLFiletype() abort
-	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . nerdfont#find() . ' ' : 'no ft') : ''
-endfunction
-
-function! LLFileFormat() abort
-	return winwidth(0) > 70 ? (&fileformat . ' ' . nerdfont#fileformat#find()) : ''
-endfunction
-'''
-
-[[plugins]]
 repo = 'tyru/caw.vim'
 hook_add = '''
 " numToStr/Comment.nvim , preservim/nerdcommenter"
@@ -81,30 +44,6 @@ nnoremap [Git]r :<C-u>Gread<CR>
 nnoremap [Git]g :<C-u>Ggrep<Space>
 '''
 
-[[plugins]]
-repo = 'junegunn/fzf'
-build = './install --all --no-update-rc'
-merged = 0
-
-[[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
-hook_add = '''
-let g:fzf_layout = {'window': {'width': 0.8, 'height': 0.6, 'yoffset': 0.8, 'xoffset': 1.0}}
-let g:fzf_preview_window = ['right,60%']
-let g:fzf_action = {
-	\ 'enter': 'tab split',
-	\ 'ctrl-s': 'split',
-	\ 'ctrl-v': 'vsplit'
-\}
-nmap <Space>f [fzf]
-nnoremap [fzf]f :<C-u>Files<CR>
-nnoremap [fzf]g :<C-u>GFiles --others --exclude-standard --cached<CR>
-nnoremap [fzf]c :<C-u>GFiles -m<CR>
-nnoremap [fzf]l :<C-u>Lines<CR>
-nnoremap [fzf]/ :<C-u>Jumps<CR>
-nnoremap [fzf]r :<C-u>Rg<CR>
-'''
 
 [[plugins]]
 repo = 't9md/vim-quickhl'
