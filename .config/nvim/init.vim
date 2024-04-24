@@ -30,6 +30,7 @@ if dein#load_state(s:dein_dir)
 
 	" TODO: use builtin lsp
 	call dein#load_toml('~/.vim/pluginconfig/vim-lsp.toml', {'lazy':1})
+	call dein#load_toml('~/.vim/pluginconfig/nvim.toml', {'lazy':0})
 	if executable("deno")
 		call dein#load_toml('~/.vim/pluginconfig/denops.toml', {'lazy':0})
 		call dein#load_toml('~/.vim/pluginconfig/ddc.toml', {'lazy':1})

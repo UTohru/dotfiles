@@ -1,0 +1,35 @@
+[[plugins]]
+repo = "nvim-lua/plenary.nvim"
+
+[[plugins]]
+repo = "nvim-telescope/telescope.nvim"
+rev = "0.1.6"
+depends = ['plenary.nvim']
+hook_add = '''
+nmap <Space>f [telescope]
+nnoremap [telescope]f <CMD>Telescope find_files<CR>
+nnoremap [telescope]g <CMD>Telescope git_files<CR>
+nnoremap [telescope]c <CMD>Telescope git_commits<CR>
+nnoremap [telescope]l <CMD>Telescope current_buffer_fuzzy_find<CR>
+nnoremap [telescope]o <CMD>Telescope jumplist<CR>
+nnoremap [telescope]r <CMD>Telescope live_grep<CR>
+'''
+
+
+[[plugins]]
+repo = "nvim-treesitter/nvim-treesitter"
+hook_post_update = 'TSUpdate'
+
+
+[[plugins]]
+repo = "nvim-tree/nvim-web-devicons"
+
+[[plugins]]
+repo = "nvim-lualine/lualine.nvim"
+depends = ["nvim-web-devicons"]
+lua_add = """
+local lualine_theme = require'lualine.themes.wombat'
+require('lualine').setup {
+	options = { theme = lualine_theme }
+}
+"""

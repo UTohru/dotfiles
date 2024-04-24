@@ -57,6 +57,6 @@ nnoremap [fzf]f :<C-u>Files<CR>
 nnoremap [fzf]g :<C-u>GFiles --others --exclude-standard --cached<CR>
 nnoremap [fzf]c :<C-u>GFiles -m<CR>
 nnoremap [fzf]l :<C-u>Lines<CR>
-nnoremap [fzf]/ :<C-u>Jumps<CR>
+nnoremap [fzf]o :<C-u>Jumps<CR>
 nnoremap [fzf]r :<C-u>Rg<CR>
 '''
