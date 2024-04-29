@@ -1,10 +1,18 @@
 [[plugins]]
+repo = "nvim-treesitter/nvim-treesitter"
+hook_post_update = 'TSUpdate'
+
+[[plugins]]
 repo = "nvim-lua/plenary.nvim"
+
+# [[plugins]]
+# repo = "nvim-telescope/telescope-fzf-native.nvim"
+# build = 'make'
 
 [[plugins]]
 repo = "nvim-telescope/telescope.nvim"
 rev = "0.1.6"
-depends = ['plenary.nvim']
+depends = ['plenary.nvim', "telescope-fzf-native.nvim"]
 hook_add = '''
 nmap <Space>f [telescope]
 nnoremap [telescope]f <CMD>Telescope find_files<CR>
@@ -14,12 +22,36 @@ nnoremap [telescope]l <CMD>Telescope current_buffer_fuzzy_find<CR>
 nnoremap [telescope]o <CMD>Telescope jumplist<CR>
 nnoremap [telescope]r <CMD>Telescope live_grep<CR>
 '''
-
-
-[[plugins]]
-repo = "nvim-treesitter/nvim-treesitter"
-hook_post_update = 'TSUpdate'
-
+lua_add = '''
+local actions = require("telescope.actions")
+require("telescope").setup {
+	defaults = {
+		mappings = {
+			i = {
+				["<ESC>"] = actions.close,
+				["<C-j>"] = actions.move_selection_next,
+				["<C-k>"] = actions.move_selection_previous,
+				["<C-v>"] = actions.select_vertical,
+				["<C-s>"] = actions.select_horizontal,
+				["<C-e>"] = actions.file_edit,
+				["<CR>"] = actions.select_tab,
+			},
+		},
+		layout_config = {
+			preview_cutoff = 1
+		},
+ 	},
+	extensions = {
+		fzf = {
+			fuzzy = true,
+			override_generic_sorter = true,
+			override_file_sorter = true,
+			case_mode = "smart_case"
+		},
+	}
+}
+-- require('telescope').load_extension('fzf')
+'''
 
 [[plugins]]
 repo = "nvim-tree/nvim-web-devicons"
@@ -28,8 +60,9 @@ repo = "nvim-tree/nvim-web-devicons"
 repo = "nvim-lualine/lualine.nvim"
 depends = ["nvim-web-devicons"]
 lua_add = """
-local lualine_theme = require'lualine.themes.wombat'
-require('lualine').setup {
-	options = { theme = lualine_theme }
-}
+require('lualine').setup ({
+	options = { 
+		theme = "wombat"
+	}
+})
 """

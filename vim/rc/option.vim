@@ -28,3 +28,5 @@ endif
 
 set tags=./tags;$HOME
 
+set mouse=
+

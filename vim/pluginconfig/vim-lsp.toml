@@ -7,14 +7,14 @@ let g:lsp_settings = {
 \		'disabled': 0,
 \		'workspace_config': {
 \			'pylsp': {
+\				'configurationSources': ['rope', 'pyflakes'],
 \				'plugins': {
 \					'pycodestyle': {'enabled': v:false},
 \					'pydocstyle': {'enabled': v:false},
+\					'pyflakes': {'enabled': v:true},
 \					'pylint': {'enabled': v:false},
-\					'mypy': {'enabled': v:false},
 \					'mccabe': {'enabled': v:false},
-\					'pyflakes': {'enabled': v:false},
-\					'flake8': {'enabled': v:false, 'ignore': ['E203', 'E231', 'E265', 'E266', 'E302', 'E501', 'W191', 'W293']},
+\					'flake8': {'enabled': v:false},
 \					'yapf': {'enabled': v:false},
 \				},
 \			}
@@ -38,7 +38,6 @@ let g:lsp_competion_resolve_timeout = 50
 " [debug]
 " let g:lsp_log_file = expand('~/vim-lsp.log')
 
-let g:asyncomplete_auto_popup = 1
 let g:lsp_diagnostics_enabled = 1
 let g:lsp_diagnostics_virtual_text_enabled = 0
 

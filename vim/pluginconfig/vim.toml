@@ -8,18 +8,23 @@ let s:lspfunc = "LLLspStatus"
 let g:lightline = {
 \	'enable': {'statusline':1, 'tabline':0},
 \	'active': {
-\		'left': [ ['mode', 'paste'], ['readonly', 'filename', 'modified'],['branch'],['lsp']],
+\		'left': [ ['mode', 'paste'],['branch'], ['readonly', 'filename', 'modified'],['lsp']],
 \		'right': [ ['fileformat', 'fileencoding', 'filetype'] ]
 \	},
 \	'separator': {'left': "\ue0b0", 'right':"\ue0b6"},
 \	'subseparator': {'left': "|", 'right':"\ue0b7"},
 \	'component_function': {
 \		'lsp': s:lspfunc,
-\		'branch': 'FugitiveHead',
+\		'branch': 'LLBranch',
 \		'fileformat' : 'LLFileFormat',
 \		'filetype' : 'LLFiletype'
 \	}
 \}
+
+function! LLBranch() abort
+	let l:branch = "\ue725 " . FugitiveHead()
+	return l:branch
+endfunction
 
 function! LLLspStatus() abort
 	let l:counts = lsp#get_buffer_diagnostics_counts()

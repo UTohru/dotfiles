@@ -67,6 +67,7 @@ if command -V trash-put > /dev/null 2>&1; then
 	alias rt='trash-put'
 fi
 
+
 if command -V eza > /dev/null 2>&1; then
 	alias ls="eza "
 	alias la="eza -a --icons"
@@ -86,6 +87,9 @@ else
 	alias duh="du -hd 1 . | sort -hr | head -n 10"
 fi
 
+if [ ! -x "$(command -v nvim)" ] && [ -x "$(command -v nvim.appimage)" ]; then
+	alias nvim=nvim.appimage
+fi
 
 # === wsl ===
 if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
