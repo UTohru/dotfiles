@@ -30,3 +30,7 @@ set tags=./tags;$HOME
 
 set mouse=
 
+if !has('nvim')
+	set termwinkey=<C-g>
+endif
+

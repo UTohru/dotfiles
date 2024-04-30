@@ -44,7 +44,6 @@ nnoremap [Git]r :<C-u>Gread<CR>
 nnoremap [Git]g :<C-u>Ggrep<Space>
 '''
 
-
 [[plugins]]
 repo = 't9md/vim-quickhl'
 # on_if = '&readonly && &buftype ==# ""'

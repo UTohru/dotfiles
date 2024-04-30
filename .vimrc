@@ -8,7 +8,7 @@ let g:wsl = filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 " =====================================
 " dein Script 
 " =====================================
-let s:dein_dir='~/.cache/dein'
+let s:dein_dir=$HOME . '/.vim/dein'
 
 let s:dein_repo = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 if &runtimepath !~# '/dein.vim'
@@ -23,12 +23,21 @@ if &compatible
 endif
 
 if dein#load_state(s:dein_dir)
-	call dein#begin(s:dein_dir)
-	call dein#load_toml('~/.vim/pluginconfig/dein.toml', {'lazy':0})
-	call dein#load_toml('~/.vim/pluginconfig/dein_lazy.toml', {'lazy':1})
+	let g:dein#cache_directory = $HOME . '/.cache/dein'
 
-	call dein#load_toml('~/.vim/pluginconfig/vim.toml', {'lazy':0})
+	call dein#begin(s:dein_dir)
+	call dein#load_toml('~/.vim/pluginconfig/common.toml', {'lazy':0})
+	call dein#load_toml('~/.vim/pluginconfig/common_lazy.toml', {'lazy':1})
+
+	if has('nvim')
+		call dein#load_toml('~/.vim/pluginconfig/nvim.toml', {'lazy':0})
+		call dein#load_toml('~/.vim/pluginconfig/nvim_lazy.toml', {'lazy':1})
+	else
+		call dein#load_toml('~/.vim/pluginconfig/vim.toml', {'lazy':0})
+	endif
+
 	call dein#load_toml('~/.vim/pluginconfig/vim-lsp.toml', {'lazy':1})
+
 	if executable("deno")
 		call dein#load_toml('~/.vim/pluginconfig/denops.toml', {'lazy':0})
 		call dein#load_toml('~/.vim/pluginconfig/ddc.toml', {'lazy':1})
@@ -81,7 +90,6 @@ augroup myvimrc
 	autocmd VimEnter * colorscheme mycolor
 augroup END
 
-set termwinkey=<C-g>
 for s:f in split(glob('~/.vim/rc/*.vim'), '\n')
 	execute 'source ' . s:f
 endfor

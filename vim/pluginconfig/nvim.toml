@@ -5,14 +5,11 @@ hook_post_update = 'TSUpdate'
 [[plugins]]
 repo = "nvim-lua/plenary.nvim"
 
-# [[plugins]]
-# repo = "nvim-telescope/telescope-fzf-native.nvim"
-# build = 'make'
 
 [[plugins]]
 repo = "nvim-telescope/telescope.nvim"
 rev = "0.1.6"
-depends = ['plenary.nvim', "telescope-fzf-native.nvim"]
+depends = ['plenary.nvim' ]
 hook_add = '''
 nmap <Space>f [telescope]
 nnoremap [telescope]f <CMD>Telescope find_files<CR>
@@ -50,8 +47,8 @@ require("telescope").setup {
 		},
 	}
 }
--- require('telescope').load_extension('fzf')
 '''
+
 
 [[plugins]]
 repo = "nvim-tree/nvim-web-devicons"
