@@ -3,6 +3,7 @@ Aiming for switchable and reuse
 
 ### Env
 - **WM**: i3 , hyprland , sway
+    - **StatusBar**: waybar, i3status-rust
 - **Editor**: vim, nvim
-- **StatusBar**: swaybar, i3status-rust
+- **Terminal**: wezterm
 - **Shell**: zsh

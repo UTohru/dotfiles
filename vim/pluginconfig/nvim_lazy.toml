@@ -7,3 +7,16 @@ lua_add = '''
 require('telescope').load_extension('fzf')
 '''
 
+
+[[plugins]]
+repo = "folke/noice.nvim"
+depends = ["nui.nvim", "nvim-treesitter"]
+on_event = ['VimEnter']
+lua_post_source = '''
+require("noice").setup({
+	presets = {
+		bottom_search = false,
+		command_palette = false,
+	},
+})
+'''

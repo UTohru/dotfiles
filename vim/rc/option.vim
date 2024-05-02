@@ -20,7 +20,7 @@ set list
 set shortmess-=S
 
 " 非表示文字
-if v:version < 802
+if v:version < 802 && !has("nvim")
 	set listchars=tab:--\|,nbsp:%,trail:~
 else
 	set listchars=tab:»-,multispace:...\|,nbsp:%,trail:~
@@ -32,5 +32,7 @@ set mouse=
 
 if !has('nvim')
 	set termwinkey=<C-g>
+else
+	autocmd myvimrc TermOpen * setl nonumber | startinsert
 endif
 

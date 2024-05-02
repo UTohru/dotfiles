@@ -3,6 +3,7 @@ repo = 'lambdalisue/fern.vim'
 hook_add = '''
 "nnoremap <Space>f :<C-u>Fern . -drawer<CR>:set nonumber<CR>
 nnoremap <Space>F :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
+autocmd myvimrc FileType fern set nonumber
 '''
 
 [[plugins]]

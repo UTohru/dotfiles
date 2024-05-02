@@ -22,8 +22,11 @@ let g:lightline = {
 \}
 
 function! LLBranch() abort
-	let l:branch = "\ue725 " . FugitiveHead()
-	return l:branch
+	let l:branch = FugitiveHead()
+	if l:branch == ""
+		return l:branch
+	else
+		return "\ue725 " . l:branch
 endfunction
 
 function! LLLspStatus() abort

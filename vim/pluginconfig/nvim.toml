@@ -5,6 +5,9 @@ hook_post_update = 'TSUpdate'
 [[plugins]]
 repo = "nvim-lua/plenary.nvim"
 
+[[plugins]]
+repo = "MunifTanjim/nui.nvim"
+
 
 [[plugins]]
 repo = "nvim-telescope/telescope.nvim"
@@ -34,8 +37,17 @@ require("telescope").setup {
 				["<CR>"] = actions.select_tab,
 			},
 		},
+		layout_strategy = "vertical",
 		layout_config = {
-			preview_cutoff = 1
+			preview_cutoff = 1,
+			vertical = {
+				width = 0.75,
+				height = 0.85,
+				mirror = true,
+				prompt_position = "top",
+				preview_cutoff = 20,
+				preview_height = 0.5,
+			},
 		},
  	},
 	extensions = {
@@ -56,10 +68,34 @@ repo = "nvim-tree/nvim-web-devicons"
 [[plugins]]
 repo = "nvim-lualine/lualine.nvim"
 depends = ["nvim-web-devicons"]
+hook_add = """
+"""
 lua_add = """
+theme = require("lualine.themes.wombat")
+theme.inactive.c = {fg = "#c6c6c6", bg = "None"}
+theme.normal.c = {fg = "#c6c6c6", bg = "None"}
+theme.normal.b = {fg = "#949494", bg = "#262626"}
 require('lualine').setup ({
 	options = { 
-		theme = "wombat"
-	}
+		theme = theme
+	},
+	sections = {
+		lualine_x = {},
+		lualine_y = { 'fileformat', 'encoding', 'filetype' },
+	},
 })
+"""
+
+[[plugins]]
+repo = "rcarriga/nvim-notify"
+hook_add = """
+hi NotifyBackground guibg=#000000
+nnoremap [telescope]m <CMD>Telescope notify<CR>
+"""
+lua_add = """
+vim.opt.termguicolors = true
+require("notify").setup({
+	render = "compact",
+})
+vim.notify = require("notify")
 """

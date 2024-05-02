@@ -78,4 +78,9 @@ nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
 " basic replace
 nnoremap <C-f> :<C-u>%s<Space>/
 " terminal
-nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
+if has('nvim')
+	nnoremap <silent> <Leader>T :<C-u>tabnew<CR>:terminal<CR>
+else
+	nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
+endif
+
