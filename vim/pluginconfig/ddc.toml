@@ -42,7 +42,7 @@ call ddc#custom#patch_global('sourceOptions', {
 
 
 call ddc#custom#patch_filetype(
-\	['python', 'rust', 'typescript', 'go', 'c', 'cpp'], 
+\	['python', 'rust', 'typescript', 'go', 'c', 'cpp', 'lua'], 
 \	'sources', ['vsnip', 'file', 'vim-lsp', 'around']
 \)
 
