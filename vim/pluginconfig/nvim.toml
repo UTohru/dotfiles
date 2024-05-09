@@ -18,6 +18,10 @@ repo = "nvim-lua/plenary.nvim"
 [[plugins]]
 repo = "MunifTanjim/nui.nvim"
 
+[[plugins]]
+repo = "nvim-telescope/telescope-fzf-native.nvim"
+build = 'make'
+# on_lua = ['telescope.lua']
 
 [[plugins]]
 repo = "nvim-telescope/telescope.nvim"
@@ -68,6 +72,7 @@ require("telescope").setup {
 		},
 	}
 }
+require('telescope').load_extension('fzf')
 '''
 
 
@@ -108,3 +113,66 @@ require("notify").setup({
 })
 vim.notify = require("notify")
 """
+
+[[plugins]]
+repo = "folke/noice.nvim"
+depends = ["nui.nvim", "nvim-treesitter"]
+#on_event = ['VimEnter']
+lua_source = '''
+require("noice").setup({
+	presets = {
+		command_palette = false,
+		bottom_search = false,
+	},
+	routes = {
+		{
+			view = "mini",
+			filter = {
+				any = {
+					{ find = "E486: *" },
+					{ find = "E349: *" },
+					{ kind = "wmsg" },
+				},
+			},
+		},
+		{
+			view = "notify",
+			filter = {
+				event = "msg_showmode",
+				["not"] = { find = "-- * --" },
+			},
+		},
+	},
+	views = {
+		cmdline_popup = {
+			position = {
+				row = -3,
+				col = "50%"
+			},
+			size = {
+				width = "90%",
+				height = "auto"
+			},
+		},
+		popupmenu = {
+			relative = "editor",
+			position = {
+				row = -6,
+				col = "50%"
+			},
+			size = {
+				width = "90%",
+				height = "auto",
+			},
+			border = { style = "rounded", padding = {0, 1} },
+			win_options = {
+				winhighlight = {Normal = "Normal", FloatBorder = "DiagnosticInfo"},
+			},
+		},
+		mini = {
+			timeout = 5000,
+			size = { width="auto", height = "auto", max_height=3},
+		},
+	}
+})
+'''
