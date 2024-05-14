@@ -31,7 +31,6 @@ if dein#load_state(s:dein_dir)
 
 	if has('nvim')
 		call dein#load_toml('~/.vim/pluginconfig/nvim.toml', {'lazy':0})
-		call dein#load_toml('~/.vim/pluginconfig/nvim_lazy.toml', {'lazy':1})
 	else
 		call dein#load_toml('~/.vim/pluginconfig/vim.toml', {'lazy':0})
 	endif

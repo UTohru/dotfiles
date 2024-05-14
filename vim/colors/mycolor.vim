@@ -18,8 +18,9 @@ hi DiffAdd		ctermfg=112	ctermbg=236	guifg=#87d700	guibg=#303030
 hi DiffChange		ctermfg=227	ctermbg=236	guifg=#ffff5f	guibg=#303030
 hi DiffDelete		ctermfg=124	ctermbg=236	guifg=#af0000	guibg=#303030
 
-hi Function		ctermfg=105 	guifg=#8787ff
-hi String		ctermfg=117 	guifg=#87d7ff
+"hi Function		ctermfg=105	guifg=#8787ff
+hi Function		ctermfg=219	guifg=#ffafff
+hi String		ctermfg=117	guifg=#87d7ff
 
 " === "
 " transparent"
