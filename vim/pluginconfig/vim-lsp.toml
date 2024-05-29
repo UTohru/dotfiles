@@ -12,10 +12,11 @@ let g:lsp_settings = {
 \					'pycodestyle': {'enabled': v:false},
 \					'pydocstyle': {'enabled': v:false},
 \					'pyflakes': {'enabled': v:true},
-\					'pylint': {'enabled': v:false},
+\					'pylint': {'enabled': v:true},
 \					'mccabe': {'enabled': v:false},
 \					'flake8': {'enabled': v:false},
 \					'yapf': {'enabled': v:false},
+\					'ruff': {'enabled': v:true},
 \				},
 \			}
 \		}

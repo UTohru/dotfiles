@@ -75,6 +75,9 @@ require("telescope").setup {
 require('telescope').load_extension('fzf')
 '''
 
+[[plugins]]
+repo = "lambdalisue/vim-quickrun-neovim-job"
+
 
 [[plugins]]
 repo = "nvim-tree/nvim-web-devicons"
