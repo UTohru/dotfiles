@@ -112,7 +112,8 @@ nnoremap [telescope]m <CMD>Telescope notify<CR>
 lua_source = """
 vim.opt.termguicolors = true
 require("notify").setup({
-	render = "compact",
+	max_width = function() return math.floor(0.6 * vim.api.nvim_win_get_width(0)) end,
+	render = "wrapped-compact",
 })
 vim.notify = require("notify")
 """
@@ -132,6 +133,7 @@ require("noice").setup({
 			view = "mini",
 			filter = {
 				any = {
+					{ find = "man.lua: \"no manual entry for *" },
 					{ find = "E486: *" },
 					{ find = "E349: *" },
 					{ kind = "wmsg" },
@@ -156,6 +158,7 @@ require("noice").setup({
 				width = "90%",
 				height = "auto"
 			},
+			border = { style = "single" },
 		},
 		popupmenu = {
 			relative = "editor",
@@ -167,7 +170,7 @@ require("noice").setup({
 				width = "90%",
 				height = "auto",
 			},
-			border = { style = "rounded", padding = {0, 1} },
+			border = { style = "single", padding = {0, 1} },
 			win_options = {
 				winhighlight = {Normal = "Normal", FloatBorder = "DiagnosticInfo"},
 			},

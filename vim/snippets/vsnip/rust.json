@@ -1,4 +1,12 @@
 {
+	"main": {
+		"prefix": "main",
+		"body": [
+			"fn main() {",
+			"\t$1",
+			"}"
+		]
+	},
 	"func": {
 		"prefix": "func",
 		"body": [

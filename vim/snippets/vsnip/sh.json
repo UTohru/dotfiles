@@ -1,4 +1,8 @@
 {
+	"shebang": {
+		"prefix": "shebang",
+		"body": "#!/usr/bin/env ${1:bash}"
+	},
 	"is_interactive": {
 		"prefix": "is_interactive",
 		"body": [
@@ -33,6 +37,16 @@
 			"esac"
 		],
 		"description": "case statement"
+	},
+	"argchk": {
+		"prefix": "argchk",
+		"body": [
+			"if [ \\$# -ne ${1:1} ]; then",
+			"\techo \"\\$0 : need just $1 arguments\"",
+			"\texit 1",
+			"fi"
+		],
+		"description": "if arg-cnt check"
 	},
 	"if": {
 		"prefix": "if",
