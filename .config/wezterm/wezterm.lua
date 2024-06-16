@@ -13,7 +13,6 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 	return {{Text = ' ' .. tab.tab_index+1 .. ' '}}
 end)
 
-
 wezterm.on('update-status', function(window, pane)
 	local icons ={
 		-- left = utf8.char(0xe0b2),
@@ -82,7 +81,9 @@ return {
 	default_prog = shell,
 	-- exit_behavior = "Close",
 	font = wezterm.font_with_fallback({
-			{ family = "Cica" },
+			{ family = "FirgeNerd Console" },
+			-- { family = "Cica" },
+			-- { family = "UDEV Gothic NF" },
 			{ family = "Cica", assume_emoji_presentation = true },
 	}),
 	use_ime = true,

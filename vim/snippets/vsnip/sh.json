@@ -16,7 +16,7 @@
 	},
 	"cdir": {
 		"prefix": "cdir",
-		"body": ["cdir=\"\\$(realpath \"\\$(dirname \\$0)\")\""],
+		"body": ["cdir=\"\\$(realpath \"\\$(dirname \\\"$0\")\")\""],
 		"description": "script path"
 	},
 	"command_executable": {
@@ -52,5 +52,28 @@
 		"prefix": "if",
 		"body": "if [[ ${1:condition} ]]; then\n\t${0}\nfi",
 		"description": "if statement."
+	},
+	"confirm": {
+		"prefix": "confirm",
+		"body" : [
+			"confirm_message=\"${1:OK?} [Y/n]:\"",
+			"while true; do",
+			"\techo -n \"\\${confirm_message}\"",
+			"\tread Ans",
+			"\tcase \\$Ans in",
+			"\t\t[Yy]*)",
+			"\t\t\t${2:echo \"Yes\"}",
+			"\t\t\tbreak",
+			"\t\t\t;;",
+			"\t\t[Nn]*)",
+			"\t\t\t${3:echo \"No\"}",
+			"\t\t\tbreak",
+			"\t\t\t;;",
+			"\t\t*)",
+			"\t\t\t;;",
+			"\tesac",
+			"done"
+		],
+		"description": "confirm interactively"
 	}
 }

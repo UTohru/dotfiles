@@ -2,12 +2,10 @@
 set -e
 
 # ===============
-#
 # Mainly create symbolic link
-#
 # ===============
 
-cdir="$(cd "$(dirname "$(readlink -e "$0" || echo "$0")")"; pwd -P)"
+cdir="$(realpath "$(dirname "$0")")"
 
 # ===============
 # required check in this
@@ -37,20 +35,31 @@ git update-index --skip-worktree ${ignore_list[@]}
 # vim
 # ===============
 if [ -x "$(command -v vim)" ]; then
-	vim_version=$(vim --version | head -n 1 | grep -o -E "[0-9]+\.[0-9]")
-	vim_version_check=$(echo "scale=2;$vim_version >= 9.0" | bc)
-	if [ $vim_version_check -eq 1 ]; then
-		# deno install
-		if ! builtin command -V deno > /dev/null 2>&1; then
-			curl -fsSL https://deno.land/x/install/install.sh | sh
-		fi
-	fi
-
 	if [ -d ~/.vim ]; then
 		rm -rf ~/.vim
 	fi
 	ln -sf ${cdir}/vim ~/.vim
 	ln -sf ${cdir}/.vimrc ~/.vimrc
+fi
+
+# deno
+if [ ! -x "$(command -v deno)" ]; then
+	deno_confirm="Do you install deno? (needed for vim-plugins) [Y/n]:"
+	while true; do
+		echo -n "${deno_confirm}"
+		read Ans
+		case $Ans in
+			[Yy]*)
+				curl -fsSL https://deno.land/install.sh | sh
+				break
+				;;
+			[Nn]*)
+				break
+				;;
+			*)
+				;;
+		esac
+	done
 fi
 
 
@@ -114,23 +123,42 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
 	ln -sf /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
 	ln -sf /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
-else
-	# ===============
-	# install font
-	# ===============
-	if [ ! -d ~/.local/share/fonts/Cica ]; then
-		cd /tmp
-		mkdir -p ~/.local/share/fonts/Cica
-
-		curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
-		unzip -o Cica.zip -d ~/.local/share/fonts/Cica
-	fi
-	if [ ! -d ~/.local/share/fonts/udev-gothic ]; then
-		cd /tmp
-		mkdir -p ~/.local/share/fonts/udev-gothic
-
-		curl https://api.github.com/repos/yuru7/udev-gothic/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/udev-gothic.zip
-		unzip -j -o udev-gothic.zip -d ~/.local/share/fonts/udev-gothic
-	fi
-	fc-cache -fv
 fi
+
+# ===============
+# install font
+# ===============
+confirm_message="Do you install font? [Y/n]:"
+if [ ! -d ~/.local/share/fonts/Firge ]; then
+while true; do
+	echo -n "${confirm_message}"
+	read Ans
+	case $Ans in
+		[Yy]*)
+			# if [ ! -d ~/.local/share/fonts/Cica ]; then
+			# 	cd /tmp
+			# 	mkdir -p ~/.local/share/fonts/Cica
+
+			# 	curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
+			# 	unzip -o Cica.zip -d ~/.local/share/fonts/Cica
+			# 	fc-cache -fv
+			# fi
+			if [ ! -d ~/.local/share/fonts/Firge ]; then
+				cd /tmp
+				mkdir -p ~/.local/share/fonts/Firge
+			
+				curl https://api.github.com/repos/yuru7/Firge/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Firge.zip
+				unzip -j -o Firge.zip -d ~/.local/share/fonts/Firge
+			fi
+			break
+			;;
+		[Nn]*)
+			break
+			;;
+		*)
+			;;
+	esac
+done
+fi
+
+echo "complete!"
