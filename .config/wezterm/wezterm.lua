@@ -3,10 +3,10 @@ local wezterm = require 'wezterm';
 local shell;
 local MODKEY = "SUPER"
 local FONT_SIZE = 14
+
 if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 	shell = {"wsl.exe", "~"}
 	MODKEY = "ALT"
-	FONT_SIZE = 12
 end
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
@@ -66,7 +66,8 @@ wezterm.on('update-status', function(window, pane)
 		if string.len(cwd) > cdir_size then
 			cwd = '..' .. cwd:sub(-cdir_size)
 		end
-		push( cwd, colors["cwd"], 'none')
+		push( cwd, colors["cwd"] , 'none')
+	
 	end
 	push(icons["user"] .. ' ' .. username, colors["user"], colors["cwd"])
 	push(icons["host"] .. ' ' .. hostname, hostcolor, colors["user"])
@@ -81,8 +82,8 @@ return {
 	default_prog = shell,
 	-- exit_behavior = "Close",
 	font = wezterm.font_with_fallback({
-			{ family = "FirgeNerd Console" },
-			-- { family = "Cica" },
+			-- { family = "FirgeNerd Console" },
+			{ family = "Cica" },
 			-- { family = "UDEV Gothic NF" },
 			{ family = "Cica", assume_emoji_presentation = true },
 	}),

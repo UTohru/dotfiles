@@ -52,7 +52,7 @@ format = " $icon $1m.eng(w:4) "
 
 [[block]]
 block = "net"
-format = " $icon {$signal_strength $ssid $frequency|Wired} ^icon_net_up$speed_up.eng(prefix:K, w:4) ^icon_net_down$speed_down.eng(prefix:K, w:4) "
+format = " $icon {$signal_strength $ssid $frequency|Wired} ^icon_net_up $speed_up.eng(prefix:K, w:4) ^icon_net_down $speed_down.eng(prefix:K, w:4) "
 interval = 5
 [[block.click]]
 button = "left"

@@ -128,27 +128,41 @@ fi
 # ===============
 # install font
 # ===============
-confirm_message="Do you install font? [Y/n]:"
-if [ ! -d ~/.local/share/fonts/Firge ]; then
+font_confirm="Do you install font? [Y/n]:"
 while true; do
-	echo -n "${confirm_message}"
+	echo -n "${font_confirm}"
 	read Ans
 	case $Ans in
 		[Yy]*)
-			# if [ ! -d ~/.local/share/fonts/Cica ]; then
-			# 	cd /tmp
-			# 	mkdir -p ~/.local/share/fonts/Cica
+			installed=""
+			 if [ ! -d ~/.local/share/fonts/Cica ]; then
+			 	cd /tmp
+			 	mkdir -p ~/.local/share/fonts/Cica
 
-			# 	curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
-			# 	unzip -o Cica.zip -d ~/.local/share/fonts/Cica
-			# 	fc-cache -fv
-			# fi
+			 	curl https://api.github.com/repos/miiton/Cica/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Cica.zip
+			 	unzip -o Cica.zip -d ~/.local/share/fonts/Cica
+			 	installed="${installed}Cica"
+			fi
 			if [ ! -d ~/.local/share/fonts/Firge ]; then
 				cd /tmp
 				mkdir -p ~/.local/share/fonts/Firge
-			
+			 
 				curl https://api.github.com/repos/yuru7/Firge/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/Firge.zip
 				unzip -j -o Firge.zip -d ~/.local/share/fonts/Firge
+			 	installed="${installed}Firge"
+			fi
+			if [ ! -d ~/.local/share/fonts/udev-gothic ]; then
+				cd /tmp
+				mkdir -p ~/.local/share/fonts/udev-gothic
+
+				curl https://api.github.com/repos/yuru7/udev-gothic/releases/latest | jq '.assets[0].browser_download_url' | xargs curl -L -o /tmp/udev-gothic.zip
+				unzip -j -o udev-gothic.zip -d ~/.local/share/fonts/udev-gothic
+			 	installed="${installed}udev-gothic"
+			fi
+
+			# recache
+			if [ -n "${installed}" ]; then
+				fc-cache -fv
 			fi
 			break
 			;;
@@ -159,6 +173,5 @@ while true; do
 			;;
 	esac
 done
-fi
 
 echo "complete!"
