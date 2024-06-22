@@ -16,7 +16,7 @@
 	},
 	"cdir": {
 		"prefix": "cdir",
-		"body": ["cdir=\"\\$(realpath \"\\$(dirname \\\"$0\")\")\""],
+		"body": ["cdir=\"\\$(realpath \"\\$(dirname \"\\$0\")\")\""],
 		"description": "script path"
 	},
 	"command_executable": {
