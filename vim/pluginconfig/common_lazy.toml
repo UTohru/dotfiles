@@ -212,8 +212,17 @@ call lexima#add_rule({'char': '<BS>', 'at': '（\%#）', 'delete': 1})
 '''
 
 [[plugins]]
+repo = 'mechatroner/rainbow_csv'
+on_ft = ['csv', 'tsv', 'csv_semicolon', 'csv_pipe', 'csv_whitespace']
+hook_source = '''
+let g:disable_rainbow_hover = 1
+let g:disable_rainbow_csv_autodetect = 1
+'''
+
+[[plugins]]
 repo = "elkowar/yuck.vim"
 on_ft = ["yuck"]
+
 
 
 [[plugins]]
