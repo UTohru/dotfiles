@@ -25,9 +25,9 @@ fi
 # if builtin command -V eww > /dev/null 2>&1; then
 # 	eww daemon
 # el
-if builtin command -V conky > /dev/null 2>&1; then
-	batch_cmd="${batch_cmd} dispatch exec conky ;"
-fi
+# if builtin command -V conky > /dev/null 2>&1; then
+# 	batch_cmd="${batch_cmd} dispatch exec conky ;"
+# fi
 
 # im
 if builtin command -V fcitx5 >/dev/null 2>&1; then

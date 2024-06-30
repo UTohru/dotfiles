@@ -2,9 +2,9 @@
 export LESS='-R -S -g -x4'
 
 # fzf
-if [ -n "${ZSH_VERSION}" -a -f ~/.fzf.zsh ]; then
+if [ -n "${ZSH_VERSION}" ] && [ -f ~/.fzf.zsh ]; then
 	source ~/.fzf.zsh
-elif [ -n "${BASH_VERSION}" -a -f ~/.fzf.bash ]; then
+elif [ -n "${BASH_VERSION}" ] && [ -f ~/.fzf.bash ]; then
 	source ~/.fzf.bash
 fi
 
