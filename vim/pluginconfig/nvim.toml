@@ -127,6 +127,7 @@ require("noice").setup({
 	presets = {
 		command_palette = false,
 		bottom_search = false,
+		long_message_to_split = true,
 	},
 	routes = {
 		{
@@ -181,4 +182,30 @@ require("noice").setup({
 		},
 	}
 })
+'''
+
+[[plugins]]
+repo = 'numToStr/Comment.nvim'
+lua_source = '''
+require("Comment").setup({
+	mapping = {
+		basic = false,
+		extra = false
+		}
+})
+local api = require('Comment.api')
+local esc = vim.api.nvim_replace_termcodes( '<ESC>', true, false, true )
+if vim.fn.has('win32') == 1 or vim.g.wsl == 1 then
+	vim.keymap.set('n', '<C-_>', api.toggle.linewise.current , { desc="Comment" })
+	vim.keymap.set('x', '<C-_>', function()
+		vim.api.nvim_feedkeys(esc, 'nx', false)
+		api.toggle.linewise(vim.fn.visualmode())
+	end)
+else
+	vim.keymap.set('n', '<C-/>', api.toggle.linewise.current , { desc="Comment" })
+	vim.keymap.set('x', '<C-/>', function()
+		vim.api.nvim_feedkeys(esc, 'nx', false)
+		api.toggle.linewise(vim.fn.visualmode())
+	end)
+end
 '''

@@ -7,20 +7,6 @@ hi DiffChange ctermbg=33
 [[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
 
-
-[[plugins]]
-repo = 'tyru/caw.vim'
-hook_add = '''
-" numToStr/Comment.nvim , preservim/nerdcommenter"
-if g:wsl || has('win32')
-	nmap <C-_> <Plug>(caw:hatpos:toggle)
-	vmap <C-_> <Plug>(caw:hatpos:toggle)
-else
-	nmap <C-/> <Plug>(caw:hatpos:toggle)
-	vmap <C-/> <Plug>(caw:hatpos:toggle)
-endif
-'''
-
 [[plugins]]
 repo = 'bkad/CamelCaseMotion'
 hook_add = '''
