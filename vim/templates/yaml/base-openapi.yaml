@@ -1,0 +1,59 @@
+openapi: 3.0.3
+info:
+  title: ""
+  description: ""
+  version: "0.0.1"
+# servers:
+#  - url:
+
+paths:
+  /hoge/{id}:
+    get:
+      description: Get
+      parameters:
+        - $ref: '#/components/parameters/ParamA'
+        - schema:
+            type: integer
+            minimum: 1
+          name: id
+          in: path
+          required: true
+      responses:
+        # "200":
+        "400":
+          $ref: '#/components/responses/clientError'
+        "500":
+          $ref: '#/components/responses/internalError'
+
+components:
+  parameters:
+    ParamA:
+      name: paramA
+      in: query
+      required: true
+      schema:
+        type: string
+        default: A
+        enum: [A, B]
+        example: A
+  responses:
+    clientError:
+      description: "BadRequests"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    internalError:
+      description: "InternalError"
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      required:
+        - messages
+      properties:
+        messages:
+          type: string

@@ -19,6 +19,24 @@ repo = 'machakann/vim-sandwich'
 on_event = ['CursorMoved', 'CursorHold']
 
 [[plugins]]
+repo = 't9md/vim-quickhl'
+on_event = ['CursorMoved', 'CursorHold']
+# on_if = '&readonly && &buftype ==# ""'
+hook_source = '''
+nmap <Space>M ^v$<Plug>(quickhl-manual-this)<ESC>
+
+nmap <Space>mm <Plug>(quickhl-manual-this)
+nmap <Space>mM <Plug>(quickhl-manual-reset)
+
+nmap <Space>mn <Plug>(quickhl-manual-go-to-next)<SID><Space>m
+nmap <Space>mN <Plug>(quickhl-manual-go-to-prev)<SID><Space>m
+nnoremap <silent><script> <SID><Space>mn :<C-u>QuickhlManualGoToNext<CR><SID><Space>m
+nnoremap <silent><script> <SID><Space>mN :<C-u>QuickhlManualGoToPrev<CR><SID><Space>m
+nmap <SID><Space>m <Nop>
+'''
+
+
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 hook_add = '''
 nnoremap <silent> <F5> :<C-u>w<CR>:QuickRun<CR>

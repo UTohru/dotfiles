@@ -1,5 +1,4 @@
 
-
 [[plugins]]
 repo = 'Shougo/ddc.vim'
 depends = ['denops.vim', 'pum.vim']
@@ -42,7 +41,7 @@ call ddc#custom#patch_global('sourceOptions', {
 
 
 call ddc#custom#patch_filetype(
-\	['python', 'rust', 'typescript', 'go', 'c', 'cpp', 'lua'], 
+\	['python', 'rust', 'typescript', 'go', 'c', 'cpp', 'lua', 'yaml'], 
 \	'sources', ['vsnip', 'file', 'vim-lsp', 'around']
 \)
 

@@ -1,0 +1,38 @@
+# version: '3.8'
+
+services:
+  app:
+    build: .
+    image: dummy-image
+    ports:
+      - 8080:8080
+    volumes:
+      - type: volume
+        source: app-data
+        target: /var/lib/data
+    networks:
+      - app-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: '500M'
+        reservations:
+          cpus: '0.25'
+          memory: '10M'
+    logging:
+      options:
+        max-file: "5"
+        max-size: "1m"
+    # command: bash -c "/app/entrypoint.sh"
+    # depends_on:
+    #   - db
+    # environment:
+    #   - ENV_VAR=${VAR1}
+    # restart: unless-stopped
+    # profiles: ["dev"]
+
+networks:
+  app-network:
+volumes:
+  app-data:
