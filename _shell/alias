@@ -87,8 +87,11 @@ else
 	alias duh="du -hd 1 . | sort -hr | head -n 10"
 fi
 
-if [ ! -x "$(command -v nvim)" ] && [ -x "$(command -v nvim.appimage)" ]; then
-	alias nvim=nvim.appimage
+if [ ! -x "$(command -v nvim)" ]; then
+	if [ -x "$(command -v nvim.appimage)" ]; then
+		alias nvim=nvim.appimage
+	else
+		alias nvim=vim
 fi
 
 if [ ! -x "$(command -v swagger-ui-watcher)" ] && [ -x "$(command -v deno)" ]; then
