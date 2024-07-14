@@ -17,6 +17,11 @@
 	"cdir": {
 		"prefix": "cdir",
 		"body": ["cdir=\"\\$(realpath \"\\$(dirname \"\\$0\")\")\""],
+		"description": "current path"
+	},
+	"sdir": {
+		"prefix": "sdir",
+		"body": ["sdir=\"\\$(dirname \"\\${BASH_SOURCE[0]:-\\$0}\")\""],
 		"description": "script path"
 	},
 	"command_executable": {
