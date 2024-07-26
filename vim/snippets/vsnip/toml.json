@@ -3,7 +3,7 @@
 	    "prefix": ["plugin", "[[plugin"],
 		"body": [
 			"[[plugins]]",
-			"${1:repo/github} = \"$2\""
+			"${2:repo} = \"$1\""
 		],
 		"description": "dein vim plugin format"
 	},

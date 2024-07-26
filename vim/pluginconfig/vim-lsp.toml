@@ -65,5 +65,7 @@ endfunction
 
 augroup myvimrc
 	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+	autocmd BufWritePre *.ts call execute('LspDocumentFormatSync --server=efm-langserver')
+	autocmd BufWritePre *.py,*.rs call execute('LspDocumentFormatSync')
 augroup END
 '''

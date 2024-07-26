@@ -14,8 +14,13 @@ tools:
       - "%Z [%trror/%r"
     root-markers:
       - .textlintrc
+  prettier: &prettier
+    format-command: 'prettier --stdin-filepath ${INPUT}'
+    format-stdin: true
 languages:
   markdown:
     - <<: *text-textlint
   tex:
     - <<: *text-textlint
+  typescript:
+    - <<: *prettier
