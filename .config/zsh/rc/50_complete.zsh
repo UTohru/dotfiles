@@ -30,7 +30,7 @@ zstyle ':completion:*' file-patterns '
 '
 zstyle ':completion:*:*:vim:*:*' group-order files directory
 
-zstyle ':completion:*:*:evince:*' file-patterns '*.pdf(D-^/*):pdf-files:"PDF" *(D-/):directories:"directory"'
+zstyle ':completion:*:*:(evince|zathura):*' file-patterns '*.pdf(D-^/*):pdf-files:"PDF" *(D-/):directories:"directory"'
 zstyle ':completion:*:*:(latexmk|uplatex|platex):*' file-patterns '*.tex(D-^/*):tex-files:"TEX" *(D-/):directories:"directory"'
 
 
