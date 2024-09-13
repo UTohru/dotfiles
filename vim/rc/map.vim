@@ -28,6 +28,8 @@ tnoremap <ESC> <C-\><C-n>
 
 nnoremap > >>
 nnoremap < <<
+xnoremap < <gv
+xnoremap > >gv
 
 
 nnoremap <C-i> <C-l>
