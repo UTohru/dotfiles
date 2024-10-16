@@ -29,6 +29,22 @@ set tags=./tags;$HOME
 
 set mouse=
 
+if g:wsl && executable("win32yank.exe")
+	let g:clipboard = {
+    \   'name': 'wslClipboard',
+    \   'copy': {
+    \      '+': 'win32yank.exe -i',
+    \      '*': 'win32yank.exe -i',
+    \    },
+    \   'paste': {
+    \      '+': 'win32yank.exe -o',
+    \      '*': 'win32yank.exe -o',
+    \   },
+    \   'cache_enabled': 1,
+    \ }
+endif
+
+
 if !has('nvim')
 	set laststatus=2
 	set termwinkey=<C-g>

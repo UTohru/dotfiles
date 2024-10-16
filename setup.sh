@@ -77,7 +77,10 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	fi
 	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
 	sudo update-locale LANG=ja_JP.UTF8
-	echo -e "[interop]\nappendWindowsPath = false" | sudo tee /etc/wsl.conf >/dev/null
+	{
+		echo -e "[interop]\nappendWindowsPath = false"
+		echo -e "[boot]\nsystemd = true"
+	} | sudo tee /etc/wsl.conf >/dev/null
 	echo "set bell-style none" > ~/.inputrc
 
 	if [ ! -d ~/.local/bin ]; then
@@ -86,6 +89,7 @@ if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
 	ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
 	ln -sf /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
 	ln -sf /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
+	ln -sf /mnt/c/Windows/System32/clip.exe $HOME/.local/bin/clip.exe
 fi
 
 echo "complete!"

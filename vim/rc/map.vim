@@ -62,6 +62,7 @@ cnoremap <C-n> <Down>
 
 vnoremap J <NOP>
 vnoremap K <NOP>
+vnoremap <Leader>y "+y
 
 onoremap a" 2i"
 onoremap a' 2i'
