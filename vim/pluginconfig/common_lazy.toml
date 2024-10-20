@@ -95,8 +95,8 @@ smap <expr> <C-k> vsnip#jumpable(-1)  ? '<Plug>(vsnip-jump-prev)'      : '<C-k>'
 repo = 'mattn/vim-maketable'
 on_ft = ['markdown']
 hook_source='''
-vnoremap <silent> t :<C-u>'<,'>MakeTable! ,<CR>
-vnoremap <silent> T :<C-u>UnmakeTable ,<CR>
+vnoremap <silent> <buffer> t :<C-u>'<,'>MakeTable! ,<CR>
+vnoremap <silent> <buffer> T :<C-u>UnmakeTable ,<CR>
 '''
 
 
@@ -106,7 +106,16 @@ build='make install'
 on_ft = ['python']
 hook_source = '''
 let g:pydocstring_formatter = 'google'
-nnoremap <silent> <Space>dq :<C-u>Pydocstring<CR>
+nnoremap <silent> <buffer> <Space>dq :<C-u>Pydocstring<CR>
+'''
+
+[[plugins]]
+repo = "heavenshell/vim-jsdoc"
+build='make install'
+on_ft = ['javascript', 'typescript']
+on_if = 'executable("npm")'
+hook_source='''
+nnoremap <silent> <buffer> <Space>dq :<C-u>JsDoc<CR>
 '''
 
 [[plugins]]
