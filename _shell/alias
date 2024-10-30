@@ -95,6 +95,29 @@ if [ ! -x "$(command -v nvim)" ]; then
 	fi
 fi
 
+if [ -x "$(command -v drawio.AppImage)" ]; then
+	alias drawio="drawio.AppImage"
+	if [ -x "$(command -v img2sixel)" ]; then
+		drawio2sixel () {
+			if [ $# -eq 1 ]; then
+				if [ -f $1 ]; then
+					drawio.AppImage -xf png -o tmp_diagram.png $1
+					img2sixel tmp_diagram.png
+					rm tmp_diagram.png
+				else
+					echo "file not found: $1"
+					return 1
+				fi
+			else
+				return 1
+			fi
+		}
+		
+	fi
+else
+	alias duh="du -hd 1 . | sort -hr | head -n 10"
+fi
+
 if [ ! -x "$(command -v swagger-ui-watcher)" ] && [ -x "$(command -v deno)" ]; then
 	alias swagger-ui-watcher="deno run --allow-read --allow-env --allow-sys --allow-run --allow-net=127.0.0.1 npm:swagger-ui-watcher"
 fi
