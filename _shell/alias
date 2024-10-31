@@ -112,10 +112,7 @@ if [ -x "$(command -v drawio.AppImage)" ]; then
 				return 1
 			fi
 		}
-		
 	fi
-else
-	alias duh="du -hd 1 . | sort -hr | head -n 10"
 fi
 
 if [ ! -x "$(command -v swagger-ui-watcher)" ] && [ -x "$(command -v deno)" ]; then
