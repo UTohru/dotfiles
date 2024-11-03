@@ -82,8 +82,10 @@ nnoremap <Leader>p a<C-r>=expand('%:p')<CR>
 nnoremap <C-f> :<C-u>%s<Space>/
 " terminal
 if has('nvim')
-	nnoremap <silent> <Leader>T :<C-u>tabnew<CR>:terminal<CR>
+	" nnoremap <silent> <Leader>T :<C-u>tabnew<CR>:terminal<CR>
+	nnoremap <silent> <Leader>T :<C-u>split<CR><C-w>j:terminal<CR><C-\><C-n>:resize 8%<CR>i
 else
-	nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
+	" nnoremap <silent> <Leader>T :<C-u>tab terminal<CR>
+	nnoremap <silent> <Leader>T :<C-u>bo terminal<CR><C-\><C-n>:resize 8%<CR>i
 endif
 
