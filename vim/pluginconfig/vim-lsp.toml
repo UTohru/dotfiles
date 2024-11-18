@@ -2,12 +2,13 @@
 repo = 'mattn/vim-lsp-settings'
 on_ft = ['python', 'rust', 'typescript', 'cpp', 'c', 'go', 'markdown', 'tex', 'lua', 'yaml']
 hook_source = '''
+" need install python-lsp-isort
 let g:lsp_settings = {
 \	'pylsp-all':{
 \		'disabled': 0,
 \		'workspace_config': {
 \			'pylsp': {
-\				'configurationSources': ['rope', 'pyflakes', 'isort'],
+\				'configurationSources': ['rope', 'pyflakes'],
 \				'plugins': {
 \					'pycodestyle': {'enabled': v:false},
 \					'pydocstyle': {'enabled': v:false},
@@ -16,11 +17,24 @@ let g:lsp_settings = {
 \					'mccabe': {'enabled': v:false},
 \					'flake8': {'enabled': v:false},
 \					'yapf': {'enabled': v:false},
-\					'ruff': {'enabled': v:true},
 \					'isort': {'enabled': v:true},
 \				},
 \			}
 \		},
+\	},
+\	'ruff': {
+\		'disabled': 0,
+\		'initialization_options': {
+\			'settings': {
+\				'lint': { 'extendSelect': ["I"] }
+\			},
+\		},
+\	},
+\	'biome': {
+\		'disabled': 0,
+\	},
+\	'yaml-language-server': {
+\		'disabled': 0,
 \	},
 \	'efm-langserver': {
 \		'disabled': 0,
@@ -67,6 +81,7 @@ endfunction
 augroup myvimrc
 	autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
 	autocmd BufWritePre *.ts call execute('LspDocumentFormatSync --server=efm-langserver')
-	autocmd BufWritePre *.py,*.rs call execute('LspDocumentFormatSync --server=ruff-lsp')
+	" autocmd BufWritePre *.py call execute('LspDocumentFormatSync --server=ruff')
+	autocmd BufWritePre *.py call execute('LspDocumentFormatSync')
 augroup END
 '''
