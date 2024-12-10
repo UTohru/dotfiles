@@ -6,7 +6,7 @@ on_event = ['InsertEnter']
 
 hook_source = '''
 
-call ddc#custom#patch_global('sources', ['vsnip', 'file', 'around'])
+call ddc#custom#patch_global('sources', ['vsnip', 'file', 'around', 'copilot'])
 call ddc#custom#patch_global('sourceOptions', {
 \	'_': {
 \		'ignoreCase': v:true,
@@ -37,12 +37,17 @@ call ddc#custom#patch_global('sourceOptions', {
 \		'isVolatile': v:true,
 \		'minAutoCompleteLength': 2,
 \	},
+\	'copilot': {
+\		'mark': 'copilot',
+\		'matchers': [],
+\		'minAutoCompleteLength': 0,
+\	},
 \})
 
 
 call ddc#custom#patch_filetype(
-\	['python', 'rust', 'typescript', 'go', 'c', 'cpp', 'lua', 'yaml'], 
-\	'sources', ['vsnip', 'file', 'vim-lsp', 'around']
+\	['python', 'rust', 'typescript', 'go', 'c', 'cpp', 'lua', 'yaml', 'java', 'terraform'], 
+\	'sources', ['vsnip', 'file', 'vim-lsp', 'copilot', 'around']
 \)
 
 call ddc#custom#patch_global('ui', 'pum')
@@ -111,4 +116,8 @@ on_source = ['ddc.vim', 'vim-vsnip']
 [[plugins]]
 repo = 'Shougo/ddc-ui-pum'
 on_source = ['ddc.vim', 'pum.vim']
+
+[[plugins]]
+repo = 'Shougo/ddc-source-copilot'
+on_source = ['ddc.vim', 'copilot.vim']
 

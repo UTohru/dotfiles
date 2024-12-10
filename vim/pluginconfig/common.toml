@@ -44,6 +44,9 @@ hook_add = '''
 let g:sonictemplate_vim_template_dir = '$HOME/.vim/templates'
 '''
 
+[[plugins]]
+repo = "github/copilot.vim"
+
 # [[plugins]]
 # repo = 'dstein64/vim-startuptime'
 
