@@ -245,3 +245,45 @@ else
 	end)
 end
 '''
+
+[[plugins]]
+repo = 'CopilotC-Nvim/CopilotChat.nvim'
+depends = ['github/copilot.vim']
+build = "make tiktoken"
+lua_source = '''
+local base_prompt = [[
+You are capable a programming assistant.
+When referencing code, please include the line number first (e.g. L.10-12).
+Provide concise, logical answers with references to minimal necessary code.
+End each answer with your confidence level (0-100%) and reasons, noting any insufficient input information.
+Answers other than the code must be in Japanese.
+]]
+require("CopilotChat").setup({
+    system_prompt = base_prompt,
+    model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models
+    agent = 'copilot',
+    show_help = "yes",
+    prompts = {
+        Explain = {
+            prompt = "コードを説明してください",
+            mapping = '<Space>Ce',
+        },
+		Review = {
+            prompt = 'コードをレビューしてください。',
+            mapping = '<Space>Cr',
+        },
+        Fix = {
+            prompt = "このコードには問題があります。バグを修正したコードを表示してください。",
+            mapping = '<Space>Cf',
+        },
+		Docs = {
+            prompt = "選択したコードに関するドキュメントコメントを英語で生成してください。",
+            mapping = '<Space>Cd',
+        },
+        Tests = {
+            prompt = "選択したコードの詳細なユニットテストを書いてください。",
+            mapping = '<Space>Ct',
+        },
+	}
+})
+'''
