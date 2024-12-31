@@ -23,8 +23,6 @@ if &compatible
 endif
 
 if dein#load_state(s:dein_dir)
-	let g:dein#cache_directory = $HOME . '/.cache/dein'
-
 	call dein#begin(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/common.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/common_lazy.toml', {'lazy':1})
@@ -53,7 +51,7 @@ syntax on
 " #auto install "
 if dein#check_install()
 	" g:dein#types#git#clone_depth = 1
-	g:dein#types#git#enable_partial_clone = v:true
+	let g:dein#types#git#enable_partial_clone = v:true
 	call dein#install()
 endif
 
