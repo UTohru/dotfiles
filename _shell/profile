@@ -7,6 +7,12 @@ if command -V vim > /dev/null 2>&1; then
 	export EDITOR=vim
 fi
 
+if [ -x "$(command -v swaymsg)" ] && swaymsg -t get_version &> /dev/null ; then
+	export XDG_CURRENT_DESKTOP=sway
+elif [  -x "$(command -v hyprctl)" ] && hyprctl -j devices &> /dev/null ; then
+	export XDG_CURRENT_DESKTOP=hyprland
+fi
+
 # about ssh-agent
 if [ -z "${SSH_AUTH_SOCK}" ]; then 
 	if [ -r "/run/user/$(id -u)/gcr/ssh" ]; then
