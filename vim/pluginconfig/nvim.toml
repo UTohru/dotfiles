@@ -121,8 +121,6 @@ repo = "nvim-tree/nvim-web-devicons"
 [[plugins]]
 repo = "nvim-lualine/lualine.nvim"
 depends = ["nvim-web-devicons"]
-hook_add = """
-"""
 lua_source = """
 theme = require("lualine.themes.wombat")
 theme.inactive.c = {fg = "#c6c6c6", bg = "None"}
@@ -284,6 +282,10 @@ require("CopilotChat").setup({
             prompt = "選択したコードの詳細なユニットテストを書いてください。",
             mapping = '<Space>Ct',
         },
+		CommitMessage = {
+			prompt = 'ステージ済みの変更に対して、英語で短いコミットメッセージを生成してください。\n#git:staged',
+			mapping = '<Space>Cm',
+		},
 	}
 })
 '''
