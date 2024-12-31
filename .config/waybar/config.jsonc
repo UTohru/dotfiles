@@ -46,7 +46,8 @@
         // "format-wifi": "  ({signalStrength}%)",
         // "format-ethernet": "\uf0e8 : {ipaddr}/{cidr}",
         // "format-disconnected": "\uead0 dissconnect",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr} {essid}"
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr} {essid}",
+        "on-right-click": "nm-connection-editor"
     },
 
     "memory": {
