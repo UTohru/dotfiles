@@ -1,5 +1,6 @@
+[general]
 live_config_reload = true
-[shell]
+[terminal.shell]
 program = "/usr/bin/zsh"
 args = ["-l"]
 
