@@ -15,14 +15,14 @@ if &runtimepath !~# '/dein.vim'
 	if !isdirectory(expand(s:dein_repo))
 		execute '!git clone --depth 1 https://github.com/Shougo/dein.vim' s:dein_repo
 	endif
-	execute 'set runtimepath^=' . substitute(
-		\ fnamemodify(s:dein_repo, ':p'), '[/\\]$', '', '')
+	execute 'set runtimepath^='
+		\ .. s:dein_repo->fnamemodify(':p')->substitute('[/\\]$', '', '')
 endif
 if &compatible
 	set nocompatible               " Be iMproved
 endif
 
-if dein#load_state(s:dein_dir)
+"if dein#load_state(s:dein_dir)
 	call dein#begin(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/common.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/common_lazy.toml', {'lazy':1})
@@ -41,9 +41,8 @@ if dein#load_state(s:dein_dir)
 	endif
 
 	call dein#end()
-	call dein#save_state()
-else
-endif
+	"call dein#save_state()
+"endif
 
 filetype plugin indent on
 syntax on
