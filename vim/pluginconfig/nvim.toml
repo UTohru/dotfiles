@@ -61,7 +61,6 @@ build = 'make'
 
 [[plugins]]
 repo = "nvim-telescope/telescope.nvim"
-rev = "0.1.6"
 depends = ['plenary.nvim' ]
 hook_add = '''
 nmap <Space>f [telescope]
