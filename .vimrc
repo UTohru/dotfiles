@@ -11,6 +11,7 @@ let g:wsl = filereadable('/proc/sys/fs/binfmt_misc/WSLInterop')
 let s:dein_dir=$HOME . '/.vim/dein'
 
 let s:dein_repo = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+let s:dein_cache = s:dein_dir . (has('nvim') ? '/nvim_cache' : '/vim_cache')
 if &runtimepath !~# '/dein.vim'
 	if !isdirectory(expand(s:dein_repo))
 		execute '!git clone --depth 1 https://github.com/Shougo/dein.vim' s:dein_repo
@@ -22,7 +23,7 @@ if &compatible
 	set nocompatible               " Be iMproved
 endif
 
-"if dein#load_state(s:dein_dir)
+if has('nvim') || dein#load_state(s:dein_cache)
 	call dein#begin(s:dein_dir)
 	call dein#load_toml('~/.vim/pluginconfig/common.toml', {'lazy':0})
 	call dein#load_toml('~/.vim/pluginconfig/common_lazy.toml', {'lazy':1})
@@ -41,11 +42,8 @@ endif
 	endif
 
 	call dein#end()
-	"call dein#save_state()
-"endif
-
-filetype plugin indent on
-syntax on
+	call dein#save_state()
+endif
 
 " #auto install "
 if dein#check_install()
@@ -53,6 +51,10 @@ if dein#check_install()
 	let g:dein#types#git#enable_partial_clone = v:true
 	call dein#install()
 endif
+
+filetype plugin indent on
+syntax on
+
 
 " #update
 " :call dein#update()"
