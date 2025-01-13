@@ -6,7 +6,7 @@ require('nvim-treesitter.configs').setup{
 	ensure_installed = {
 		"lua", "vim", "vimdoc", "query",
 		"python", "typescript", "json",
-		"yaml", "toml"
+		"yaml", "toml", "tsx"
 	},
 	lookahead = true,
 	highlight = {
