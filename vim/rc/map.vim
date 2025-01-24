@@ -68,6 +68,9 @@ onoremap a" 2i"
 onoremap a' 2i'
 onoremap a` 2i`
 
+noremap  <C-s> :<C-u>w<CR>
+inoremap  <C-s> :<C-u>w<CR><ESC>
+
 "
 " SHORTCUT
 "
