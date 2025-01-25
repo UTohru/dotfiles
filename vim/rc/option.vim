@@ -8,6 +8,7 @@ else
 	set t_vb=
 endif
 
+set expandtab
 set tabstop=4
 set shiftwidth=4
 set whichwrap=b,s,h,l,<,>,[,],~ "行を跨ぐ移動
