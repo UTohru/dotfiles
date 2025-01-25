@@ -38,6 +38,11 @@ if [ "$XDG_SESSION_TYPE" = "x11" ]; then
 		$cmd "exec --no-startup-id $comp -b --config $HOME/.config/compton.conf"
 	fi
 
+	chassis_type=`cat /sys/class/dmi/id/chassis_type`
+	if [ $chassis_type -ne 10 ] && [ ! $chassis_type -ne 9 ]; then
+		xset s off
+		xset -dpms
+	fi
 fi
 
 if builtin command -V conky > /dev/null 2>&1; then
@@ -62,3 +67,4 @@ fi
 if builtin command -V google-drive-ocamlfuse > /dev/null 2>&1; then
 	${HOME}/.config/i3/script/mount_gdrive.sh
 fi
+
