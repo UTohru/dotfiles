@@ -25,3 +25,13 @@ apply = ["defer"]
 [plugins.zsh-autosuggestions.hooks]
 post = "source $ZDOTDIR/pluginconf/zsh-autosuggestions_post.zsh"
 
+
+[plugins.zsh-syntax-highlighting]
+github = "zsh-users/zsh-syntax-highlighting"
+use = ["{{ name }}.zsh"]
+apply = ["defer"]
+
+
+[plugins.zoxide]
+github = "ajeetdsouza/zoxide"
+apply = ["defer"]
