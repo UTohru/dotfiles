@@ -14,22 +14,25 @@ elif [  -x "$(command -v hyprctl)" ] && hyprctl -j devices &> /dev/null ; then
 fi
 
 # about ssh-agent
-if [ -z "${SSH_AUTH_SOCK}" ]; then 
-	if [ -r "/run/user/$(id -u)/gcr/ssh" ]; then
-		export SSH_AUTH_SOCK="/run/user/$(id -u)/gcr/ssh"
-	elif [ -r "/run/user/$(id -u)/keyring/ssh" ]; then
-		export SSH_AUTH_SOCK="/run/user/$(id -u)/keyring/ssh"
-	elif [ -r "$HOME/.ssh/agent.sock" ]; then
-		export SSH_AUTH_SOCK="$HOME/.ssh/agent.sock"
-	else
-		# create new agent
-		if command -V gnome-keyring-daemon > /dev/null 2>&1; then
-			eval $(gnome-keyring-daemon --start --components=ssh,secrets)
-			export SSH_AUTH_SOCK
-		elif command -V ssh-agent > /dev/null 2>&1; then
-			eval `ssh-agent -a $HOME/.ssh/agent.sock`
-		fi
-	fi
+AUTHSOCK_CANDIDATES=(
+    "/run/user/$(id -u)/gcr/ssh"
+    "/run/user/$(id -u)/keyring/ssh"
+    "$HOME/.ssh/agent.sock"
+)
+if pgrep -u "$USER" ssh-agent >/dev/null 2>&1; then
+    for sock in  "${AUTHSOCK_CANDIDATES[@]}"; do
+        if [ -r "$sock" ]; then
+            export SSH_AUTH_SOCK="$sock"
+            break
+        fi
+    done
+else
+    if command -V gnome-keyring-daemon > /dev/null 2>&1; then
+        eval $(gnome-keyring-daemon --start --components=ssh,secrets)
+        export SSH_AUTH_SOCK
+    elif command -V ssh-agent > /dev/null 2>&1; then
+        eval `ssh-agent -a $HOME/.ssh/agent.sock`
+    fi
 fi
 
 # add local path
