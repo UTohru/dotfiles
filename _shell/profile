@@ -17,11 +17,11 @@ fi
 AUTHSOCK_CANDIDATES=(
     "/run/user/$(id -u)/gcr/ssh"
     "/run/user/$(id -u)/keyring/ssh"
-    "$HOME/.ssh/agent.sock"
+    "${HOME}/.ssh/agent.sock"
 )
 if pgrep -u "$USER" ssh-agent >/dev/null 2>&1; then
-    for sock in  "${AUTHSOCK_CANDIDATES[@]}"; do
-        if [ -r "$sock" ]; then
+    for sock in "${AUTHSOCK_CANDIDATES[@]}"; do
+        if [ -r $sock ]; then
             export SSH_AUTH_SOCK="$sock"
             break
         fi
@@ -31,9 +31,11 @@ else
         eval $(gnome-keyring-daemon --start --components=ssh,secrets)
         export SSH_AUTH_SOCK
     elif command -V ssh-agent > /dev/null 2>&1; then
+        rm $HOME/.ssh/agent.sock
         eval `ssh-agent -a $HOME/.ssh/agent.sock`
     fi
 fi
+unset AUTHSOCK_CANDIDATES
 
 # add local path
 if [ -d "$HOME/.local/bin" ] ; then
