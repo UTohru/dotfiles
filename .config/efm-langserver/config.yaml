@@ -5,7 +5,7 @@ root-markers:
 tools:
   text-textlint: &text-textlint
     lint-stdin: false
-    lint-command: 'deno run --allow-sys --allow-env --allow-run --allow-read ~/.local/share/deno_ts/textlint.ts ${INPUT}'
+    lint-command: "deno run --allow-sys --allow-env --allow-run --allow-read ~/.local/share/deno_ts/textlint.ts ${INPUT}"
     lint-ignore-exit-code: true
     lint-formats:
       - "%f:%l:%c: %m [%trror/%r"
@@ -14,8 +14,47 @@ tools:
       - "%Z [%trror/%r"
     root-markers:
       - .textlintrc
+  deno_fmt:
+    require-marker: true
+    root-markers:
+      - deno.json
+      - deno.jsonc
+  prettierd: &prettierd
+    require-marker: true
+    format-command: >
+      prettierd ${INPUT} ${--range-start=charStart} ${--range-end=charEnd} \
+        ${--tab-width=tabSize}
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - .prettierrc.json
+      - .prettierrc.js
+      - .prettierrc.yml
+      - .prettierrc.yaml
+      - .prettierrc.mjs
+      - .prettierrc.cjs
+      - .prettierrc.toml
+  eslint: &eslint
+    lint-command: "eslint -f visualstudio --stdin --stdin-filename ${INPUT}"
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %trror %m"
+    require-marker: true
+    root-markers:
+      - .eslintrc
+      - .eslintrc.json
+      - .eslintrc.config.js
+
 languages:
   markdown:
     - <<: *text-textlint
   tex:
     - <<: *text-textlint
+  typescript:
+    - <<: *eslint
+    - <<: *prettierd
+  typescriptreact:
+    - <<: *eslint
+    - <<: *prettierd
