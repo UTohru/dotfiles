@@ -39,9 +39,9 @@ if [ "$XDG_SESSION_TYPE" = "x11" ]; then
 	fi
 
 	chassis_type=`cat /sys/class/dmi/id/chassis_type`
-	if [ $chassis_type -ne 10 ] && [ ! $chassis_type -ne 9 ]; then
-		xset s off
-		xset -dpms
+	if [ "$chassis_type" -ne 10 ] && [ "$chassis_type" -ne 9 ]; then
+		$cmd "exec --no-startup-id xset s off"
+		$cmd "exec --no-startup-id xset -dpms"
 	fi
 fi
 
