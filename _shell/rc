@@ -1,3 +1,5 @@
+# vim: set filetype=sh:
+
 # less option
 export LESS='-R -S -g -x4'
 

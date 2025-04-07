@@ -1,3 +1,4 @@
+# vim: set filetype=sh:
 
 if command -V vim > /dev/null 2>&1; then
 	alias vimplane='vim -u NONE -N'
@@ -7,6 +8,8 @@ alias ipa="ip -br -c a"
 alias ipr="ip -br -c route"
 
 alias bc='bc -l'
+
+alias dialy="touch `date +%Y%m%d`.md"
 
 # alias deletefiles="find . -type f -exec sleep 0.01 \; -delete"
 
@@ -116,7 +119,7 @@ if [ -x "$(command -v drawio.AppImage)" ]; then
 fi
 
 if [ ! -x "$(command -v swagger-ui-watcher)" ] && [ -x "$(command -v deno)" ]; then
-	alias swagger-ui-watcher="deno run --allow-read --allow-env --allow-sys --allow-run --allow-net=127.0.0.1 npm:swagger-ui-watcher"
+	alias swagger-ui-watcher="deno run --allow-read --allow-env --allow-sys --allow-run --allow-net npm:swagger-ui-watcher"
 fi
 
 # === wsl ===
