@@ -1,5 +1,9 @@
 # vim: set filetype=sh:
 
+if [ -f ~/.dircolors ] && [ -x "$(command -v dircolors)" ]; then
+    eval $(dircolors ~/.dircolors)
+fi 
+
 if command -V firefox > /dev/null 2>&1; then
 	export BROWSER=`which firefox`
 fi

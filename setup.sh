@@ -54,6 +54,7 @@ fi
 # other links
 # ===============
 ln -sf ${cdir}/.zshenv ~/.zshenv
+ln -sf ${cdir}/_shell/dircolors ~/.dircolors
 
 ln -sf ${cdir}/others/.textlintrc ~/.textlintrc
 if [ ! -d ~/.local/share/deno_ts ]; then
