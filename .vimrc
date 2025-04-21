@@ -82,6 +82,7 @@ augroup myvimrc
 	" filetype
 	autocmd BufRead,BufNewFile *.snippets set filetype=snippets
 	autocmd BufRead,BufNewFile *.tf set filetype=terraform
+	autocmd BufRead,BufNewFile *.j2,*.jinja,*jinja2  set filetype=jinja
 	autocmd BufRead,BufNewFile */pluginconfig/*.toml call dein#toml#syntax()
 	let g:tex_flavor = 'latex'
 
