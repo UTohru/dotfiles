@@ -252,25 +252,30 @@ local base_prompt = [[
 You are capable a programming assistant.
 When referencing code, please include the line number first (e.g. L.10-12).
 Provide concise, logical answers with references to minimal necessary code.
-End each answer with your confidence level (0-100%) and reasons, noting any insufficient input information.
+End each answer with note if  there is any input information that missing to answer.
 Answers other than the code must be in Japanese.
+]]
+local sticky = [[
+#system:`git rev-parse --show-toplevel | xargs -I{} eza -T --git-ignore --no-filesize --no-permissions --no-user --no-time "{}"`
+> #buffer
 ]]
 require("CopilotChat").setup({
     system_prompt = base_prompt,
-    model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models
+    model = 'o4-mini', -- Default model to use, see ':CopilotChatModels' for available models
     agent = 'copilot',
     show_help = "yes",
+    sticky = sticky,
     prompts = {
         Explain = {
-            prompt = "コードを説明してください",
+            prompt = "以下のコードを説明してください。\n#buffer:current",
             mapping = '<Space>Ce',
         },
 		Review = {
-            prompt = 'コードをレビューしてください。',
+            prompt = '以下のコードをレビューしてください。\n#buffer:current',
             mapping = '<Space>Cr',
         },
         Fix = {
-            prompt = "このコードには問題があります。バグを修正したコードを表示してください。",
+            prompt = "以下のコードには問題があります。バグを修正したコードを表示してください。\n#buffer:current",
             mapping = '<Space>Cf',
         },
 		Docs = {
