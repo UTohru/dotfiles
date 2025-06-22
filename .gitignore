@@ -19,3 +19,8 @@ mlterm/pts_*
 mlterm/challenge
 
 .config/zsh/.zcompdump*
+
+.config/claude/*
+!.config/claude/CLAUDE.md
+!.config/claude/settings.json
+!.config/claude/commands/*
