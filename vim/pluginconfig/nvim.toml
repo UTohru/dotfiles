@@ -252,16 +252,16 @@ local base_prompt = [[
 You are capable a programming assistant.
 When referencing code, please include the line number first (e.g. L.10-12).
 Provide concise, logical answers with references to minimal necessary code.
-End each answer with note if  there is any input information that missing to answer.
+If there is any missing input information required to provide an answer, please write the necessary relative file path at the end of each response.
 Answers other than the code must be in Japanese.
 ]]
 local sticky = [[
-#system:`git rev-parse --show-toplevel | xargs -I{} eza -T --git-ignore --no-filesize --no-permissions --no-user --no-time "{}"`
+> #system:`pwd && git rev-parse --show-toplevel | xargs -I{} eza -T --git-ignore --no-filesize --no-permissions --no-user --no-time "{}"`
 > #buffer
 ]]
 require("CopilotChat").setup({
     system_prompt = base_prompt,
-    model = 'o4-mini', -- Default model to use, see ':CopilotChatModels' for available models
+    -- model = 'o4-mini', -- Default model to use, see ':CopilotChatModels' for available models
     agent = 'copilot',
     show_help = "yes",
     sticky = sticky,
