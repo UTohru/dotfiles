@@ -51,6 +51,24 @@ if [ ! -d ${cdir}/.config/i3/wallpaper ]; then
 fi
 
 # ===============
+# claude
+# ===============
+if [ ! -d ~/.claude ]; then
+	mkdir ~/.claude
+fi
+
+for file in "${cdir}"/.config/claude/*; do
+	if [ -f "$file" ]; then
+		filename=$(basename "$file")
+		if [ -e ~/.claude/"$filename" ] && [ ! -L ~/.claude/"$filename" ]; then
+			echo "Error: ~/.claude/$filename already exists and is not a symbolic link"
+			exit 1
+		fi
+		ln -sf "$file" ~/.claude/"$filename"
+	fi
+done
+
+# ===============
 # other links
 # ===============
 ln -sf ${cdir}/.zshenv ~/.zshenv
