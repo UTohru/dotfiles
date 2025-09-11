@@ -57,6 +57,7 @@ mkdir -p ~/.claude ~/.codex
 
 ln -sf "${cdir}/AGENTS.md" ~/.claude/CLAUDE.md
 ln -sf "${cdir}/AGENTS.md" ~/.codex/AGENTS.md
+ln -sf "${cdir}/.codex/config.toml" ~/.codex/config.toml
 
 # ===============
 # other links
