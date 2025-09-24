@@ -55,8 +55,10 @@ fi
 # ===============
 mkdir -p ~/.claude ~/.codex
 
-ln -sf "${cdir}/.config/AGENTS.md" ~/.claude/CLAUDE.md
-ln -sf "${cdir}/.config/AGENTS.md" ~/.codex/AGENTS.md
+ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
+ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
+ln -sf "${cdir}/.config/ai-agent/prompts" ~/.claude/commands
+ln -sf "${cdir}/.config/ai-agent/prompts" ~/.codex/prompts
 ln -sf "${cdir}/.codex/config.toml" ~/.codex/config.toml
 
 # ===============
