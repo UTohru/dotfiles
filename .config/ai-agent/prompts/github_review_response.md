@@ -18,45 +18,14 @@
 ブランチが見つからない場合は確認が必要です。
 
 ## 2. GraphQL APIを使って、未解決のレビューを取得する。
+
+```bash
+~/.config/ai-agent/scripts/fetch_data/github_get_unresolved_reviews.sh <OWNER> <REPOSITORY> <PR_NUMBER>
 ```
-gh api graphql --field query='
-{
-  repository(owner: "<Owner>", name: "<Repository>") {
-    pullRequest(number: <PR_Number>) {
-      url
-      title
-      reviewThreads(first: 100) {
-        edges {
-          node {
-            id
-            isResolved
-            isOutdated
-            path
-            line
-            comments(first: 100) {
-              totalCount
-              nodes {
-                id
-                databaseId
-                author { login }
-                body
-                url
-                createdAt
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}' | jq -r '.data.repository.pullRequest.reviewThreads.edges[] | select(.node.isResolved == false) |
-"---
-File: \(.node.path):\(.node.line)
-Thread ID: \(.node.id)
-Status: Unresolved, Outdated=\(.node.isOutdated)
-First Comment ID: \(.node.comments.nodes[0].databaseId)
-Thread (\(.node.comments.totalCount) comments):
-" + (.node.comments.nodes | map("  [\(.author.login)] \(.body | split("\n")[0])") | join("\n")) + "\n"'
+
+例：
+```bash
+~/.config/ai-agent/scripts/fetch_data/github_get_unresolved_reviews.sh myorg myrepo 123
 ```
 
 ## 3. 各指摘に対して下記の手順を繰り返す
