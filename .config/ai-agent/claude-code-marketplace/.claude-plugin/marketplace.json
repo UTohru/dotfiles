@@ -1,0 +1,17 @@
+{
+  "name": "my-dot-tools",
+  "owner": {
+    "name": "UTohru",
+    "url": "https://github.com/UTohru/dotfiles/.config/ai-agents/claude-code-marketplace"
+  },
+  "plugins": [
+    {
+      "name": "tools",
+      "source": "./plugins/well-worn-tools",
+      "description": "A set of well-worn tools my tasks.",
+      "version": "0.0.1",
+      "author": { "name": "UTohru" }
+    }
+  ]
+}
+
