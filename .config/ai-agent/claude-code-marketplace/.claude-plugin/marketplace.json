@@ -1,8 +1,7 @@
 {
   "name": "my-dot-tools",
   "owner": {
-    "name": "UTohru",
-    "url": "https://github.com/UTohru/dotfiles/.config/ai-agents/claude-code-marketplace"
+    "name": "UTohru"
   },
   "plugins": [
     {
