@@ -1,0 +1,21 @@
+{
+  "name": "aws-tools",
+  "version": "0.1.0",
+  "description": "AWS infrastructure tools including Terraform cost estimation",
+  "author": {
+    "name": "UTohru"
+  },
+  "keywords": ["aws", "terraform", "cost estimate", "pricing"],
+  "commands": [
+    "./commands/terraform_aws_cost_estimate.md"
+  ],
+  "dependencies": {
+    "mcp": {
+      "aws-pricing": {
+        "package": "awslabs.aws-pricing-mcp-server",
+        "required": true,
+        "description": "AWS Pricing MCP Server for retrieving AWS service pricing information"
+      }
+    }
+  }
+}
