@@ -32,42 +32,13 @@ This plugin requires the following MCP server:
 
 ## Installation
 
-### Plugin Installation
-
 The plugin and MCP server will be installed automatically when you enable this plugin.
 
-**No AWS credentials are required for installation.**
+### AWS Credentials (Required for Usage)
 
-### AWS Credentials Setup (Required for Usage)
+The AWS Pricing MCP Server requires AWS credentials to access pricing data. Use any standard AWS authentication method (environment variables, profiles, IAM roles, etc.).
 
-To actually use the cost estimation feature, you need AWS credentials:
-
-**Why credentials are needed:**
-- The AWS Pricing MCP Server uses the AWS Price List Query API
-- This API requires authentication (unlike the public Bulk API)
-- Credentials remain on your local machine
-- Only accesses public pricing data (no user-specific information)
-
-**Setup methods:**
-
-```bash
-# Option 1: AWS CLI configuration (recommended)
-aws configure
-
-# Option 2: Environment variables
-export AWS_ACCESS_KEY_ID=your-access-key
-export AWS_SECRET_ACCESS_KEY=your-secret-key
-export AWS_REGION=us-east-1
-
-# Option 3: AWS Profile
-export AWS_PROFILE=your-profile
-export AWS_REGION=us-east-1
-```
-
-### IAM Permissions
-
-Your AWS user/role needs the following permissions:
-
+**Required IAM permissions:**
 ```json
 {
   "Version": "2012-10-17",
@@ -81,7 +52,10 @@ Your AWS user/role needs the following permissions:
 }
 ```
 
-**Note:** Even if your AWS account has no resources, you can still use the Pricing API to get pricing information. The API is free to use.
+**Notes:**
+- All Pricing API calls are free (no AWS charges)
+- Only accesses public pricing data (no user-specific information)
+- You can use the Pricing API even if your AWS account has no resources
 
 ## Usage
 
@@ -107,7 +81,9 @@ The command will:
 
 ### MCP Server Configuration
 
-The plugin automatically configures the AWS Pricing MCP Server. You can customize the configuration by editing `.mcp.json`:
+The plugin automatically configures the AWS Pricing MCP Server. The server uses your AWS credentials' default region.
+
+To customize log level, edit `.mcp.json`:
 
 ```json
 {
@@ -116,17 +92,12 @@ The plugin automatically configures the AWS Pricing MCP Server. You can customiz
       "command": "uvx",
       "args": ["awslabs.aws-pricing-mcp-server@latest"],
       "env": {
-        "FASTMCP_LOG_LEVEL": "ERROR",
-        "AWS_REGION": "ap-northeast-1"
+        "FASTMCP_LOG_LEVEL": "ERROR"
       }
     }
   }
 }
 ```
-
-### Customizing AWS Region
-
-To change the default region for pricing queries, update the `AWS_REGION` environment variable in `.mcp.json`.
 
 ## Troubleshooting
 
@@ -140,10 +111,9 @@ Error: Authentication failed
 **This is expected if AWS credentials are not configured.**
 
 **Solutions:**
-1. Configure AWS credentials (see "AWS Credentials Setup" above)
+1. Configure AWS credentials using standard AWS methods
 2. Verify IAM permissions include `pricing:*`
-3. Check AWS_REGION is set correctly
-4. Test credentials: `aws pricing describe-services --region us-east-1`
+3. Test credentials: `aws sts get-caller-identity`
 
 ### MCP Server Connection Issues
 
