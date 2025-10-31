@@ -11,7 +11,7 @@ Terraform CLIが利用可能な場合は自動解析、そうでない場合は�
 
 ## オプション
 - **Terraform CLI**: 利用可能な場合、より正確な解析が可能
-  - バージョン: v0.12以上を推奨
+  - バージョン: プロジェクトの `required_version` に準拠
   - 変数展開やモジュール解決が自動で行われる
 
 # 実行フロー
@@ -21,9 +21,9 @@ Terraform CLIが利用可能な場合は自動解析、そうでない場合は�
    ↓
 2. Terraform CLIの利用可能性チェック
    ↓
-   ├─ 利用可能（v0.12以上）→ [Path A] Terraform CLIを使用
+   ├─ 利用可能かつプロジェクト要件を満たす → [Path A] Terraform CLIを使用
    │
-   └─ 利用不可 → [Path B] 手動パース
+   └─ 利用不可またはバージョン不一致 → [Path B] 手動パース
    ↓
 3. AWS Pricing MCP Serverで価格取得
    ↓
@@ -54,13 +54,48 @@ tree -L 2 -I 'node_modules|.terraform'
 # Terraformコマンドの存在確認
 which terraform
 
-# バージョン確認（v0.12以上を推奨）
+# バージョン確認
 terraform version
+
+# プロジェクトの要件バージョンを確認
+grep -r 'required_version' *.tf
+# または
+cat versions.tf | grep required_version
 ```
 
 **判定基準:**
-- ✅ Terraformコマンドが存在し、バージョンがv0.12以上 → **Path A**
-- ❌ コマンドが存在しない、またはv0.12未満 → **Path B**
+
+### オプション1: シンプルな判定（推奨）
+```bash
+# terraform planが実行できるか試す
+terraform init && terraform plan -out=tfplan.binary
+
+# 成功 → Path A
+# 失敗 → Path B（エラーメッセージを確認して原因を判断）
+```
+
+### オプション2: 詳細な判定
+1. **Terraformコマンドの存在**
+   ```bash
+   which terraform || echo "Terraform not found"
+   ```
+
+2. **プロジェクト要件の確認**
+   - `versions.tf` または他の `.tf` ファイルから `required_version` を確認
+   - 例: `required_version = ">= 1.0.0"`
+
+3. **バージョン互換性の確認**
+   - インストールされているバージョンが要件を満たすか確認
+   - 満たす場合: **Path A**
+   - 満たさない場合: **Path B**
+
+4. **実行可能性の確認**
+   - `terraform init` が成功するか
+   - `terraform validate` が成功するか
+
+**Path 選択:**
+- ✅ Terraformコマンドが存在し、プロジェクト要件を満たし、実行可能 → **Path A**
+- ❌ 上記のいずれかを満たさない → **Path B**
 
 ---
 
@@ -74,9 +109,19 @@ Terraform CLIが利用可能な場合、このパスを使用します。
 # 作業ディレクトリに移動
 cd <terraform-directory>
 
+# プロジェクトの要件バージョンを確認
+cat versions.tf 2>/dev/null || grep -h 'required_version' *.tf 2>/dev/null
+
+# インストールされているバージョンを確認
+terraform version
+
 # 初期化（まだの場合）
 terraform init
 ```
+
+**注意:**
+- プロジェクトの `required_version` と異なるバージョンのTerraformを使用すると、初期化やplanが失敗する場合があります
+- その場合は Path B に切り替えてください
 
 ### A-2. Terraform Planの実行
 
@@ -748,15 +793,18 @@ which terraform
 ```bash
 #!/bin/bash
 
-# 1. バージョンチェック
+# 1. バージョン確認（情報表示のみ）
 TF_VERSION=$(terraform version -json | jq -r '.terraform_version')
 echo "Terraform version: $TF_VERSION"
 
+# プロジェクトの要件確認
+grep -h 'required_version' *.tf 2>/dev/null || echo "No version requirement found"
+
 # 2. 初期化
-terraform init
+terraform init || { echo "init failed, switching to Path B"; exit 1; }
 
 # 3. Planの生成
-terraform plan -out=tfplan.binary
+terraform plan -out=tfplan.binary || { echo "plan failed, switching to Path B"; exit 1; }
 
 # 4. JSON形式で出力
 terraform show -json tfplan.binary > tfplan.json
