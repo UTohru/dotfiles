@@ -1,10 +1,13 @@
 {
   "name": "tools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A collection of useful tools for various tasks.",
   "author": {
     "name": "UTohru"
   },
-  "keywords": ["github review response"],
-  "commands": ["./commands/github_review_response.md"]
+  "keywords": ["github review response", "terraform", "aws", "cost estimate"],
+  "commands": [
+    "./commands/github_review_response.md",
+    "./commands/terraform_aws_cost_estimate.md"
+  ]
 }
