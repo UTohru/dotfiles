@@ -19,28 +19,33 @@ elif [  -x "$(command -v hyprctl)" ] && hyprctl -j devices &> /dev/null ; then
 fi
 
 # about ssh-agent
-AUTHSOCK_CANDIDATES=(
-    "/run/user/$(id -u)/gcr/ssh"
-    "/run/user/$(id -u)/keyring/ssh"
-    "${HOME}/.ssh/agent.sock"
-)
-if pgrep -u "$USER" ssh-agent >/dev/null 2>&1; then
+# systemdで既にソケットが設定されている場合はそれを優先
+if [ -n "$SSH_AUTH_SOCK" ] && [ -S "$SSH_AUTH_SOCK" ]; then
+    # SSH_AUTH_SOCKが既に設定されており、ソケットが存在する場合は何もしない
+    :
+else
+    # SSH_AUTH_SOCKが未設定、または無効な場合のみ設定を試みる
+    AUTHSOCK_CANDIDATES=(
+        "/run/user/$(id -u)/gcr/ssh"
+        "/run/user/$(id -u)/keyring/ssh"
+        "${HOME}/.ssh/agent.sock"
+    )
     for sock in "${AUTHSOCK_CANDIDATES[@]}"; do
-        if [ -r $sock ]; then
+        if [ -S "$sock" ]; then
             export SSH_AUTH_SOCK="$sock"
             break
         fi
     done
-else
-    if command -V gnome-keyring-daemon > /dev/null 2>&1; then
-        eval $(gnome-keyring-daemon --start --components=ssh,secrets)
-        export SSH_AUTH_SOCK
-    elif command -V ssh-agent > /dev/null 2>&1; then
-        rm $HOME/.ssh/agent.sock
-        eval `ssh-agent -a $HOME/.ssh/agent.sock`
+
+    # どのソケットも見つからない場合のみ、エージェントを起動
+    if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
+        if command -V ssh-agent > /dev/null 2>&1; then
+            rm -f "$HOME/.ssh/agent.sock"
+            eval `ssh-agent -a "$HOME/.ssh/agent.sock"`
+        fi
     fi
+    unset AUTHSOCK_CANDIDATES
 fi
-unset AUTHSOCK_CANDIDATES
 
 # add local path
 if [ -d "$HOME/.local/bin" ] ; then
