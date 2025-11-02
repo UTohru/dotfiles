@@ -41,7 +41,7 @@ else
     if [ -z "$SSH_AUTH_SOCK" ] || [ ! -S "$SSH_AUTH_SOCK" ]; then
         if command -V ssh-agent > /dev/null 2>&1; then
             rm -f "$HOME/.ssh/agent.sock"
-            eval `ssh-agent -a "$HOME/.ssh/agent.sock"`
+            eval "$(ssh-agent -a "$HOME/.ssh/agent.sock")"
         fi
     fi
     unset AUTHSOCK_CANDIDATES
