@@ -9,13 +9,5 @@
   "commands": [
     "./commands/terraform_aws_cost_estimate.md"
   ],
-  "dependencies": {
-    "mcp": {
-      "aws-pricing": {
-        "package": "awslabs.aws-pricing-mcp-server",
-        "required": true,
-        "description": "AWS Pricing MCP Server for retrieving AWS service pricing information"
-      }
-    }
-  }
+  "mcpServers": "./.mcp.json"
 }
