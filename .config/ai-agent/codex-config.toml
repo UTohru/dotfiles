@@ -1,6 +1,4 @@
 network_access = true
-
-[tools]
 web_search_request = true
 
 # -- Waiting Prj Suport --
