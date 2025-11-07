@@ -1,3 +1,4 @@
+approval_policy = "untrusted"
 network_access = true
 web_search_request = true
 
