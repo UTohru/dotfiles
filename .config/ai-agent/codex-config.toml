@@ -1,7 +1,11 @@
 approval_policy = "untrusted"
-network_access = true
-web_search_request = true
 sandbox_mode = "workspace-write"
+
+[tools]
+web_search_request = true
+
+[sandbox_workspace_write]
+network_access = true
 
 # -- Waiting Prj Suport --
 # [mcp_servers.serena]
