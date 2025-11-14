@@ -79,7 +79,7 @@ ln -sf ${cdir}/.xprofile ~/.xprofile
 # ===============
 # wsl (ubuntu)
 # ===============
-if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+if [[ -d /run/WSL ]]; then
 	if command -V powershell.exe > /dev/null 2>&1; then
 		WIN_USERDIR=$(wslpath -ua $(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g'))
 		if [ ! -L $HOME/desktop ]; then

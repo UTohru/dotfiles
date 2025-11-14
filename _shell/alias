@@ -123,7 +123,7 @@ if [ ! -x "$(command -v swagger-ui-watcher)" ] && [ -x "$(command -v deno)" ]; t
 fi
 
 # === wsl ===
-if [ -f /proc/sys/fs/binfmt_misc/WSLInterop ]; then
+if [[ -d /run/WSL ]]; then
 	alias chrome='/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
 	alias explorer='explorer.exe .';
 	alias cmd='cmd.exe';
