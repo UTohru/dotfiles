@@ -1,10 +1,12 @@
 {
   "name": "tools",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A collection of useful tools for various tasks.",
   "author": {
     "name": "UTohru"
   },
   "keywords": ["github review response"],
-  "commands": ["./commands/github_review_response.md"]
+  "commands": [
+    "./commands/github_review_response.md"
+  ]
 }

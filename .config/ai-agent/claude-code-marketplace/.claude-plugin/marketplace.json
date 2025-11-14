@@ -7,8 +7,15 @@
     {
       "name": "tools",
       "source": "./plugins/well-worn-tools",
-      "description": "A set of well-worn tools my tasks.",
-      "version": "0.0.1",
+      "description": "A set of well-worn tools for my tasks.",
+      "version": "0.0.2",
+      "author": { "name": "UTohru" }
+    },
+    {
+      "name": "aws-tools",
+      "source": "./plugins/aws-tools",
+      "description": "AWS infrastructure tools including Terraform cost estimation.",
+      "version": "0.1.0",
       "author": { "name": "UTohru" }
     }
   ]
