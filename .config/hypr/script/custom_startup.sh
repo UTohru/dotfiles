@@ -6,11 +6,6 @@
 
 batch_cmd=""
 
-# Notification
-if builtin command -V dunst > /dev/null 2>&1; then
-	bacth_cmd="$batch_cmd dispatch exec dunst ;"
-fi
-
 # NetworkManager
 if builtin command -V nm-applet > /dev/null 2>&1; then
 	batch_cmd="${batch_cmd} dispatch exec nm-applet --indicator ;"

@@ -93,7 +93,7 @@ tooltip , #tray menu{
 }
 
 
-#clock {
+#clock,#custom-notification {
     font-weight: bold;
     margin: 0 5px 0;
 }
