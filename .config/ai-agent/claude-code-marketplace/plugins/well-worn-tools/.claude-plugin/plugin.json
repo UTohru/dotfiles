@@ -6,5 +6,6 @@
     "name": "UTohru"
   },
   "keywords": ["github review response"],
-  "commands": ["./commands/github_review_response.md"]
+  "commands": ["./commands/github_review_response.md"],
+  "skills": ["./skills/ai-task-runner/SKILL.md"]
 }
