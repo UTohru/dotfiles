@@ -10,7 +10,7 @@ cdir="$(realpath "$(dirname "$0")")"
 # ===============
 # ignore localconf
 # ===============
-ignore_list=("${cdir}/.config/zsh/localconf/rc.zsh" "${cdir}/.config/zsh/localconf/profile.zsh" "${cdir}/.config/i3/enable/local.conf" "${cdir}/.config/sway/enable/local.conf")
+ignore_list=("${cdir}/.config/zsh/localconf/rc.zsh" "${cdir}/.config/zsh/localconf/profile.zsh" "${cdir}/.config/i3/enable/local.conf" "${cdir}/.config/sway/enable/local.conf" "${cdir}/.config/hypr/local.conf")
 git update-index --skip-worktree ${ignore_list[@]}
 
 
