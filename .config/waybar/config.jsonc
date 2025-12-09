@@ -150,7 +150,7 @@
         "tooltip": false
     },
     "mpris#main": {
-        "format": " {status_icon} {artist} \uf001 <b>{title}</b> ",
+        "format": "\uf001 <b>{title}</b> {status_icon} ",
         "artist-len": 12,
         "title-len": 30,
         "status-icons": {
