@@ -12,7 +12,7 @@
     "modules-right": [
         // "cpu",
         // "memory",
-        // "network",
+        "network",
         "group/resource",
 
         // "disk",
@@ -48,6 +48,7 @@
         // "format-ethernet": "\uf0e8 : {ipaddr}/{cidr}",
         // "format-disconnected": "\uead0 dissconnect",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr} {essid}",
+        "on-click": "iwgtk",
         "on-right-click": "nm-connection-editor"
     },
 
