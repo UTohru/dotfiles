@@ -54,11 +54,6 @@ if builtin command -V nm-applet > /dev/null 2>&1; then
 	$cmd "exec --no-startup-id nm-applet --indicator"
 fi
 
-# pulseaudio  systemtray
-if builtin command -V pasystray > /dev/null 2>&1; then
-	$cmd "exec --no-startup-id pasystray"
-fi
-
 # bluetooth
 if builtin command -V blueman-applet > /dev/null 2>&1; then
 	$cmd "exec --no-startup-id blueman-applet"

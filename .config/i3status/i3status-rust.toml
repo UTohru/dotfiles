@@ -70,7 +70,7 @@ step_width = 5
 format = " $icon {$volume.eng(w:2)|muted} "
 [[block.click]]
 button = "left"
-cmd = "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+cmd = "pavucontrol"
 
 [[block]]
 block = "time"
