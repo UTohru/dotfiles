@@ -6,14 +6,9 @@
 
 batch_cmd=""
 
-# NetworkManager
-if builtin command -V nm-applet > /dev/null 2>&1; then
-	batch_cmd="${batch_cmd} dispatch exec nm-applet --indicator ;"
-fi
-
-# pulseaudio  systemtray
-if builtin command -V pasystray > /dev/null 2>&1; then
-	batch_cmd="${batch_cmd} dispatch exec pasystray ;"
+# iwgtk
+if builtin command -V iwgtk > /dev/null 2>&1; then
+	batch_cmd="${batch_cmd} dispatch exec iwgtk -i ;"
 fi
 
 # eww or conky

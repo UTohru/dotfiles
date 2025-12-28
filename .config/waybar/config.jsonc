@@ -117,8 +117,7 @@
             "default": ["\uf027", "\uf028"]
         },
         "tooltip-format": "{icon} {volume}% {format_source}",
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
-        "on-right-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+        "on-click": "pavucontrol",
         "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
         "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
     },
