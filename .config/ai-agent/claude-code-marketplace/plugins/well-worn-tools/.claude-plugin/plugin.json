@@ -6,5 +6,5 @@
     "name": "UTohru"
   },
   "keywords": ["github review response"],
-  "commands": ["./commands/github_review_response.md"]
+  "commands": ["./commands"]
 }
