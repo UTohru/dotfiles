@@ -12,10 +12,14 @@ OWNER="$1"
 REPOSITORY="$2"
 PR_NUMBER="$3"
 
-gh api graphql --field query='
-{
-  repository(owner: "'"${OWNER}"'", name: "'"${REPOSITORY}"'") {
-    pullRequest(number: '"${PR_NUMBER}"') {
+gh api graphql \
+  -f owner="${OWNER}" \
+  -f name="${REPOSITORY}" \
+  -F number="${PR_NUMBER}" \
+  --field query='
+query($owner: String!, $name: String!, $number: Int!) {
+  repository(owner: $owner, name: $name) {
+    pullRequest(number: $number) {
       url
       title
       reviewThreads(first: 100) {
