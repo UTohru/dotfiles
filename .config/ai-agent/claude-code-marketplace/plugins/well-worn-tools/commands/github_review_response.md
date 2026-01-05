@@ -18,45 +18,8 @@
 ブランチが見つからない場合は確認が必要です。
 
 ## 2. GraphQL APIを使って、未解決のレビューを取得する。
-```
-gh api graphql --field query='
-{
-  repository(owner: "<Owner>", name: "<Repository>") {
-    pullRequest(number: <PR_Number>) {
-      url
-      title
-      reviewThreads(first: 100) {
-        edges {
-          node {
-            id
-            isResolved
-            isOutdated
-            path
-            line
-            comments(first: 100) {
-              totalCount
-              nodes {
-                id
-                databaseId
-                author { login }
-                body
-                url
-                createdAt
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}' | jq -r '.data.repository.pullRequest.reviewThreads.edges[] | select(.node.isResolved == false) |
-"---
-File: \(.node.path):\(.node.line)
-Thread ID: \(.node.id)
-Status: Unresolved, Outdated=\(.node.isOutdated)
-First Comment ID: \(.node.comments.nodes[0].databaseId)
-Thread (\(.node.comments.totalCount) comments):
-" + (.node.comments.nodes | map("  [\(.author.login)] \(.body | split("\n")[0])") | join("\n")) + "\n"'
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/gh-list-unresolved-reviews.sh <Owner> <Repository> <PR_Number>
 ```
 
 ## 3. 各指摘に対して下記の手順を繰り返す
@@ -66,27 +29,15 @@ Thread (\(.node.comments.totalCount) comments):
 3. コメントIDに対して、返答を追加する。
 
 ### 返答
-```
+```bash
 # 上記で確認したFirst Comment IDを使用
-
-gh api repos/<Owner>/<Repository>/pulls/<PR_Number>/comments/${COMMENT_ID}/replies \
-  --method POST \
-  -f body='[修正内容・対応理由の説明]'
+echo '[修正内容・対応理由の説明]' | ${CLAUDE_PLUGIN_ROOT}/scripts/gh-reply-review-comment.sh <Owner> <Repository> <PR_Number> ${COMMENT_ID}
 ```
 
 ### resolvedにマーク（必用な場合のみ）
-```
+```bash
 # 上記で確認したThread IDを使用
-
-gh api graphql -f query='
-mutation {
-  resolveReviewThread(input: {threadId: "'$THREAD_ID'"}) {
-    thread {
-      isResolved
-    }
-  }
-}'
-
+${CLAUDE_PLUGIN_ROOT}/scripts/gh-resolve-review-thread.sh ${THREAD_ID}
 ```
 
 

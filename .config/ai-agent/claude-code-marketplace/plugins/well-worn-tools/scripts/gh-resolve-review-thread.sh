@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# レビュースレッドをresolvedにマーク
+
+set -euo pipefail
+
+if [[ $# -ne 1 ]]; then
+  echo "Usage: $(basename "$0") <thread_id>" >&2
+  exit 1
+fi
+
+THREAD_ID="$1"
+
+gh api graphql \
+  -f threadId="${THREAD_ID}" \
+  --field query='
+mutation($threadId: ID!) {
+  resolveReviewThread(input: {threadId: $threadId}) {
+    thread {
+      isResolved
+    }
+  }
+}'
