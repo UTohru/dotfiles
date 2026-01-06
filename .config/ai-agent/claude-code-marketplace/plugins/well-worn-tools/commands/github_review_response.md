@@ -17,9 +17,20 @@
 
 ブランチが見つからない場合は確認が必要です。
 
-## 2. GraphQL APIを使って、未解決のレビューを取得する。
+## 2. スクリプトで未解決のレビューを取得する。
 ```bash
 ${CLAUDE_PLUGIN_ROOT}/scripts/gh-list-unresolved-reviews.sh <Owner> <Repository> <PR_Number>
+```
+
+出力例：
+```
+---
+File: path/to/file.sh:45
+Thread ID: PRRT_kwDOHZmjFc5n_6u4
+Status: Unresolved, Outdated=false
+First Comment ID: 2660715204
+Thread (1 comments):
+  [reviewer] コメント内容
 ```
 
 ## 3. 各指摘に対して下記の手順を繰り返す

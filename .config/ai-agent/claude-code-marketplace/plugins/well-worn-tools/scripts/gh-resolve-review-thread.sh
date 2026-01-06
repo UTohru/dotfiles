@@ -11,10 +11,10 @@ fi
 THREAD_ID="$1"
 
 gh api graphql \
-  -f threadId="${THREAD_ID}" \
+  -f thread_id="${THREAD_ID}" \
   --field query='
-mutation($threadId: ID!) {
-  resolveReviewThread(input: {threadId: $threadId}) {
+mutation($thread_id: ID!) {
+  resolveReviewThread(input: {threadId: $thread_id}) {
     thread {
       isResolved
     }

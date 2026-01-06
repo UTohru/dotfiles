@@ -14,15 +14,15 @@ PR_NUMBER="$3"
 
 gh api graphql \
   -f owner="${OWNER}" \
-  -f name="${REPOSITORY}" \
-  -F number="${PR_NUMBER}" \
+  -f repository="${REPOSITORY}" \
+  -F pr_number="${PR_NUMBER}" \
   --field query='
-query($owner: String!, $name: String!, $number: Int!) {
-  repository(owner: $owner, name: $name) {
-    pullRequest(number: $number) {
+query($owner: String!, $repository: String!, $pr_number: Int!) {
+  repository(owner: $owner, name: $repository) {
+    pullRequest(number: $pr_number) {
       url
       title
-      reviewThreads(first: 100) {
+      reviewThreads(first: 10) {
         edges {
           node {
             id
@@ -30,7 +30,7 @@ query($owner: String!, $name: String!, $number: Int!) {
             isOutdated
             path
             line
-            comments(first: 100) {
+            comments(first: 10) {
               totalCount
               nodes {
                 id
