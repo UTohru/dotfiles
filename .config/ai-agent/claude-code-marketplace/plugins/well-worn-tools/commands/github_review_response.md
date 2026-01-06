@@ -30,12 +30,12 @@ Thread ID: PRRT_kwDOHZmkFc5n_6u4
 Status: Unresolved, Outdated=false
 First Comment ID: 2660705204
 Thread (1 comments):
-  [reviewer] コメント内容
+  [reviewer] レビューコメント
 ```
 
-## 3. 各指摘に対して下記の手順を繰り返す
+## 3. 手順2の出力の各指摘に対して下記の手順を繰り返す
 
-1. 指摘内用の正当性を確認する。
+1. コメント（指摘）の正当性を確認する。
 2. 指摘が正しい場合は、改善し、commit, pushする。
 3. コメントIDに対して、返答を追加する。
 
