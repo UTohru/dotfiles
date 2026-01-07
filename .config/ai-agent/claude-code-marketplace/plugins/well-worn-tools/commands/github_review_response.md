@@ -56,7 +56,7 @@ ${CLAUDE_PLUGIN_ROOT}/scripts/gh-resolve-review-thread.sh ${THREAD_ID}
 ## 注意事項
 
 1. 取得制限
-   - Review取得のスクリプトはレビュースレッド最大10件、各スレッドのコメント最大10件まで取得
+   - Review取得のスクリプトはレビュースレッド最大25件、各スレッドのコメント最大10件まで取得
 
 2. 認証
    - `gh`コマンドが自動的に認証情報を使用
