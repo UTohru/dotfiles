@@ -22,7 +22,7 @@ query($owner: String!, $repository: String!, $pr_number: Int!) {
     pullRequest(number: $pr_number) {
       url
       title
-      reviewThreads(first: 25) {
+      reviewThreads(first: 500) {
         edges {
           node {
             id
@@ -46,11 +46,11 @@ query($owner: String!, $repository: String!, $pr_number: Int!) {
       }
     }
   }
-}' | jq -r '.data.repository.pullRequest.reviewThreads.edges[] | select(.node.isResolved == false) |
+}' | jq -r '[.data.repository.pullRequest.reviewThreads.edges[] | select(.node.isResolved == false)] | .[0:20][] |
 "---
 File: \(.node.path):\(.node.line)
 Thread ID: \(.node.id)
 Status: Unresolved, Outdated=\(.node.isOutdated)
 First Comment ID: \(.node.comments.nodes[0].databaseId)
 Thread (\(.node.comments.totalCount) comments):
-" + (.node.comments.nodes | map("  [\(.author.login)] \(.body | split("\n")[0])") | join("\n")) + "\n"'
+" + (.node.comments.nodes | map("  [\(.author.login)]\n\(.body)") | join("\n\n")) + "\n"'
