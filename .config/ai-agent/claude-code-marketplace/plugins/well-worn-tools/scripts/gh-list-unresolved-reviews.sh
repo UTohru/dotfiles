@@ -22,7 +22,7 @@ query($owner: String!, $repository: String!, $pr_number: Int!) {
     pullRequest(number: $pr_number) {
       url
       title
-      reviewThreads(first: 500) {
+      reviewThreads(first: 100) {
         edges {
           node {
             id
