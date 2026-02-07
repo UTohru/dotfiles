@@ -57,7 +57,6 @@ mkdir -p ~/.claude ~/.codex
 
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
-ln -sf "${cdir}/.config/ai-agent/claude-code-marketplace/plugins/well-worn-tools/commands" ~/.codex/prompts
 ln -sf "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
 ln -sf "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
 
