@@ -20,6 +20,7 @@ nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" 
 # default shell
 ZSH="$(command -v zsh 2>/dev/null || true)"
 if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
+  grep -qxF "$ZSH" /etc/shells || echo "$ZSH" | sudo tee -a /etc/shells
   chsh -s "$ZSH"
 fi
 
