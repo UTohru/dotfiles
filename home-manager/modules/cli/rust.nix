@@ -2,7 +2,10 @@
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
-    rustup
+    cargo
+    rustc
+    rustfmt
+    clippy
     eza
     fd
     ripgrep
