@@ -4,14 +4,16 @@
   home.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     udev-gothic
   ];
 
   # Cica / Firge は nixpkgs に存在しないため GitHub Releases から取得する
   home.activation.downloadFonts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     _install_font() {
-      local name=$1 url=$2 dest="$HOME/.local/share/fonts/$name"
+      local name=$1
+      local url=$2
+      local dest="$HOME/.local/share/fonts/$name"
       [ -d "$dest" ] && return
       install -d "$dest"
       ${pkgs.curl}/bin/curl -sfL "$url" -o /tmp/font.zip || { rm -rf "$dest"; return 1; }

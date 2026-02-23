@@ -9,7 +9,7 @@
     eza
     fd
     ripgrep
-    du-dust
+    dust
     sheldon
   ];
 }

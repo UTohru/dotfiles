@@ -1,106 +1,30 @@
-#!/bin/bash
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
-# ===============
-# Mainly create symbolic link
-# ===============
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+HOST="${1:?'Usage: setup.sh <host>'}"
 
-cdir="$(realpath "$(dirname "$0")")"
+# git skip-worktree for local config files
+git -C "$SCRIPT_DIR" update-index --skip-worktree \
+  .config/zsh/localconf/rc.zsh \
+  .config/zsh/localconf/profile.zsh \
+  .config/i3/enable/local.conf \
+  .config/sway/enable/local.conf \
+  .config/hypr/local.conf \
+  2>/dev/null || true
 
-# ===============
-# ignore localconf
-# ===============
-ignore_list=("${cdir}/.config/zsh/localconf/rc.zsh" "${cdir}/.config/zsh/localconf/profile.zsh" "${cdir}/.config/i3/enable/local.conf" "${cdir}/.config/sway/enable/local.conf" "${cdir}/.config/hypr/local.conf")
-git update-index --skip-worktree ${ignore_list[@]}
+# home-manager switch
+export REPO_DIR="$(dirname "$SCRIPT_DIR")"
+nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" --impure
 
-
-# ===============
-# vim
-# ===============
-if [ -x "$(command -v vim)" ]; then
-	if [ -d ~/.vim ]; then
-		rm -rf ~/.vim
-	fi
-	ln -sf ${cdir}/vim ~/.vim
-	ln -sf ${cdir}/.vimrc ~/.vimrc
+# default shell
+ZSH="$(command -v zsh 2>/dev/null || true)"
+if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
+  chsh -s "$ZSH"
 fi
 
-
-# ===============
-# config links
-# ===============
-
-function ln_config() {
-	if [ ! -d ~/.config ]; then
-		mkdir ~/.config
-	fi
-	for path in "${cdir}"/.config/*
-	do
-		src="$(basename "${path}")"
-		if [ -d ~/.config/"${src}" ]; then
-			rm -rf ~/.config/"${src}"
-		fi
-		ln -sf "${path}" ~/.config/"${src}"
-	done
-}
-
-ln_config
-
-if [ ! -d ${cdir}/.config/i3/wallpaper ]; then
-	mkdir ${cdir}/.config/i3/wallpaper
+# docker group
+if command -v docker &>/dev/null; then
+  getent group docker &>/dev/null || sudo groupadd docker
+  sudo usermod -aG docker "$USER"
 fi
-
-# ===============
-# claude & codex
-# ===============
-mkdir -p ~/.claude ~/.codex
-
-ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
-ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
-ln -sf "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
-ln -sf "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
-
-# ===============
-# other links
-# ===============
-ln -sf ${cdir}/.zshenv ~/.zshenv
-ln -sf ${cdir}/_shell/dircolors ~/.dircolors
-
-ln -sf ${cdir}/others/.textlintrc ~/.textlintrc
-if [ ! -d ~/.local/share/deno_ts ]; then
-	mkdir -p ~/.local/share/deno_ts
-fi
-ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
-
-ln -sf ${cdir}/.xprofile ~/.xprofile
-
-
-# ===============
-# wsl (ubuntu)
-# ===============
-if [[ -d /run/WSL ]]; then
-	if command -V powershell.exe > /dev/null 2>&1; then
-		WIN_USERDIR=$(wslpath -ua $(powershell.exe '$env:USERPROFILE' | sed -e 's/[\r\n]\+//g'))
-		if [ ! -L $HOME/desktop ]; then
-			ln -sf $WIN_USERDIR/Desktop ~/desktop
-		fi
-		echo "export WIN_USER=${WIN_USERDIR##*/}" >> ~/.config/zsh/localconf/profile.zsh
-	fi
-	sudo apt -y install language-pack-ja manpages-ja manpages-ja-dev
-	sudo update-locale LANG=ja_JP.UTF8
-	{
-		echo -e "[interop]\nappendWindowsPath = false"
-		echo -e "[boot]\nsystemd = true"
-	} | sudo tee /etc/wsl.conf >/dev/null
-	echo "set bell-style none" > ~/.inputrc
-
-	if [ ! -d ~/.local/bin ]; then
-		mkdir -p ~/.local/bin
-	fi
-	ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe $HOME/.local/bin/powershell.exe
-	ln -sf /mnt/c/Windows/System32/cmd.exe $HOME/.local/bin/cmd.exe
-	ln -sf /mnt/c/Windows/explorer.exe $HOME/.local/bin/explorer.exe
-	ln -sf /mnt/c/Windows/System32/clip.exe $HOME/.local/bin/clip.exe
-fi
-
-echo "complete!"
