@@ -1,9 +1,8 @@
-# インフラ開発ツール群
 { lib, config, pkgs, ... }:
 {
   options.infra = {
     terraform.enable  = lib.mkEnableOption "terraform";
-    aws.enable        = lib.mkEnableOption "aws cli (session-manager-plugin 含む)";
+    aws.enable        = lib.mkEnableOption "aws cli (includes session-manager-plugin)";
     gcloud.enable     = lib.mkEnableOption "gcloud";
     cloudflare.enable = lib.mkEnableOption "cloudflare wrangler";
   };

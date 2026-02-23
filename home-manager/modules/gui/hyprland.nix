@@ -1,4 +1,3 @@
-# Hyprland (Wayland) 環境
 { pkgs, lib, repoDir, config, ... }:
 {
   home.packages = with pkgs; [

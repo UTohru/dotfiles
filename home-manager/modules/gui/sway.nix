@@ -1,4 +1,3 @@
-# Sway (Wayland) 環境
 { pkgs, repoDir, config, ... }:
 {
   home.packages = with pkgs; [

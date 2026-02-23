@@ -1,4 +1,3 @@
-# Python プロジェクト管理
 { lib, config, pkgs, ... }:
 {
   options.python = {

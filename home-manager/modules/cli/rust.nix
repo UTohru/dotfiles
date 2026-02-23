@@ -1,4 +1,3 @@
-# Rust ツール群
 { pkgs, ... }:
 {
   home.packages = with pkgs; [

@@ -1,5 +1,4 @@
-# Go ランタイムとツール群
-# pike (github.com/jameswoolfenden/pike) は nixpkgs に存在しないため除外
+# pike (github.com/jameswoolfenden/pike) is not in nixpkgs
 { pkgs, ... }:
 {
   home.packages = with pkgs; [

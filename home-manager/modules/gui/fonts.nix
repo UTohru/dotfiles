@@ -1,4 +1,3 @@
-# フォント
 { lib, pkgs, ... }:
 {
   home.packages = with pkgs; [
@@ -8,7 +7,7 @@
     udev-gothic
   ];
 
-  # Cica / Firge は nixpkgs に存在しないため GitHub Releases から取得する
+  # Cica and Firge are not in nixpkgs; download from GitHub Releases
   home.activation.downloadFonts = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     _install_font() {
       local name=$1

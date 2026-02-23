@@ -1,4 +1,3 @@
-# i3 (X11) 環境
 { config, pkgs, repoDir, ... }:
 {
   home.packages = with pkgs; [

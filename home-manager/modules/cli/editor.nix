@@ -1,4 +1,3 @@
-# エディタ: vim / nvim を host ごとに選択可能（両方 enable にもできる）
 { lib, config, pkgs, repoDir, ... }:
 {
   options.editor = {

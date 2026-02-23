@@ -1,4 +1,3 @@
-# Wayland 共通パッケージ（sway / hyprland で共用）
 { pkgs, repoDir, config, ... }:
 {
   home.packages = with pkgs; [
