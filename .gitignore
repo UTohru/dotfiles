@@ -20,6 +20,9 @@ mlterm/challenge
 
 .config/zsh/.zcompdump*
 
+.config/environment.d/10-home-manager.conf
+.config/environment.d/*.backup
+
 .config/claude/*
 !.config/claude/CLAUDE.md
 !.config/claude/settings.json
