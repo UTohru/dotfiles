@@ -11,6 +11,9 @@
     pasystray
   ];
 
+  home.sessionVariables.TERMINAL = "wezterm";
+  systemd.user.sessionVariables.TERMINAL = "wezterm";
+
   home.file.".config/i3".source =
     config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/.config/i3";
   home.file.".config/i3status".source =
