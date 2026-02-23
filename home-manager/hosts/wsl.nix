@@ -1,5 +1,5 @@
 # WSL: CLI-only with Windows interop
-{ lib, config, ... }:
+{ lib, ... }:
 {
   imports = [
     ../modules/dotfiles.nix
@@ -15,21 +15,18 @@
   editor.nvim.enable = true;
   python.uv.enable = true;
 
-  # Windows バイナリへのシンボリックリンク
-  home.file = {
-    ".local/bin/powershell.exe".source = /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe;
-    ".local/bin/cmd.exe".source        = /mnt/c/Windows/System32/cmd.exe;
-    ".local/bin/explorer.exe".source   = /mnt/c/Windows/explorer.exe;
-    ".local/bin/clip.exe".source       = /mnt/c/Windows/System32/clip.exe;
-  };
-
-  # Windows ユーザーディレクトリへのシンボリックリンクと WIN_USER 設定
   home.activation.wslSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if command -v powershell.exe &>/dev/null; then
+      mkdir -p "$HOME/.local/bin"
+      ln -sf /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe "$HOME/.local/bin/powershell.exe"
+      ln -sf /mnt/c/Windows/System32/cmd.exe "$HOME/.local/bin/cmd.exe"
+      ln -sf /mnt/c/Windows/explorer.exe "$HOME/.local/bin/explorer.exe"
+      ln -sf /mnt/c/Windows/System32/clip.exe "$HOME/.local/bin/clip.exe"
+
       WIN_USERDIR=$(wslpath -ua "$(powershell.exe '$env:USERPROFILE' | tr -d '\r\n')")
       [ -L "$HOME/desktop" ] || ln -sf "$WIN_USERDIR/Desktop" "$HOME/desktop"
       grep -q "WIN_USER" "$HOME/.config/zsh/localconf/profile.zsh" 2>/dev/null \
-        || echo "export WIN_USER=${WIN_USERDIR##*/}" >> "$HOME/.config/zsh/localconf/profile.zsh"
+        || echo "export WIN_USER=''${WIN_USERDIR##*/}" >> "$HOME/.config/zsh/localconf/profile.zsh"
     fi
   '';
 }
