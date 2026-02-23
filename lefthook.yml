@@ -1,0 +1,23 @@
+pre-commit:
+  parallel: true
+  commands:
+
+    flake-eval:
+      glob: "home-manager/**/*.nix"
+      run: nix flake check --no-build ./home-manager
+
+    home-manager-i3:
+      glob: "home-manager/**/*.nix"
+      run: REPO_DIR=$(git rev-parse --show-toplevel)/.. nix build ./home-manager#homeConfigurations.i3.activationPackage --dry-run --impure
+
+    home-manager-hyprland:
+      glob: "home-manager/**/*.nix"
+      run: REPO_DIR=$(git rev-parse --show-toplevel)/.. nix build ./home-manager#homeConfigurations.hyprland.activationPackage --dry-run --impure
+
+    home-manager-wsl:
+      glob: "home-manager/**/*.nix"
+      run: REPO_DIR=$(git rev-parse --show-toplevel)/.. nix build ./home-manager#homeConfigurations.wsl.activationPackage --dry-run --impure
+
+    home-manager-server:
+      glob: "home-manager/**/*.nix"
+      run: REPO_DIR=$(git rev-parse --show-toplevel)/.. nix build ./home-manager#homeConfigurations.server.activationPackage --dry-run --impure

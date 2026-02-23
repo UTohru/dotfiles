@@ -1,5 +1,5 @@
 # ホームディレクトリへのシンボリックリンク設定
-{ config, repoDir, ... }:
+{ config, lib, pkgs, repoDir, ... }:
 let
   link = path: config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/${path}";
 in
@@ -28,4 +28,8 @@ in
     ".config/ai-agent".source      = link ".config/ai-agent";
     ".config/conky".source         = link ".config/conky";
   };
+
+  home.activation.lefthookInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ${pkgs.lefthook}/bin/lefthook install -f "${repoDir}/dotfiles"
+  '';
 }

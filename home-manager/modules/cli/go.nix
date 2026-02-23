@@ -6,5 +6,6 @@
     go
     efm-langserver
     terraform-docs
+    lefthook
   ];
 }
