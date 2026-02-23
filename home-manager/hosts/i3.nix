@@ -1,5 +1,5 @@
 # i3 (X11) desktop with full CLI toolchain
-{ ... }:
+{ lib, pkgs, ... }:
 {
   imports = [
     ../modules/dotfiles.nix

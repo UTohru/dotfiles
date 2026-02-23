@@ -31,6 +31,6 @@ in
   };
 
   home.activation.lefthookInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    ${pkgs.lefthook}/bin/lefthook install -f "${repoDir}/dotfiles"
+    (cd "${repoDir}/dotfiles" && ${pkgs.lefthook}/bin/lefthook install)
   '';
 }
