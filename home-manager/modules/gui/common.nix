@@ -1,5 +1,3 @@
-# GUI 共通パッケージ（X11/Wayland 問わず使用）
-# pipewire はシステムレベルのサービスのため管理外
 { pkgs, ... }:
 {
   home.packages = with pkgs; [
@@ -10,7 +8,9 @@
     blueman
     networkmanagerapplet
     i3status-rust
+    wezterm
     alacritty
+    ulauncher
     pandoc
   ];
 }

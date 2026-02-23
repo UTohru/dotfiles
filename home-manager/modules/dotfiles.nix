@@ -1,4 +1,3 @@
-# ホームディレクトリへのシンボリックリンク設定
 { config, lib, pkgs, repoDir, ... }:
 let
   link = path: config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/${path}";
@@ -11,7 +10,7 @@ in
     ".textlintrc".source                      = link "others/.textlintrc";
     ".local/share/deno_ts/textlint.ts".source = link "others/textlint.ts";
 
-    # AI エージェント設定
+    # AI agent config
     ".claude/CLAUDE.md".source    = link ".config/ai-agent/AGENTS.md";
     ".claude/settings.json".source = link ".config/ai-agent/claude-config.json";
     ".codex/AGENTS.md".source     = link ".config/ai-agent/AGENTS.md";
@@ -24,6 +23,8 @@ in
     ".config/zathura".source       = link ".config/zathura";
     ".config/latexmk".source       = link ".config/latexmk";
     ".config/environment.d/wayland.conf".source = link ".config/environment.d/wayland.conf";
+    ".config/wezterm".source       = link ".config/wezterm";
+    ".config/alacritty".source     = link ".config/alacritty";
     ".config/greetd".source        = link ".config/greetd";
     ".config/ai-agent".source      = link ".config/ai-agent";
     ".config/conky".source         = link ".config/conky";

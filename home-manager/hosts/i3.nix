@@ -13,7 +13,6 @@
     ../modules/gui/common.nix
     ../modules/gui/i3.nix
     ../modules/gui/fonts.nix
-    ../modules/gui/terminal.nix
     ../modules/gui/apps.nix
   ];
 

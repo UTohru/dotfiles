@@ -14,7 +14,6 @@
     ../modules/gui/wayland-common.nix
     ../modules/gui/hyprland.nix
     ../modules/gui/fonts.nix
-    ../modules/gui/terminal.nix
     ../modules/gui/apps.nix
   ];
 
