@@ -8,6 +8,7 @@
     ffmpeg
     pavucontrol
     blueman
+    networkmanagerapplet
     i3status-rust
     alacritty
     pandoc

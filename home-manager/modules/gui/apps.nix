@@ -7,6 +7,7 @@
   ];
 
   home.packages = with pkgs; [
+    firefox
     ulauncher
     zoom-us
     discord
