@@ -3,6 +3,7 @@
 {
   imports = [
     ../modules/dotfiles.nix
+    ../modules/cli/base.nix
     ../modules/cli/rust.nix
     ../modules/cli/go.nix
     ../modules/cli/node.nix

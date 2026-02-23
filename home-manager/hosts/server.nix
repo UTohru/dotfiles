@@ -3,6 +3,7 @@
 {
   imports = [
     ../modules/dotfiles.nix
+    ../modules/cli/base.nix
     ../modules/cli/editor.nix
   ];
 
