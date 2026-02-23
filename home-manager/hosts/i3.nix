@@ -1,4 +1,4 @@
-# Arch Linux: Hyprland (Wayland) + フル CLI 構成
+# i3 (X11) desktop with full CLI toolchain
 { ... }:
 {
   imports = [
@@ -11,8 +11,7 @@
     ../modules/cli/editor.nix
     ../modules/cli/python.nix
     ../modules/gui/common.nix
-    ../modules/gui/wayland-common.nix
-    ../modules/gui/hyprland.nix
+    ../modules/gui/i3.nix
     ../modules/gui/fonts.nix
     ../modules/gui/terminal.nix
     ../modules/gui/apps.nix

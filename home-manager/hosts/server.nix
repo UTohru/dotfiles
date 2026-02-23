@@ -1,4 +1,4 @@
-# サーバー: 最小 CLI 構成
+# Minimal CLI server configuration
 { ... }:
 {
   imports = [

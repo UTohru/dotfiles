@@ -37,8 +37,8 @@
     in
     {
       homeConfigurations = {
-        desktop = mkHost ./hosts/desktop.nix;
-        arch    = mkHost ./hosts/arch.nix;
+        i3       = mkHost ./hosts/i3.nix;
+        hyprland = mkHost ./hosts/hyprland.nix;
         wsl     = mkHost ./hosts/wsl.nix;
         server  = mkHost ./hosts/server.nix;
       };

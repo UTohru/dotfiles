@@ -1,4 +1,4 @@
-# WSL (Ubuntu): GUI なし、CLI + Windows 連携
+# WSL: CLI-only with Windows interop
 { lib, config, ... }:
 {
   imports = [
