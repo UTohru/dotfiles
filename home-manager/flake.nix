@@ -14,13 +14,11 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
 
-      # --impure で実行時の環境変数から取得する
+      # requires --impure; read from environment at runtime
       username = builtins.getEnv "USER";
       homeDirectory = builtins.getEnv "HOME";
       repoDir = builtins.getEnv "REPO_DIR";
-
-      # 初回 home-manager switch 時のバージョンに合わせて設定し、以後変更しない
-      stateVersion = "24.11";
+      stateVersion = "25.11";
 
       mkHost = host: home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
