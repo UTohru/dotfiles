@@ -4,6 +4,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 HOST="${1:?'Usage: setup.sh <host>'}"
 
+# Check required commands
+for cmd in git nix; do
+  command -v "$cmd" &>/dev/null || { echo "Error: $cmd is required but not found" >&2; exit 1; }
+done
+
 # git skip-worktree for local config files
 git -C "$SCRIPT_DIR" update-index --skip-worktree \
   .config/zsh/localconf/rc.zsh \
@@ -15,7 +20,7 @@ git -C "$SCRIPT_DIR" update-index --skip-worktree \
 
 # home-manager switch
 export REPO_DIR="$(dirname "$SCRIPT_DIR")"
-nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" --impure
+nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" --impure -b backup
 
 # default shell
 ZSH="$(command -v zsh 2>/dev/null || true)"

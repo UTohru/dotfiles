@@ -10,6 +10,7 @@
     ../modules/cli/deno.nix
     ../modules/cli/editor.nix
     ../modules/cli/python.nix
+    ../modules/cli/infra.nix
   ];
 
   editor.vim.enable = true;

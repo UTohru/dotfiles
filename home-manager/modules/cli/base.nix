@@ -4,5 +4,6 @@
     zsh
     jq
     libsixel
+    git
   ];
 }
