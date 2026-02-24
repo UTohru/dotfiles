@@ -19,7 +19,7 @@
 
 ## 2. スクリプトで未解決のレビューを取得する。
 ```bash
-${CLAUDE_PLUGIN_ROOT}/scripts/gh-list-unresolved-reviews.sh <Owner> <Repository> <PR_Number>
+~/.config/ai-agent/scripts/gh-list-unresolved-reviews.sh <Owner> <Repository> <PR_Number>
 ```
 
 出力例：
@@ -42,7 +42,7 @@ Thread (1 comments):
 ### 返答
 ```bash
 # 上記で確認したFirst Comment IDを使用
-echo '[修正内容・対応理由の説明]' | ${CLAUDE_PLUGIN_ROOT}/scripts/gh-reply-review-comment.sh <Owner> <Repository> <PR_Number> ${COMMENT_ID}
+echo '[修正内容・対応理由の説明]' | ~/.config/ai-agent/scripts/gh-reply-review-comment.sh <Owner> <Repository> <PR_Number> ${COMMENT_ID}
 ```
 
 修正したコミットハッシュを書くと親切です。
@@ -50,7 +50,7 @@ echo '[修正内容・対応理由の説明]' | ${CLAUDE_PLUGIN_ROOT}/scripts/gh
 ### resolvedにマーク（必用な場合のみ）
 ```bash
 # 上記で確認したThread IDを使用
-${CLAUDE_PLUGIN_ROOT}/scripts/gh-resolve-review-thread.sh ${THREAD_ID}
+~/.config/ai-agent/scripts/gh-resolve-review-thread.sh ${THREAD_ID}
 ```
 
 ## 注意事項

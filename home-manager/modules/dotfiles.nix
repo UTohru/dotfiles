@@ -11,9 +11,10 @@ in
     ".local/share/deno_ts/textlint.ts".source = link "others/textlint.ts";
 
     # AI agent config
-    ".claude/CLAUDE.md".source    = link ".config/ai-agent/AGENTS.md";
-    ".codex/AGENTS.md".source     = link ".config/ai-agent/AGENTS.md";
-    ".codex/config.toml".source   = link ".config/ai-agent/codex-config.toml";
+    ".claude/CLAUDE.md".source      = link ".config/ai-agent/AGENTS.md";
+    ".claude/commands".source       = link ".config/ai-agent/commands";
+    ".codex/AGENTS.md".source       = link ".config/ai-agent/AGENTS.md";
+    ".codex/config.toml".source     = link ".config/ai-agent/codex-config.toml";
 
     ".config/zsh".source           = link ".config/zsh";
     ".config/sheldon".source       = link ".config/sheldon";
