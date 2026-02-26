@@ -24,6 +24,7 @@
         inherit pkgs;
         extraSpecialArgs = { inherit repoDir; };
         modules = [
+          ./modules/nixpkgs.nix
           host
           {
             home.username = username;

@@ -2,6 +2,7 @@
 { ... }:
 {
   imports = [
+    ./local-device-setting.nix
     ../modules/dotfiles.nix
     ../modules/cli/base.nix
     ../modules/cli/rust.nix
@@ -12,6 +13,7 @@
     ../modules/cli/editor.nix
     ../modules/cli/python.nix
     ../modules/gui/common.nix
+    ../modules/gui/terminal.nix
     ../modules/gui/wayland-common.nix
     ../modules/gui/hyprland.nix
     ../modules/gui/fonts.nix

@@ -2,6 +2,7 @@
 { lib, pkgs, ... }:
 {
   imports = [
+    ./local-device-setting.nix
     ../modules/dotfiles.nix
     ../modules/cli/base.nix
     ../modules/cli/rust.nix
@@ -12,6 +13,7 @@
     ../modules/cli/editor.nix
     ../modules/cli/python.nix
     ../modules/gui/common.nix
+    ../modules/gui/terminal.nix
     ../modules/gui/i3.nix
     ../modules/gui/fonts.nix
     ../modules/gui/apps.nix
