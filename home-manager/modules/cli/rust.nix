@@ -10,5 +10,6 @@
     ripgrep
     dust
     sheldon
+    zoxide
   ];
 }
