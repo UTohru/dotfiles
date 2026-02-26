@@ -11,11 +11,22 @@ git -C "$SCRIPT_DIR" update-index --skip-worktree \
   .config/i3/enable/local.conf \
   .config/sway/enable/local.conf \
   .config/hypr/local.conf \
+  home-manager/hosts/local-device-setting.nix \
   2>/dev/null || true
 
 # home-manager switch
 export REPO_DIR="$(dirname "$SCRIPT_DIR")"
 nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" --impure
+
+# OpenGL driver setup for non-NixOS desktop environments
+case "$HOST" in
+  i3|hyprland)
+    GPU_SETUP="$HOME/.nix-profile/bin/non-nixos-gpu-setup"
+    if [[ -x "$GPU_SETUP" ]]; then
+      sudo "$GPU_SETUP"
+    fi
+    ;;
+esac
 
 # default shell
 ZSH="$(command -v zsh 2>/dev/null || true)"

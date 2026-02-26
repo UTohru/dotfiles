@@ -1,9 +1,6 @@
 { pkgs, ... }:
 {
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-    "zoom"
-    "discord"
-  ];
+  allowUnfreePackages = [ "zoom" "discord" ];
 
   home.packages = with pkgs; [
     firefox
