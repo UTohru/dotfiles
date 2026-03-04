@@ -5,5 +5,6 @@
     jq
     libsixel
     git
+    gh
   ];
 }
