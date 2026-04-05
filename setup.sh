@@ -1,47 +1,89 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/bash
+set -e
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-HOST="${1:?'Usage: setup.sh <host>'}"
+cdir="$(realpath "$(dirname "$0")")"
 
-# Check required commands
-for cmd in git nix; do
-  command -v "$cmd" &>/dev/null || { echo "Error: $cmd is required but not found" >&2; exit 1; }
-done
+# ===============
+# ignore localconf
+# ===============
+ignore_list=("${cdir}/.config/zsh/localconf/rc.zsh" "${cdir}/.config/zsh/localconf/profile.zsh" "${cdir}/.config/i3/enable/local.conf" "${cdir}/.config/sway/enable/local.conf" "${cdir}/.config/hypr/local.conf")
+git update-index --skip-worktree ${ignore_list[@]}
 
-# git skip-worktree for local config files
-git -C "$SCRIPT_DIR" update-index --skip-worktree \
-  .config/zsh/localconf/rc.zsh \
-  .config/zsh/localconf/profile.zsh \
-  .config/i3/enable/local.conf \
-  .config/sway/enable/local.conf \
-  .config/hypr/local.conf \
-  home-manager/hosts/local-device-setting.nix \
-  2>/dev/null || true
 
-# home-manager switch
-export REPO_DIR="$(dirname "$SCRIPT_DIR")"
-nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#$HOST" --impure -b backup
-
-# OpenGL driver setup for non-NixOS desktop environments
-case "$HOST" in
-  i3|hyprland)
-    GPU_SETUP="$HOME/.nix-profile/bin/non-nixos-gpu-setup"
-    if [[ -x "$GPU_SETUP" ]]; then
-      sudo "$GPU_SETUP"
-    fi
-    ;;
-esac
-
-# default shell
-ZSH="$(command -v zsh 2>/dev/null || true)"
-if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
-  grep -qxF "$ZSH" /etc/shells || echo "$ZSH" | sudo tee -a /etc/shells
-  chsh -s "$ZSH"
+# ===============
+# vim
+# ===============
+if [ -x "$(command -v vim)" ]; then
+	if [ -d ~/.vim ]; then
+		rm -rf ~/.vim
+	fi
+	ln -sf ${cdir}/vim ~/.vim
+	ln -sf ${cdir}/.vimrc ~/.vimrc
 fi
 
-# docker group
-if command -v docker &>/dev/null; then
-  getent group docker &>/dev/null || sudo groupadd docker
-  sudo usermod -aG docker "$USER"
+
+# ===============
+# config links
+# ===============
+
+function ln_config() {
+	if [ ! -d ~/.config ]; then
+		mkdir ~/.config
+	fi
+	for path in "${cdir}"/.config/*
+	do
+		src="$(basename "${path}")"
+		if [ -d ~/.config/"${src}" ]; then
+			rm -rf ~/.config/"${src}"
+		fi
+		ln -sf "${path}" ~/.config/"${src}"
+	done
+}
+
+ln_config
+
+if [ ! -d ${cdir}/.config/i3/wallpaper ]; then
+	mkdir ${cdir}/.config/i3/wallpaper
 fi
+
+# ===============
+# claude, codex, gemini, copilot
+# ===============
+mkdir -p ~/.claude ~/.codex ~/.gemini ~/.copilot
+
+ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
+ln -sfn "${cdir}/.config/ai-agent/commands" ~/.claude/commands
+ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
+ln -sf "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
+
+# AI agent settings
+# Remove stale symlinks (e.g. from home-manager) before writing
+rm -f ~/.claude/settings.json
+ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
+ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
+
+# claude settings.json = claude-config.json + mcpServers merged
+if [ -x "$(command -v jq)" ]; then
+	mcp_servers=$(jq '.mcpServers' "${cdir}/.config/ai-agent/mcp-servers.json")
+	jq --argjson mcp "$mcp_servers" '. + { mcpServers: $mcp }' \
+		"${cdir}/.config/ai-agent/claude-config.json" > ~/.claude/settings.json
+else
+	echo "Warning: jq not found, linking claude-config.json without mcpServers" >&2
+	ln -sf "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
+fi
+
+# ===============
+# other links
+# ===============
+ln -sf ${cdir}/.zshenv ~/.zshenv
+ln -sf ${cdir}/_shell/dircolors ~/.dircolors
+
+ln -sf ${cdir}/others/.textlintrc ~/.textlintrc
+if [ ! -d ~/.local/share/deno_ts ]; then
+	mkdir -p ~/.local/share/deno_ts
+fi
+ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
+
+ln -sf ${cdir}/.xprofile ~/.xprofile
+
+echo "complete!"

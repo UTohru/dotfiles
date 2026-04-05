@@ -1,9 +1,14 @@
 { config, lib, pkgs, repoDir, ... }:
 let
   link = path: config.lib.file.mkOutOfStoreSymlink "${repoDir}/dotfiles/${path}";
+  mcpServers = (builtins.fromJSON (builtins.readFile "${repoDir}/dotfiles/.config/ai-agent/mcp-servers.json")).mcpServers;
+  claudeConfig = builtins.fromJSON (builtins.readFile "${repoDir}/dotfiles/.config/ai-agent/claude-config.json");
 in
 {
   home.file = {
+    ".claude/settings.json".text = builtins.toJSON (claudeConfig // { inherit mcpServers; });
+    ".gemini/settings.json".text = builtins.toJSON { inherit mcpServers; };
+    ".copilot/mcp-config.json".text = builtins.toJSON { inherit mcpServers; };
     ".zshenv".source                          = link ".zshenv";
     ".xprofile".source                        = link ".xprofile";
     ".dircolors".source                       = link "_shell/dircolors";
@@ -20,14 +25,7 @@ in
     ".config/sheldon".source       = link ".config/sheldon";
     ".config/tmux".source          = link ".config/tmux";
     ".config/efm-langserver".source = link ".config/efm-langserver";
-    ".config/zathura".source       = link ".config/zathura";
-    ".config/latexmk".source       = link ".config/latexmk";
-    ".config/environment.d/wayland.conf".source = link ".config/environment.d/wayland.conf";
-    ".config/wezterm".source       = link ".config/wezterm";
-    ".config/alacritty".source     = link ".config/alacritty";
-    ".config/greetd".source        = link ".config/greetd";
     ".config/ai-agent".source      = link ".config/ai-agent";
-    ".config/conky".source         = link ".config/conky";
   };
 
   home.activation.lefthookInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
