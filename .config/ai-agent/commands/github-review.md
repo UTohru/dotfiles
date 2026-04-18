@@ -1,3 +1,6 @@
+---
+allowed-tools: Bash(git remote:*), Bash(gh pr status:*), Bash(~/.config/ai-agent/scripts/gh-list-unresolved-reviews.sh:*), Bash(echo:*), Bash(~/.config/ai-agent/scripts/gh-reply-review-comment.sh:*), Bash(~/.config/ai-agent/scripts/gh-resolve-review-thread.sh:*), Bash(git commit:*), Bash(git push:*)
+---
 
 以下の手順でgithubのPRに対するレビューを読んで、対応を行ってください。
 
