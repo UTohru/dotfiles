@@ -64,7 +64,7 @@ cp "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
 rm -f ~/.claude/settings.json
 # gemini settings.json: overwrite from tracked on every run
 cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
-ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
+cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
 
 # claude settings.json = claude-config.json + mcpServers merged
 if [ -x "$(command -v jq)" ]; then

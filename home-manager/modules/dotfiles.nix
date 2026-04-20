@@ -6,7 +6,6 @@ let
 in
 {
   home.file = {
-    ".copilot/mcp-config.json".text = builtins.toJSON { inherit mcpServers; };
     ".zshenv".source                          = link ".zshenv";
     ".xprofile".source                        = link ".xprofile";
     ".dircolors".source                       = link "_shell/dircolors";

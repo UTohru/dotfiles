@@ -25,6 +25,10 @@ if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
   chsh -s "$ZSH"
 fi
 
+# copilot mcp config: overwrite from tracked on every run
+mkdir -p "$HOME/.copilot"
+cp "$SCRIPT_DIR/.config/ai-agent/mcp-servers.json" "$HOME/.copilot/mcp-config.json"
+
 # claude settings.json: overwrite from tracked on every run (claude-config + mcpServers)
 mkdir -p "$HOME/.claude"
 rm -f "$HOME/.claude/settings.json"
