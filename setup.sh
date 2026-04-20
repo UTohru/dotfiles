@@ -86,4 +86,17 @@ ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
 
 ln -sf ${cdir}/.xprofile ~/.xprofile
 
+# ===============
+# review-response plugin
+# ===============
+if command -v codex &>/dev/null; then
+	codex marketplace add "${cdir}/.config/ai-agent"
+fi
+
+if command -v gemini &>/dev/null; then
+	if [ ! -d "${HOME}/.gemini/extensions/review-response" ]; then
+		gemini extensions link --consent "${cdir}/.config/ai-agent/plugins/review-response"
+	fi
+fi
+
 echo "complete!"

@@ -8,14 +8,10 @@ if [[ $# -ne 3 ]]; then
   exit 1
 fi
 
-OWNER="$1"
-REPOSITORY="$2"
-PR_NUMBER="$3"
-
 gh api graphql \
-  -f owner="${OWNER}" \
-  -f repository="${REPOSITORY}" \
-  -F pr_number="${PR_NUMBER}" \
+  -f owner="${1}" \
+  -f repository="${2}" \
+  -F pr_number="${3}" \
   --field query='
 query($owner: String!, $repository: String!, $pr_number: Int!) {
   repository(owner: $owner, name: $repository) {

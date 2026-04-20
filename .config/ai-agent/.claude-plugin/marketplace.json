@@ -1,0 +1,9 @@
+{
+  "plugins": [
+    {
+      "name": "review-response",
+      "path": "plugins/review-response",
+      "description": "GitHub PRのレビューコメントへの対応を行う"
+    }
+  ]
+}

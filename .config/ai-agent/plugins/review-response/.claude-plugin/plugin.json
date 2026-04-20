@@ -1,0 +1,12 @@
+{
+  "name": "review-response",
+  "version": "1.0.0",
+  "description": "GitHub PRのレビューコメントへの対応を行う",
+  "commands": [
+    {
+      "name": "review-response",
+      "description": "GitHub PRのレビューコメントへの対応を行う",
+      "source": "../skills/review-response/SKILL.md"
+    }
+  ]
+}
