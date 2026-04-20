@@ -61,7 +61,7 @@ cp "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
 # AI agent settings
 # Remove stale symlinks (e.g. from home-manager) before writing
 rm -f ~/.claude/settings.json
-# gemini settings.json: overwrite from tracked on every run
+# gemini/copilot mcp config: overwrite from tracked on every run
 cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
 cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
 
