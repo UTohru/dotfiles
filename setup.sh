@@ -52,7 +52,6 @@ fi
 mkdir -p ~/.claude ~/.codex ~/.gemini ~/.copilot
 
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
-ln -sfn "${cdir}/.config/ai-agent/commands" ~/.claude/commands
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
 
 # codex config: overwrite from tracked on every run (tracked is source of truth; CLI runtime writes are reset)
@@ -72,8 +71,8 @@ if [ -x "$(command -v jq)" ]; then
 	jq --argjson mcp "$mcp_servers" '. + { mcpServers: $mcp }' \
 		"${cdir}/.config/ai-agent/claude-config.json" > ~/.claude/settings.json
 else
-	echo "Warning: jq not found, linking claude-config.json without mcpServers" >&2
-	ln -sf "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
+	echo "Warning: jq not found, copying claude-config.json without mcpServers" >&2
+	cp "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
 fi
 
 # ===============

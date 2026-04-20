@@ -14,7 +14,6 @@ in
 
     # AI agent config
     ".claude/CLAUDE.md".source      = link ".config/ai-agent/AGENTS.md";
-    ".claude/commands".source       = link ".config/ai-agent/commands";
     ".codex/AGENTS.md".source       = link ".config/ai-agent/AGENTS.md";
 
     ".config/zsh".source           = link ".config/zsh";
