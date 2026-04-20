@@ -25,6 +25,17 @@ if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
   chsh -s "$ZSH"
 fi
 
+# claude settings.json: overwrite from tracked on every run (claude-config + mcpServers)
+mkdir -p "$HOME/.claude"
+rm -f "$HOME/.claude/settings.json"
+if command -v jq &>/dev/null; then
+  mcp_servers=$(jq '.mcpServers' "$SCRIPT_DIR/.config/ai-agent/mcp-servers.json")
+  jq --argjson mcp "$mcp_servers" '. + { mcpServers: $mcp }' \
+    "$SCRIPT_DIR/.config/ai-agent/claude-config.json" > "$HOME/.claude/settings.json"
+else
+  cp "$SCRIPT_DIR/.config/ai-agent/claude-config.json" "$HOME/.claude/settings.json"
+fi
+
 # codex config: overwrite from tracked on every run (tracked is source of truth; CLI runtime writes are reset)
 if command -v codex &>/dev/null; then
   mkdir -p "$HOME/.codex"

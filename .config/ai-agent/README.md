@@ -28,10 +28,9 @@ Not auto-registered. Run the following inside Claude Code once:
 
 ```
 /plugin marketplace add <path-to-dotfiles>/.config/ai-agent
-/plugin install review-response@<marketplace-name>
+/plugin install review-response@dotfiles
 ```
 
 - `<path-to-dotfiles>`: local path where this repo is cloned.
-- `<marketplace-name>`: the name displayed after running `/plugin marketplace add`. Auto-assigned because `.claude-plugin/marketplace.json` has no explicit `name` field.
 
 Run `/plugin` inside Claude Code to inspect installed plugins and their enablement.

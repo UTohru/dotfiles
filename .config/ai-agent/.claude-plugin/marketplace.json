@@ -1,8 +1,15 @@
 {
+  "name": "dotfiles",
+  "owner": {
+    "name": "UTohru"
+  },
+  "metadata": {
+    "description": "Personal plugin collection for AI coding agents"
+  },
   "plugins": [
     {
       "name": "review-response",
-      "path": "plugins/review-response",
+      "source": "./plugins/review-response",
       "description": "GitHub PRのレビューコメントへの対応を行う"
     }
   ]

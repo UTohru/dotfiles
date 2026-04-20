@@ -6,7 +6,6 @@ let
 in
 {
   home.file = {
-    ".claude/settings.json".text = builtins.toJSON (claudeConfig // { inherit mcpServers; });
     ".copilot/mcp-config.json".text = builtins.toJSON { inherit mcpServers; };
     ".zshenv".source                          = link ".zshenv";
     ".xprofile".source                        = link ".xprofile";
