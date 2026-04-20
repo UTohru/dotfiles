@@ -1,4 +1,6 @@
 ---
+name: review-response
+description: GitHub PRのレビューコメントへの対応を行う
 allowed-tools:
   - Bash(git remote:*)
   - Bash(gh pr status:*)

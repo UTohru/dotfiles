@@ -54,12 +54,16 @@ mkdir -p ~/.claude ~/.codex ~/.gemini ~/.copilot
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
 ln -sfn "${cdir}/.config/ai-agent/commands" ~/.claude/commands
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
-ln -sf "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
+
+# codex config: overwrite from tracked on every run (tracked is source of truth; CLI runtime writes are reset)
+rm -f ~/.codex/config.toml
+cp "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
 
 # AI agent settings
 # Remove stale symlinks (e.g. from home-manager) before writing
 rm -f ~/.claude/settings.json
-ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
+# gemini settings.json: overwrite from tracked on every run
+cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
 ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
 
 # claude settings.json = claude-config.json + mcpServers merged

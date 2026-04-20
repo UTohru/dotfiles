@@ -7,7 +7,6 @@ in
 {
   home.file = {
     ".claude/settings.json".text = builtins.toJSON (claudeConfig // { inherit mcpServers; });
-    ".gemini/settings.json".text = builtins.toJSON { inherit mcpServers; };
     ".copilot/mcp-config.json".text = builtins.toJSON { inherit mcpServers; };
     ".zshenv".source                          = link ".zshenv";
     ".xprofile".source                        = link ".xprofile";
@@ -19,7 +18,6 @@ in
     ".claude/CLAUDE.md".source      = link ".config/ai-agent/AGENTS.md";
     ".claude/commands".source       = link ".config/ai-agent/commands";
     ".codex/AGENTS.md".source       = link ".config/ai-agent/AGENTS.md";
-    ".codex/config.toml".source     = link ".config/ai-agent/codex-config.toml";
 
     ".config/zsh".source           = link ".config/zsh";
     ".config/sheldon".source       = link ".config/sheldon";
