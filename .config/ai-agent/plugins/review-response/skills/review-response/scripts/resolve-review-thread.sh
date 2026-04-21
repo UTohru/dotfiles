@@ -8,10 +8,8 @@ if [[ $# -ne 1 ]]; then
   exit 1
 fi
 
-THREAD_ID="$1"
-
 gh api graphql \
-  -f thread_id="${THREAD_ID}" \
+  -f thread_id="${1}" \
   --field query='
 mutation($thread_id: ID!) {
   resolveReviewThread(input: {threadId: $thread_id}) {

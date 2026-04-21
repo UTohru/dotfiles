@@ -52,15 +52,18 @@ fi
 mkdir -p ~/.claude ~/.codex ~/.gemini ~/.copilot
 
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.claude/CLAUDE.md
-ln -sfn "${cdir}/.config/ai-agent/commands" ~/.claude/commands
 ln -sf "${cdir}/.config/ai-agent/AGENTS.md" ~/.codex/AGENTS.md
-ln -sf "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
+
+# codex config: overwrite from tracked on every run (tracked is source of truth; CLI runtime writes are reset)
+rm -f ~/.codex/config.toml
+cp "${cdir}/.config/ai-agent/codex-config.toml" ~/.codex/config.toml
 
 # AI agent settings
 # Remove stale symlinks (e.g. from home-manager) before writing
 rm -f ~/.claude/settings.json
-ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
-ln -sf "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
+# gemini/copilot mcp config: overwrite from tracked on every run
+cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.gemini/settings.json
+cp "${cdir}/.config/ai-agent/mcp-servers.json" ~/.copilot/mcp-config.json
 
 # claude settings.json = claude-config.json + mcpServers merged
 if [ -x "$(command -v jq)" ]; then
@@ -68,8 +71,8 @@ if [ -x "$(command -v jq)" ]; then
 	jq --argjson mcp "$mcp_servers" '. + { mcpServers: $mcp }' \
 		"${cdir}/.config/ai-agent/claude-config.json" > ~/.claude/settings.json
 else
-	echo "Warning: jq not found, linking claude-config.json without mcpServers" >&2
-	ln -sf "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
+	echo "Warning: jq not found, copying claude-config.json without mcpServers" >&2
+	cp "${cdir}/.config/ai-agent/claude-config.json" ~/.claude/settings.json
 fi
 
 # ===============
@@ -85,5 +88,18 @@ fi
 ln -sf ${cdir}/others/textlint.ts ~/.local/share/deno_ts/textlint.ts
 
 ln -sf ${cdir}/.xprofile ~/.xprofile
+
+# ===============
+# review-response plugin
+# ===============
+if command -v codex &>/dev/null; then
+	codex marketplace add "${cdir}/.config/ai-agent"
+fi
+
+if command -v gemini &>/dev/null; then
+	if [ ! -d "${HOME}/.gemini/extensions/review-response" ]; then
+		gemini extensions link --consent "${cdir}/.config/ai-agent/plugins/review-response"
+	fi
+fi
 
 echo "complete!"

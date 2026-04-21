@@ -9,14 +9,9 @@ if [[ $# -ne 4 ]]; then
   exit 1
 fi
 
-OWNER="$1"
-REPOSITORY="$2"
-PR_NUMBER="$3"
-COMMENT_ID="$4"
-
 # stdinからボディを読み取る
 BODY=$(cat)
 
-gh api "repos/${OWNER}/${REPOSITORY}/pulls/${PR_NUMBER}/comments/${COMMENT_ID}/replies" \
+gh api "repos/${1}/${2}/pulls/${3}/comments/${4}/replies" \
   --method POST \
   -f body="${BODY}"

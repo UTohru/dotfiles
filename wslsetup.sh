@@ -24,3 +24,35 @@ if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
   grep -qxF "$ZSH" /etc/shells || echo "$ZSH" | sudo tee -a /etc/shells
   chsh -s "$ZSH"
 fi
+
+# copilot mcp config: overwrite from tracked on every run
+mkdir -p "$HOME/.copilot"
+cp "$SCRIPT_DIR/.config/ai-agent/mcp-servers.json" "$HOME/.copilot/mcp-config.json"
+
+# claude settings.json: overwrite from tracked on every run (claude-config + mcpServers)
+mkdir -p "$HOME/.claude"
+rm -f "$HOME/.claude/settings.json"
+if command -v jq &>/dev/null; then
+  mcp_servers=$(jq '.mcpServers' "$SCRIPT_DIR/.config/ai-agent/mcp-servers.json")
+  jq --argjson mcp "$mcp_servers" '. + { mcpServers: $mcp }' \
+    "$SCRIPT_DIR/.config/ai-agent/claude-config.json" > "$HOME/.claude/settings.json"
+else
+  cp "$SCRIPT_DIR/.config/ai-agent/claude-config.json" "$HOME/.claude/settings.json"
+fi
+
+# codex config: overwrite from tracked on every run (tracked is source of truth; CLI runtime writes are reset)
+if command -v codex &>/dev/null; then
+  mkdir -p "$HOME/.codex"
+  rm -f "$HOME/.codex/config.toml"
+  cp "$SCRIPT_DIR/.config/ai-agent/codex-config.toml" "$HOME/.codex/config.toml"
+  codex marketplace add "$SCRIPT_DIR/.config/ai-agent"
+fi
+
+if command -v gemini &>/dev/null; then
+  # gemini settings.json: overwrite from tracked on every run
+  mkdir -p "$HOME/.gemini"
+  cp "$SCRIPT_DIR/.config/ai-agent/mcp-servers.json" "$HOME/.gemini/settings.json"
+  if [ ! -d "${HOME}/.gemini/extensions/review-response" ]; then
+    gemini extensions link --consent "$SCRIPT_DIR/.config/ai-agent/plugins/review-response"
+  fi
+fi
