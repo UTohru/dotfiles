@@ -46,19 +46,38 @@ Thread (1 comments):
   [reviewer] レビューコメント
 ```
 
-## 3. 手順2の出力の各指摘に対して下記の手順を繰り返す
+## 3. 手順2の出力の各指摘について、対応と返答案を準備する
+
+各指摘に対して以下を行う（この段階ではまだ返答を投稿しない）。
 
 1. コメント（指摘）の正当性を確認する。
 2. 指摘が正しい場合は、改善し、commit, pushする。
-3. コメントIDに対して、返答を追加する。
+3. 各コメントIDに対する返答案（文面）をドラフトする。
 
-### 返答
-```bash
-# 上記で確認したFirst Comment IDを使用
-echo '[修正内容・対応理由の説明]' | ~/.config/ai-agent/plugins/review-response/skills/review-response/scripts/reply-review-comment.sh <Owner> <Repository> <PR_Number> ${COMMENT_ID}
+## 4. 返答案をまとめてユーザに確認する
+
+手順3でドラフトした返答案を、対応する `First Comment ID` / 対象ファイル位置と共に**まとめて一度だけ**ユーザに提示し、投稿可否・修正希望を確認する。ユーザからの承認を得るまでは `reply-review-comment.sh` を実行してはならない。
+
+返答案がユーザとの会話で使用している言語と異なる場合は、ユーザ確認時は会話言語への訳を併記する（投稿時は原文のみ）。
+
+提示フォーマット：
+```
+[連番]
+コメント:
+  [<reviewer>] <元のレビューコメント本文>
+返答案:
+  <返答文>
 ```
 
-修正したコミットハッシュを書くと親切です。
+## 5. 承認後に返答を投稿し、必要ならresolveする
+
+### 返答
+投稿する返答文には、対応するcommitハッシュを添えると親切（ユーザ確認用の提示には含めない）。
+
+```bash
+# 上記で確認したFirst Comment IDを使用
+echo '[確認済みの返答文（必要に応じてcommitハッシュを付与）]' | ~/.config/ai-agent/plugins/review-response/skills/review-response/scripts/reply-review-comment.sh <Owner> <Repository> <PR_Number> ${COMMENT_ID}
+```
 
 ### resolvedにマーク（必用な場合のみ）
 ```bash
