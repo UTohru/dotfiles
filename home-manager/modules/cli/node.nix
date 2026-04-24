@@ -6,8 +6,4 @@
     nodejs
     pnpm
   ];
-
-  home.sessionVariables = {
-    NPM_CONFIG_PREFIX = "$HOME/.local";
-  };
 }

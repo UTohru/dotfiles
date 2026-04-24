@@ -18,6 +18,10 @@ git -C "$SCRIPT_DIR" update-index --skip-worktree \
 export REPO_DIR="$(dirname "$SCRIPT_DIR")"
 nix run nixpkgs#home-manager -- switch --flake "$SCRIPT_DIR/home-manager#wsl" --impure -b backup
 
+mkdir -p "$HOME/.config/zsh/localconf"
+grep -q '^export NPM_CONFIG_PREFIX=' "$HOME/.config/zsh/localconf/profile.zsh" 2>/dev/null \
+  || echo 'export NPM_CONFIG_PREFIX="$HOME/.local"' >> "$HOME/.config/zsh/localconf/profile.zsh"
+
 # default shell
 ZSH="$(command -v zsh 2>/dev/null || true)"
 if [[ -n "$ZSH" && "$SHELL" != "$ZSH" ]]; then
