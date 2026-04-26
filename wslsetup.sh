@@ -49,7 +49,7 @@ if command -v codex &>/dev/null; then
   mkdir -p "$HOME/.codex"
   rm -f "$HOME/.codex/config.toml"
   cp "$SCRIPT_DIR/.config/ai-agent/codex-config.toml" "$HOME/.codex/config.toml"
-  codex marketplace add "$SCRIPT_DIR/.config/ai-agent"
+  codex plugin marketplace add "$SCRIPT_DIR/.config/ai-agent"
 fi
 
 if command -v gemini &>/dev/null; then
