@@ -19,6 +19,7 @@
   infra.terraform.enable = true;
   infra.aws.enable = true;
   infra.gcloud.enable = true;
+  infra.cloudflare.enable = true;
 
   home.activation.wslSetup = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     if command -v powershell.exe &>/dev/null; then

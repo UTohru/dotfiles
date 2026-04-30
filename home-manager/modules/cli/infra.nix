@@ -4,6 +4,7 @@
     terraform.enable  = lib.mkEnableOption "terraform";
     aws.enable        = lib.mkEnableOption "aws cli (includes session-manager-plugin)";
     gcloud.enable     = lib.mkEnableOption "gcloud";
+    cloudflare.enable = lib.mkEnableOption "cloudflare (flarectl)";
   };
 
   config = lib.mkMerge [
@@ -16,6 +17,9 @@
     })
     (lib.mkIf config.infra.gcloud.enable {
       home.packages = with pkgs; [ google-cloud-sdk ];
+    })
+    (lib.mkIf config.infra.cloudflare.enable {
+      home.packages = with pkgs; [ flarectl ];
     })
   ];
 }
