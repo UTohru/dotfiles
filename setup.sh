@@ -93,7 +93,7 @@ ln -sf ${cdir}/.xprofile ~/.xprofile
 # review-response plugin
 # ===============
 if command -v codex &>/dev/null; then
-	codex marketplace add "${cdir}/.config/ai-agent"
+	codex plugin marketplace add "${cdir}/.config/ai-agent"
 fi
 
 if command -v gemini &>/dev/null; then
