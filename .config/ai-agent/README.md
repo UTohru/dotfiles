@@ -21,6 +21,7 @@ Shared configuration and plugins for AI coding agents (Claude Code / Codex / Gem
 ### Codex / Gemini
 
 Registered automatically by `setup.sh` (non-WSL) or `wslsetup.sh` (WSL).
+Codex uses `codex plugin marketplace add <path-to-dotfiles>/.config/ai-agent`.
 
 ### Claude Code
 
