@@ -1,6 +1,0 @@
-{
-  "name": "review-response",
-  "version": "1.0.0",
-  "description": "GitHub PRのレビューコメントへの対応を行う",
-  "skills": ["../skills/review-response"]
-}
