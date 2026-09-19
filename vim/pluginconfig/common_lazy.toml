@@ -101,15 +101,6 @@ vnoremap <silent> <buffer> T :<C-u>UnmakeTable ,<CR>
 
 
 [[plugins]]
-repo = "heavenshell/vim-jsdoc"
-build='make install'
-on_ft = ['javascript', 'typescript']
-on_if = 'executable("npm")'
-hook_source='''
-nnoremap <silent> <buffer> <Space>dq :<C-u>JsDoc<CR>
-'''
-
-[[plugins]]
 repo = 'mattn/vim-goimports'
 on_ft = ['go']
 
