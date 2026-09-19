@@ -1,5 +1,5 @@
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
+repo = 'lambdalisue/vim-fern'
 hook_add = '''
 "nnoremap <Space>f :<C-u>Fern . -drawer<CR>:set nonumber<CR>
 nnoremap <Space>F :<C-u>Fern -drawer<Left><Left><Left><Left><Left><Left><Left><Space><Left>
@@ -7,8 +7,8 @@ autocmd myvimrc FileType fern set nonumber
 '''
 
 [[plugins]]
-repo = 'lambdalisue/fern-renderer-nerdfont.vim'
-on_source = ['fern.vim']
+repo = 'lambdalisue/vim-fern-renderer-nerdfont'
+on_source = ['vim-fern']
 hook_source = '''
 let g:fern#renderer = 'nerdfont'
 hi Directory ctermfg=39

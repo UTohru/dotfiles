@@ -5,7 +5,7 @@ hi DiffChange ctermbg=33
 '''
 
 [[plugins]]
-repo = 'lambdalisue/nerdfont.vim'
+repo = 'lambdalisue/vim-nerdfont'
 
 [[plugins]]
 repo = 'bkad/CamelCaseMotion'
