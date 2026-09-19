@@ -1,54 +1,4 @@
 [[plugins]]
-repo = "nvim-treesitter/nvim-treesitter"
-hook_post_update = 'TSUpdate'
-lua_source = """
-require('nvim-treesitter.configs').setup{
-	ensure_installed = {
-		"lua", "vim", "vimdoc", "query",
-		"python", "typescript", "json", "jinja",
-		"yaml", "toml", "tsx", "terraform"
-	},
-	lookahead = true,
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = { "python" },
-	},
-	textobjects = {
-		select = {
-			enable = true,
-			lookahead = true,
-			keymaps = {
-				["aF"] = "@function.outer",
-				["iF"] = "@function.inner",
-				["aC"] = "@class.outer",
-				["iC"] = "@class.inner"
-			},
-		},
-		move = {
-			enable = true,
-			goto_next = {
-				["]b"] = {query="@block.outer", desc="Next block"},
-				["]f"] = {query="@call.outer", desc="Next call"},
-				["]F"] = {query="@function.outer", desc="Next function"},
-				["]c"] = {query="@class", desc="Next class"},
-			},
-			goto_previous = {
-				["[b"] = {query="@block.outer", desc="Previous block"},
-				["[f"] = {query="@call.outer", desc="Previous call"},
-				["[F"] = {query="@function.outer", desc="Previous function"},
-				["[c"] = {query="@class", desc="Previous class"},
-			},
-		},
-	},
-}
-"""
-
-[[plugins]]
-repo = "nvim-treesitter/nvim-treesitter-textobjects"
-depends = ['nvim-treesitter' ]
-
-
-[[plugins]]
 repo = "nvim-lua/plenary.nvim"
 
 [[plugins]]
@@ -153,7 +103,7 @@ vim.notify = require("notify")
 
 [[plugins]]
 repo = "folke/noice.nvim"
-depends = ["nui.nvim", "nvim-treesitter"]
+depends = ["nui.nvim"]
 #on_event = ['VimEnter']
 lua_source = '''
 require("noice").setup({
