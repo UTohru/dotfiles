@@ -19,6 +19,3 @@ mlterm/pts_*
 mlterm/challenge
 
 .config/zsh/.zcompdump*
-
-.config/environment.d/10-home-manager.conf
-.config/environment.d/*.backup
